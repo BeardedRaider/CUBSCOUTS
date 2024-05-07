@@ -25,11 +25,14 @@ function App() {
                 <Route path="/events" element={<Events />} />
                 <Route path="/parent" element={<Parent />} />
                 <Route path="/child" element={<Child />} />
-                
+
 
 
             </Routes>
         </Router>
     </div>
 }
+
+// Exporting the App component
+export default App;
     
