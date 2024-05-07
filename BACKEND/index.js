@@ -3,6 +3,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const app = express();// Create the express app
 const PORT = process.env.PORT || 5000;// Define the port to listen to
@@ -11,15 +14,15 @@ app.use(express.json());// Use the json parser
 app.use(cors());// Use the cors middleware
 
 // Connect to the mongodb server
-const MONGO_URI = 'mongodb+srv://shanecummingsuk:9VyP0eqHbVs1P4RG@cubscouts.nrz1yvh.mongodb.net/CubScouts?retryWrites=true&w=majority&appName=CubScouts';
+const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 });
 
 //event listener for when the connection is open
-mongoose.connection.on('connected...', () => {
-    console.log('Mongoose is connected to the database');
+mongoose.connection.on('connected', () => {
+    console.log(' Connected to MongoDB');
 });
 
 app.listen(PORT, () => {
