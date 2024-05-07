@@ -8,3 +8,8 @@ npm i mongoose
 npm i cors
 npm install bcryptjs
 npm install jsonwebtoken
+
+Frontend
+npm i 
+npm i react
+npm i tailwind
