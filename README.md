@@ -1,6 +1,6 @@
 # CUBSCOUTS
-
-to get started, set up backend and frontend folders. Int the backends do the followingP: 
+-----------------------------------------------------
+to get started, set up backend and frontend folders. In the backends do the following: 
 create a file index.js
 then install the following into the backend folder
 npm i express
