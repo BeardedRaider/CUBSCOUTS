@@ -1,6 +1,5 @@
 // Importing necessary modules and components
 import React, { useState, useEffect } from 'react';
-import DesktopWarning from './components/pages/shared/DesktopWarning';
 import { BrowserRouter as Router, Route, Routes,} from "react-router-dom";// Importing routing components from react-router-dom
 
 import Home from '../FRONTEND/pages/shared/Home';// Importing Home component
