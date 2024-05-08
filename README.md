@@ -21,7 +21,7 @@ npm i react-router-dom axios
 root install
 
 
-npm i vite
+npm i vite??
 
 -----------------------------------
 App.jsx is where the routes are.
