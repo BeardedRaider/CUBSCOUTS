@@ -12,4 +12,6 @@ body {/*style for the body*/
     margin: 0;/*remove the margin*/
     padding: 0;/*remove the padding*/
     box-sizing: border-box;/*set the box-sizing property*/
+    background-color: rgba(0, 0, 0, 0.973);/*set the background color*/
+    color: white;/*set the color of the text*/
 }

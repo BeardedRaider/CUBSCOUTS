@@ -1,0 +1,12 @@
+.navbar {
+    width: 100%;/* set the width of the navbar */
+    height: 60px;/* set the height of the navbar */
+    background-color: rgba(0, 0, 0, 0.973);
+    display: flex;/* display the items in a row */
+    align-items: center;/* align the items in the center */
+    justify-content: space-between;/* set the space between the items */
+    position: sticky;/* set the position of the navbar */
+    top: 0;/* set the top of the navbar */
+    z-index: 1000;/* set the z-index of the navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);/* set the box shadow of the navbar */
+}
