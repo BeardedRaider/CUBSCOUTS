@@ -13,3 +13,8 @@ Frontend
 npm i 
 npm i react
 npm i tailwind
+npm i react-router-dom axios
+
+root install
+
+npm i vite
