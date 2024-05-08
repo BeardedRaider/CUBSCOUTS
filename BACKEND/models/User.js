@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');// Import the mongoose library
-const { Schema } = mongoose;// Destructure the Schema object from the mongoose library
 
 const userSchema = new mongoose.Schema({// Create the user schema
     name: String,

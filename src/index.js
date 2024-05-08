@@ -3,7 +3,7 @@ import React from "react";
 // Import the ReactDOM library, specifically the client-side methods
 import ReactDOM from "react-dom/client";
 // Import the main App component from the App.js file
-import App from "./App";
+import App from "../FRONTEND/App";
 
 // Get the DOM element with the id 'root' and create a root for the React application
 const root = ReactDOM.createRoot(document.getElementById("root"));
