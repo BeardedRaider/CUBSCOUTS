@@ -6,24 +6,22 @@ const Header = ({ className }) => {
   // Navbar component
   const navigate = useNavigate();
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [parent, setParent] = useState(
-    localStorage.getItem("parent") === "true"
-  );
-  const [admin, setAdmin] = useState(localStorage.getItem("admin") === "true");
+  const [role, setRole] = useState(localStorage.getItem("role"));
 
   const handleLogout = () => {
     // Logout function
     localStorage.removeItem("token"); // Remove the token from the local storage
+    localStorage.removeItem("role"); // Remove the role from the local storage
     setToken(null); // Update the state
+    setRole(null); // Update the state
     navigate("/"); // Redirect to the home page
   };
 
   // Listen for changes in the local storage
   useEffect(() => {
     const handleStorageChange = () => {
-      setToken(localStorage.getItem("token"));
-      setParent(localStorage.getItem("parent") === "true");
-      setAdmin(localStorage.getItem("admin") === "true");
+      setToken(localStorage.getItem("token"));// Update the state when local storage changes
+      setRole(localStorage.getItem("role"));// Update the state when local storage changes
     };
 
     // Attach the event listener
@@ -38,9 +36,8 @@ const Header = ({ className }) => {
   // Log the token and user type when they change
   useEffect(() => {
     console.log("Token has changed:", token);
-    console.log("Parents click here:", parent);
-    console.log("Admin click here:", admin);
-  }, [token, parent, admin]);
+    console.log("Role has changed:", role);
+  }, [token, role]);
 
   return (
     <div className={`navbar`}>
@@ -54,10 +51,10 @@ const Header = ({ className }) => {
       <div>
         <ul>
           {token ? (
-            admin ? (
+            role === 'admin' ? (
               <>
                 <li>
-                  <Link to="/admin">Home</Link>
+                  <Link to="/admin">Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/users">Users</Link>
@@ -71,13 +68,13 @@ const Header = ({ className }) => {
                   </button>
                 </li>
               </>
-            ) : parent ? (
+            ) :role === "parent" ? (
               <>
                 <li>
                   <Link to="/parent">Home</Link>
                 </li>
                 <li>
-                  <Link to="/event">Events</Link>
+                  <Link to="/events">Events</Link>
                 </li>
                 <li>
                   <Link to="/gallery">Gallery</Link>
@@ -93,13 +90,13 @@ const Header = ({ className }) => {
                   </button>
                 </li>
               </>
-            ) : (
+            ) : ( // If the user is a child
               <>
                 <li>
                   <Link to="/child">Home</Link>
                 </li>
                 <li>
-                  <Link to="/event">Events</Link>
+                  <Link to="/events">Events</Link>
                 </li>
                 <li>
                   <Link to="/gallery">Gallery</Link>
@@ -116,7 +113,7 @@ const Header = ({ className }) => {
                 </li>
               </>
             )
-          ) : (
+          ) : ( // If the user is not logged in
             <>
               <li>
                 <Link to="/">Home</Link>
