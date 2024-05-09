@@ -25,3 +25,6 @@ npm i vite??
 
 -----------------------------------
 App.jsx is where the routes are.
+
+-----------------------------------
+Main colour rgb(72, 12, 136)
