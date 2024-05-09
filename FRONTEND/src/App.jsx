@@ -1,10 +1,12 @@
 import React from 'react';
 import {Route, Routes, BrowserRouter as Router} from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 // shared pages
 import Home from './pages/shared/Home';
 import Login from './pages/shared/Login';
 import Register from './pages/shared/Register';
+import Gallery from './pages/shared/Gallery';
 // admin pages
 import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/Users';
@@ -30,11 +32,11 @@ const App = () => {
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
           <Route path="/events" element={<Events />} />
-
-          {/* add the rest of  your routes */}
+          <Route path="/gallery" element={<Gallery />} />
         </Routes>
-       </Router>        
-      </div> 
+        <Footer />
+      </Router>        
+    </div> 
   );
 };
 export default App;

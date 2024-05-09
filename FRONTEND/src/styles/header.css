@@ -25,3 +25,21 @@
     list-style: none;/*remove the bullet points*/
     margin-right: 40px;/*margin from the right*/
 }
+
+.logoutBtn {
+    margin-right: 2.5rem;/* set the margin right of the logout button */
+    background-color: rgba(53, 51, 51, 0.973);/* set the background color of the logout button */
+    color: white;/* set the color of the logout button */
+    border: none;/* remove the border of the logout button */
+    padding: 10px 20px;/* set the padding of the logout button */
+    border-radius: 5px;/* set the border radius of the logout button */
+    cursor: pointer;/* set the cursor of the logout button */
+}
+
+.logoutBtn:hover {
+    background-color: rgba(95, 23, 177, 0.9);/* set the background color of the logout button when hovered */
+}
+
+.logoutBtn:active {
+    transform: translateY(1px);/* set the transform of the logout button when clicked */
+}

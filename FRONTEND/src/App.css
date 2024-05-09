@@ -12,6 +12,7 @@ body {/*style for the body*/
     margin: 0;/*remove the margin*/
     padding: 0;/*remove the padding*/
     box-sizing: border-box;/*set the box-sizing property*/
-    background-color: rgba(0, 0, 0, 0.973);/*set the background color*/
-    color: white;/*set the color of the text*/
+    background-color: rgba(24, 23, 24, 0.973);/*set the background color*/
+    /* color: rgb(99, 16, 188);Main colour but not for text*/
+    color: rgba(176, 174, 179, 0.9)/*set the color of the text */
 }
