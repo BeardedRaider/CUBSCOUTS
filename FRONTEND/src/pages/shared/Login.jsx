@@ -24,7 +24,7 @@ const Login = () => {
       localStorage.setItem("role", response.data.role);
 
       if (response.data.role === 'admin') {
-          navigate("/dashboard");
+          navigate("/admin");
       } else if (response.data.role === 'parent') {
           navigate("/parent");
       } else if (response.data.role === 'child') {
