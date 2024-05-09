@@ -54,7 +54,7 @@ const Header = ({ className }) => {
             role === 'admin' ? (
               <>
                 <li>
-                  <Link to="/admin">Dashboard</Link>
+                  <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/users">Users</Link>
