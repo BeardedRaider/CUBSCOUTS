@@ -88,19 +88,7 @@ return (
                 autocomplete="off"
               />
             </div>
-            {/* <!-------- Admin Checkbox --------> */}
-            <div class="mb-4 flex items-center">
-              <input
-                type="checkbox"
-                id="checkbox_id"
-                checked={admin}//check the admin state
-                onChange={() => setAdmin(!admin)}//toggle the admin state
-                class="text-blue-500"
-              />
-              <label for="checkbox_id" class="text-gray-600 ml-2">
-                If Admin Please Select
-              </label>
-            </div>
+            
             
             {/* <!-- Login Button --> */}
             <button

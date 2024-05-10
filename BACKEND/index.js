@@ -94,6 +94,7 @@ app.post('/api/login', async (req, res) => {
         // Sign the token
         const token = jwt.sign(tokenPayload, 'your-secret-key', { expiresIn: '1h',
         });// token expires in 1 hour
+        res.json({ token, role: user.role });// Return the token and the user role
 
         res.json({ token });// Return the token
     } catch (error) {
