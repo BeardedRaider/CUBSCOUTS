@@ -6,7 +6,7 @@ import { AuthContext } from "../../components/AuthContext";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [setAdmin] = useState(false);
+    
     const navigate = useNavigate();
     const { setAuth } = useContext(AuthContext);
 
@@ -53,7 +53,7 @@ const Login = () => {
             role: 'admin'
           }));
         }
-    }, []);
+    }, [setAuth]);
 
 return (
     <div>
