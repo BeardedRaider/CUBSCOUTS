@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../components/AuthContext";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [admin, setAdmin] = useState(false);
+    const [setAdmin] = useState(false);
     const navigate = useNavigate();
+    const { setAuth } = useContext(AuthContext);
 
     const handleLogin = async (event) => {
         event.preventDefault();//prevent the default form submission
@@ -18,10 +20,17 @@ const Login = () => {
 
       console.log("Login successful");
       console.log('Token:', response.data.token);
+      console.log('Email:', response.data.email);
+      console.log('Role:', response.data.role); 
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("email", response.data.email);
       localStorage.setItem("role", response.data.role);
+
+      setAuth({
+          token: response.data.token,
+          role: response.data.role,
+      });
 
       if (response.data.role === 'admin') {
           navigate("/dashboard");
@@ -39,7 +48,10 @@ const Login = () => {
     useEffect(() => {
         const storedRole = localStorage.getItem("role");
         if (storedRole === 'admin') {
-            setAdmin(true);
+          setAuth(prevAuth => ({
+            ...prevAuth, 
+            role: 'admin'
+          }));
         }
     }, []);
 

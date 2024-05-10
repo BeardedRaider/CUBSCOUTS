@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../components/AuthContext";
 import "../styles/header.css";
 
 const Header = ({ className }) => {
+  console.log('Header is rendering...');
   // Navbar component
+  
   const navigate = useNavigate();
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const [role, setRole] = useState(localStorage.getItem("role"));
+  const { auth, setAuth } = useContext(AuthContext);
 
   const handleLogout = () => {
     // Logout function
     localStorage.removeItem("token"); // Remove the token from the local storage
     localStorage.removeItem("role"); // Remove the role from the local storage
-    setToken(null); // Update the state
-    setRole(null); // Update the state
+    setAuth({ token: null, role: null }); // Update the state
     navigate("/"); // Redirect to the home page
   };
 
   // Listen for changes in the local storage
   useEffect(() => {
     const handleStorageChange = () => {
-      setToken(localStorage.getItem("token"));// Update the state when local storage changes
-      setRole(localStorage.getItem("role"));// Update the state when local storage changes
+      setAuth({
+        token: localStorage.getItem("token"), // Update the state when local storage changes
+        role: localStorage.getItem("role"), // Update the state when local storage changes
+      });
     };
 
     // Attach the event listener
@@ -31,13 +34,13 @@ const Header = ({ className }) => {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, []);
+  }, [setAuth]);// Update the state when local storage changes
 
   // Log the token and user type when they change
   useEffect(() => {
-    console.log("Token has changed:", token);
-    console.log("Role has changed:", role);
-  }, [token, role]);
+    console.log("Token has changed:", auth.token);
+    console.log("Role has changed:", auth.role);
+  }, [auth]);
 
   return (
     <div className={`navbar`}>
@@ -50,8 +53,8 @@ const Header = ({ className }) => {
       </div>
       <div>
         <ul>
-          {token ? (
-            role === 'admin' ? (
+          {auth.token ? (
+            auth.role === 'admin' ? (
               <>
                 <li>
                   <Link to="/dashboard">Dashboard</Link>
@@ -68,7 +71,7 @@ const Header = ({ className }) => {
                   </button>
                 </li>
               </>
-            ) :role === "parent" ? (
+            ) : auth.role === "parent" ? (
               <>
                 <li>
                   <Link to="/parent">Home</Link>

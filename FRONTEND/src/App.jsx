@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Route, Routes, BrowserRouter as Router} from 'react-router-dom';
+import {AuthProvider} from './components/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 // shared pages
@@ -19,24 +20,31 @@ import Child from './pages/child/Child';
 import './App.css';
 
 const App = () => {
+  const [auth, setAuth] = useState({
+    token: localStorage.getItem('token'),
+    role: localStorage.getItem('role'),
+  });
+
   return (
-    <div className="App">       
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/parent" element={<Parent />} />
-          <Route path="/child" element={<Child />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/gallery" element={<Gallery />} />
-        </Routes>
-        <Footer />
-      </Router>        
-    </div> 
+    <AuthProvider value={{auth, setAuth}}>
+      <div className="App">       
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/parent" element={<Parent />} />
+            <Route path="/child" element={<Child />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/gallery" element={<Gallery />} />
+          </Routes>
+          <Footer />
+        </Router>        
+      </div>
+    </AuthProvider>
   );
 };
 export default App;
