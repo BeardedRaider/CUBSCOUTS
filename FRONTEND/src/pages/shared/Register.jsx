@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import "../../styles/header.css";
+import "../../styles/register.css";
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -55,20 +55,21 @@ const Register = () => {
             }
         }
     };
-
+// ---------------Register form/card
     return (
-        <div>
-            <div class="lg:p-20 md:p-24 sm:10 p-4 w-full lg:w-1/2 h-auto">
-                <h1 class="text-2xl font-semibold mb-2">Register</h1>
+    <>
+        <div className="flex items-center justify-center h-screen bg-gray-200">
+            <div class="bg-white p-8 rounded shadow-lg w-96">
+                <h1 class="text-2xl font-semibold mb-6 text-center">Register</h1>
 
-            <form onSubmit={handleRegister}>
-                <div className="flex justify-between gap-4">
-                    <div className='w-1/2'>
+            <form onSubmit={handleRegister} className='space-y-4'>
+                <div className='flex flex-col items-center'>
+                    <div>
                     <label for="email" className='block text-white'>
                         Email
                     </label>
                         <input
-                        class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                        class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500"
                         type="email"
                         id="email"
                         value={email}
@@ -122,13 +123,13 @@ const Register = () => {
                         />
                     </div>
 
-                    <div>
+                    <div className='w-full'>
                         <label for="address" className='block text-white'>
                         Address
                         </label>
                         <input
-                        class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                        type="address"
+                        className="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500"
+                        type="text"
                         id="address"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
@@ -153,15 +154,16 @@ const Register = () => {
                     </div>
 
                 </div>
-                    <div >
-                    <button type="submit"  className="logoutBtn ">
+                    <div className='flex justify-center'>
+                    <button type="submit"  className="registerBtn w-full">
                     Register
                     </button>
                     </div>    
             </form>
             
+            </div>
         </div>
-    </div>
+    </>
     );
 };
 
