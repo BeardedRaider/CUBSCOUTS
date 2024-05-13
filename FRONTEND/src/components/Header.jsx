@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/AuthContext";
 import "../styles/header.css";
+import logo from "../images/";
 
 const Header = ({ className }) => {
   console.log('Header is rendering...');
@@ -43,12 +44,12 @@ const Header = ({ className }) => {
   }, [auth]);
 
   return (
-    <div className={`navbar`}>
+    <div className={`navbar ${className}`}>
       <div>
         <img
           className="logo"
-          src={process.env.PUBLIC_URL + "../../../public/images/logo.png"}
-          alt="Cub Scouts"
+          src={logo}
+          alt="Cub Scouts Logo"
         />
       </div>
       <div>
