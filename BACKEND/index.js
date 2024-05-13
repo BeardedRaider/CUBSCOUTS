@@ -26,7 +26,42 @@ mongoose.connection.on('connected', () => {
     console.log(' Connected to MongoDB');
 });
 
-//fetching the user data
+// --------------register the user
+app.post('/api/register', async (req, res) => {
+    try {
+        const { email, password, name, dob, address, role } = req.body;// Extract the email and password etc from the request body
+
+        // Check if the user already exists
+        const existingUser = await User.findOne({ email });
+
+        if (existingUser) {
+            return res.status(400).json({ error: 'User already exists' });
+        }
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create a new user and save it to the users collection
+        const user = new User({
+            name,
+            email,
+            password: hashedPassword,
+            dob,
+            address,
+            role,
+        });
+
+        // Save the user to the database
+        await user.save();
+
+        res.json({ message: 'User created successfully' });// Return a success message
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+//------------------------fetching the user data
 app.get('/api/users', async (req, res) => {
     try {
         // Extract the token from the request headers
@@ -67,7 +102,7 @@ app.get('/api/users', async (req, res) => {
     }
 });
 
-//handle the user login
+//-----------------------handle the user login
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;// Extract the email and password from the request body

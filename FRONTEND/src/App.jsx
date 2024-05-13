@@ -16,6 +16,8 @@ import Events from './pages/admin/Events';
 import Parent from './pages/parent/Parent';
 // child pages
 import Child from './pages/child/Child';
+//notification
+import { Toaster } from 'react-hot-toast';
 // css
 import './App.css';
 
@@ -27,6 +29,7 @@ const App = () => {
 
   return (
     <AuthProvider value={{auth, setAuth}}>
+      <Toaster />
       <div className="App">       
         <Router>
           <Header />

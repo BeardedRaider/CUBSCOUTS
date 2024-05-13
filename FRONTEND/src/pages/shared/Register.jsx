@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { event } from 'jquery';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import "../../styles/header.css";
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -10,8 +12,17 @@ const Register = () => {
     const [address, setAddress] = useState('');
     const [role, setRole] = useState('');
 
-    const handleRegister = async () => {
+    const navigate = useNavigate();
+
+    const handleRegister = async (event) => {
         event.preventDefault();
+
+        // Check if all fields are filled
+        if (!email || !password || !name || !dob || !address || !role) {
+            toast.error('All fields are required');
+            return;
+        }
+
         try {
             await axios.post('http://localhost:5000/api/register', {
                 email,
@@ -27,102 +38,128 @@ const Register = () => {
             setName('');
             setDob('');
             setAddress('');
-            setRole('parent');//default role
+            setRole('child');//default role
 
-            console.log('Registration successful');
+            toast.success('Registration successful');
+
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);// Redirect to login page after 2 seconds
+
         } catch (error) {
             console.error(error);
-            alert('Registration failed', error.response.data.error);
+            if (error.response && error.response.data.error) {
+                toast.error(error.response.data.error);
+            } else {
+            toast.error('Registration failed');
+            }
         }
     };
 
     return (
         <div>
-            <div>
-                <h1>Register</h1>
+            <div class="lg:p-20 md:p-24 sm:10 p-4 w-full lg:w-1/2 h-auto">
+                <h1 class="text-2xl font-semibold mb-2">Register</h1>
 
             <form onSubmit={handleRegister}>
-                <div>
-                <label for="email">
-                    Email
-                </label>
-                    <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    autocomplete="off"
-                    />
-                </div>
-                <div>
-                <label for="password">
-                    Password
-                </label>
-                    <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    autocomplete="off"
-                    />
-                </div>
-                <div>
-                <label for="name">
-                    Name
-                </label>
-                    <input
-                    type="name"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Name"
-                    autocomplete="off"
-                    />
-                </div>
-                <div>
-                    <label for="dob">
-                    Date of Birth
+                <div className="flex justify-between gap-4">
+                    <div className='w-1/2'>
+                    <label for="email" className='block text-white'>
+                        Email
                     </label>
-                    <input
-                    type="date"
-                    id="dob"
-                    value={dob}
-                    onChange={(e) => setDob(e.target.value)}
-                    autocomplete="off"
-                    />
-                </div>
-                <div>
-                    <label for="address">
-                    Address
-                    </label>
-                    <input
-                    type="date"
-                    id="address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    placeholder="Address"
-                    autocomplete="off"
-                    />
-                </div>
+                        <input
+                        class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        autocomplete="off"
+                        />
+                    </div>
                     
                     <div>
-                        <label for="role">Role</label>
-                        <select id="role" name='role'>
-                            <option value="admin">Admin</option>
+                    <label for="password" className='block text-white'>
+                        Password
+                    </label>
+                        <input
+                        class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        autocomplete="off"
+                        />
+                    </div>
+
+                    <div>
+                    <label for="name" className='block text-white'>
+                        Name
+                    </label>
+                        <input
+                        class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                        type="name"
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Name"
+                        autocomplete="off"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="dob" className='block text-white'>
+                        Date of Birth
+                        </label>
+                        <input
+                        class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                        type="date"
+                        id="dob"
+                        value={dob}
+                        onChange={(e) => setDob(e.target.value)}
+                        autocomplete="off"
+                        />
+                    </div>
+
+                    <div>
+                        <label for="address" className='block text-white'>
+                        Address
+                        </label>
+                        <input
+                        class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                        type="address"
+                        id="address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        placeholder="Address"
+                        autocomplete="off"
+                        />
+                    </div>
+                    
+                    <div>
+                        <label for="role" className='block text-white'>Role</label>
+                        <select 
+                        id="role" 
+                        name='role'
+                        class="border border-gray-300 rounded-md py-2 px-8 focus:outline-none focus:border-blue-500"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        >
+                            {/* <option value="admin">Admin</option> */}
                             <option value="parent">User</option>
                             <option value="child">child</option>
                         </select>
                     </div>
 
-                    
+                </div>
+                    <div >
+                    <button type="submit"  className="logoutBtn ">
+                    Register
+                    </button>
+                    </div>    
             </form>
-            <button 
-                type="submit"
-                onClick={handleRegister}>
-                Register
-            </button>
+            
         </div>
     </div>
     );
