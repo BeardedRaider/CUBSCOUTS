@@ -2,6 +2,7 @@
     width: 100%;/* set the width of the navbar */
     height: 6rem;/* set the height of the navbar */
     background-color: rgba(53, 51, 51, 0.973);
+    color: white;/*set the background color of the navbar*/
     display: flex;/* display the items in a row */
     align-items: center;/* align the items in the center */
     justify-content: space-between;/* set the space between the items */
@@ -26,6 +27,33 @@
     list-style: none;/*remove the bullet points*/
     margin-right: 40px;/*margin from the right*/
 }
+
+.navbar ul li a {
+    color: white;/*set the color of the text*/
+    text-decoration: none;
+    position: relative;
+}
+
+.navbar ul li a.active {
+    color: white;
+    text-decoration: none;
+    position: relative;
+}
+
+.navbar ul li a:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 2px;
+    width: 100%;
+    background-color: rgb(133, 30, 30);
+    opacity: 0;
+    text-decoration: underline;
+    opacity: 1;
+}
+
+
 
 .logoutBtn {
     margin-right: 2rem;/* set the margin right of the logout button */

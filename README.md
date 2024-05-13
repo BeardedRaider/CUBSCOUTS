@@ -17,11 +17,11 @@ npm i
 npm i react
 npm i tailwind
 npm i react-router-dom axios
+npm install react-hot-toast for notifications
 
 root install
 
-
-npm i vite??
+npm i vite
 
 -----------------------------------
 App.jsx is where the routes are.
