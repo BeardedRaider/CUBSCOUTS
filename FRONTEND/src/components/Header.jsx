@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/AuthContext";
 import "../styles/header.css";
-import logo from "../images/";
+import logo from "../images/symbol.png";
 
 const Header = ({ className }) => {
   console.log('Header is rendering...');
