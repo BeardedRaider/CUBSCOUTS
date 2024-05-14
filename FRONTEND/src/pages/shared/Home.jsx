@@ -102,8 +102,233 @@ const Home = () => {
 
       {/* ------OUR MISSION------ */}
       <section className='bg-gray-100 sectionBg3'>
-vdjknhvdfhvlkd
+        <div className='container mx-auto px-6 py-20'>
+          <h1 className='text-2xl font-semibold dark:text-black lg:text-4xl'>
+            Our Mission
+          </h1>
+          <p className='my-4 max-w-2xl text-1x1 text-gray-800'>
+            Our mission is to provide a safe and fun environment for our cubs to learn and grow. We aim to provide a range of activities and events that will help our cubs develop new skills and make new friends.
+          </p>
+          <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-1 lg:mt-16 xl:grid-cols-3">
+            <div>
+              <div class="inline-block rounded-lg bg-yellow-400 p-3 text-black">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+
+              <div>
+                <h1 class="text-xl font-semibold dark:text-black">
+                  What can i expect at my first consultation?
+                </h1>
+
+                <p class="mt-2 text-sm dark:text-gray-800">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Provident placeat, consequatur eveniet veritatis quos
+                  dignissimos beatae dolores exercitationem laboriosam officia
+                  magnam atque blanditiis illum doloremque magni ex corrupti
+                  tempora quis.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div class="inline-block rounded-lg bg-yellow-400 p-3 text-black">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+
+              <div>
+                <h1 class="text-xl font-semibold dark:text-black">
+                  What are your opening house?
+                </h1>
+
+                <p class="mt-2 text-sm dark:text-gray-800">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Provident placeat, consequatur eveniet veritatis quos
+                  dignissimos beatae dolores exercitationem laboriosam officia
+                  magnam atque blanditiis illum doloremque magni ex corrupti
+                  tempora quis.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div class="inline-block rounded-lg bg-yellow-400 p-3 text-black">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+
+              <div>
+                <h1 class="text-xl font-semibold dark:text-black">
+                  Do i need button referral?
+                </h1>
+
+                <p class="mt-2 text-sm dark:text-gray-800">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Provident placeat, consequatur eveniet veritatis quos
+                  dignissimos beatae dolores exercitationem laboriosam officia
+                  magnam atque blanditiis illum doloremque magni ex corrupti
+                  tempora quis.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div class="inline-block rounded-lg bg-yellow-400 p-3 text-black">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+
+              <div>
+                <h1 class="text-xl font-semibold dark:text-black">
+                  Is the cost of the appoinment covered by private health
+                  insurance?
+                </h1>
+
+                <p class="mt-2 text-sm dark:text-gray-800">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Provident placeat, consequatur eveniet veritatis quos
+                  dignissimos beatae dolores exercitationem laboriosam officia
+                  magnam atque blanditiis illum doloremque magni ex corrupti
+                  tempora quis.
+                </p>
+              </div>
+
+              
+
+              
+            </div>
+
+            <div>
+              <div class="inline-block rounded-lg bg-yellow-400 p-3 text-black">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+
+              <div>
+                <h1 class="text-xl font-semibold dark:text-black">
+                  Is the cost of the appoinment covered by private health
+                  insurance?
+                </h1>
+
+                <p class="mt-2 text-sm dark:text-gray-800">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Provident placeat, consequatur eveniet veritatis quos
+                  dignissimos beatae dolores exercitationem laboriosam officia
+                  magnam atque blanditiis illum doloremque magni ex corrupti
+                  tempora quis.
+                </p>
+              </div>
+
+              
+
+              
+            </div>
+
+            <div>
+              <div class="inline-block rounded-lg bg-yellow-400 p-3 text-black">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+
+              <div>
+                <h1 class="text-xl font-semibold dark:text-black">
+                  Is the cost of the appoinment covered by private health
+                  insurance?
+                </h1>
+
+                <p class="mt-2 text-sm dark:text-gray-800">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Provident placeat, consequatur eveniet veritatis quos
+                  dignissimos beatae dolores exercitationem laboriosam officia
+                  magnam atque blanditiis illum doloremque magni ex corrupti
+                  tempora quis.
+                </p>
+              </div>
+
+              
+
+              
+            </div>
+          </div>
+
+        </div>
       </section>
+
+      {/* ------CONTACT US------ */}
+      
     </div>
   )
 }
