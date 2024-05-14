@@ -15,7 +15,7 @@ const Home = () => {
                 Come and join a fun and exciting adventure with Obanshire Cub Scouts. We have a range of activities and events for all ages.
               </p>
               <a href="/login"
-              className='bg-transparent hover:bg-yellow-300 text-yellow-300 hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-yellow-300 hover:border-transparent'>Login Now</a>
+              className='bg-transparent hover:bg-yellow-400 text-yellow-400 hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-yellow-400 hover:border-transparent'>Login Now</a>
             </div>
           </div>
         </div>
@@ -327,7 +327,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ------CONTACT US------ */}
       
     </div>
   )

@@ -1,4 +1,8 @@
 # CUBSCOUTS
+
+site for cub uniforms
+
+https://shop.scouts.org.uk/scouts-sections/scouts
 -----------------------------------------------------
 to get started, set up backend and frontend folders. In the backends do the following: 
 create a file index.js
