@@ -23,3 +23,15 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);/* adds a black overlay to the image */
 }
+
+.sectionBg2 {
+    background-color: rgb(72, 12, 136);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
+}
+
+.sectionBg3 {
+    /* background-color: rgb(203, 206, 205); *//* light grey */
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5); /* add a shadow to the section */
+    
+}

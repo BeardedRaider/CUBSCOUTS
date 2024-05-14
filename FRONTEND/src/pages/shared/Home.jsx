@@ -21,7 +21,89 @@ const Home = () => {
         </div>
       </section>
 
-      
+      {/* ------MEET THE TEAM------ */}
+      <section className='bg-white sectionBg2'>
+        <div className='container mx-auto px-6 pt-28'>
+          <h1 className="text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl">
+            Meet the Team
+          </h1>
+          <p className='my-4 max-w-2xl text-1x1 text-gray-800'>
+            Our team is made up of a group of dedicated volunteers who are passionate about providing the best experience for our cubs.
+          </p>
+
+          <div className='mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 xl:mt-16 xl:grid-cols-4'>
+            {/* ------TEAM MEMBER 1------ */}
+            <div className='group flex transform cursor-pointer flex-col items-center rounded-xl p-8 transition-colors duration-300 hover:bg-blue-600'>
+              <img 
+              className='w-32 h-32 mb-4 rounded-full'
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt=""
+              />
+
+              <h1 className="mt-4 text-2xl font-semibold capitalize text-gray-700 group-hover:text-white dark:text-white">
+              arthur melo
+              </h1>
+              <p class="mt-2 capitalize text-gray-800">
+                design director
+              </p>
+            </div>
+            {/* ------TEAM MEMBER 2------ */}
+            <div class="group flex transform cursor-pointer flex-col items-center rounded-xl p-8 transition-colors duration-300 hover:bg-blue-600">
+              <img
+                class="h-32 w-32 rounded-full object-cover ring-4 ring-gray-300"
+                src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
+                alt=""
+              />
+
+              <h1 class="mt-4 text-2xl font-semibold capitalize text-gray-700 group-hover:text-white dark:text-white">
+                Amelia. Anderson
+              </h1>
+
+              <p class="mt-2 capitalize text-gray-800">
+                Lead Developer
+              </p>
+            </div>
+            {/* ------TEAM MEMBER 3------ */}
+            <div class="group flex transform cursor-pointer flex-col items-center rounded-xl p-8 transition-colors duration-300 hover:bg-blue-600">
+              <img
+                class="h-32 w-32 rounded-full object-cover ring-4 ring-gray-300"
+                src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+                alt=""
+              />
+
+              <h1 class="mt-4 text-2xl font-semibold capitalize text-gray-700 group-hover:text-white dark:text-white">
+                John Doe
+              </h1>
+
+              <p class="mt-2 capitalize text-gray-800">
+                Full stack developer
+              </p>
+            </div>
+            {/* ------TEAM MEMBER 4------ */}
+            <div class="group flex transform cursor-pointer flex-col items-center rounded-xl p-8 transition-colors duration-300 hover:bg-blue-600">
+              <img
+                class="h-32 w-32 rounded-full object-cover ring-4 ring-gray-300"
+                src="https://images.unsplash.com/photo-1499470932971-a90681ce8530?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                alt=""
+              />
+
+              <h1 class="mt-4 text-2xl font-semibold capitalize text-gray-700 group-hover:text-white dark:text-white">
+                Mia
+              </h1>
+
+              <p class="mt-2 capitalize text-gray-800">
+                Graphic Designer
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ------OUR MISSION------ */}
+      <section className='bg-gray-100 sectionBg3'>
+vdjknhvdfhvlkd
+      </section>
     </div>
   )
 }
