@@ -8,7 +8,7 @@
     justify-content: space-between;/* set the space between the items */
     position: sticky;/* set the position of the navbar */
     top: 0;/* set the top of the navbar */
-    /* z-index: 1000;set the z-index of the navbar */
+    z-index: 1000;/*set the z-index of the navbar*/
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);/* set the box shadow of the navbar */
 }
 

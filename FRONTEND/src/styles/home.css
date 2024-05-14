@@ -1,0 +1,25 @@
+.text-white {
+    position: relative;/* adds position relative to the text */
+    z-index: 100;/* adds z-index to the text to make sure its on top */
+}
+
+.sectionBg {
+    position: relative;
+    background-image: url("../../../public/images/landing.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);/* adds shadow to the section*/
+    height: 80vh;
+    overflow: auto;/* hides the overflow content */
+}
+
+.sectionBg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);/* adds a black overlay to the image */
+}
