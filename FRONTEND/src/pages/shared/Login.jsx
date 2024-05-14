@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../components/AuthContext";
+import loginImg from "../../images/loginImg.jpg";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -61,8 +62,8 @@ return (
         {/* <!-- Left: Image --> */}
         <div class="w-1/2 h-screen hidden lg:block">
             <img
-                src="https://placehold.co/800x/667fff/ffffff.png?text=Your+Image&font=Montserrat"
-                alt=""
+                src={loginImg}
+                alt="kids with map"
                 class="object-cover w-full h-full"
             />
         </div>
