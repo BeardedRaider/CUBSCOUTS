@@ -57,7 +57,7 @@ const Login = () => {
     }, [setAuth]);
 
 return (
-    <div>
+    <div >
       <div class="bg-gray-100 flex justify-center items-center h-screen">
         {/* <!-- Left: Image --> */}
         <div class="w-1/2 h-screen hidden lg:block">
