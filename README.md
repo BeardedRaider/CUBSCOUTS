@@ -1,9 +1,17 @@
 # CUBSCOUTS
+FOR THE IMAGES.JSON FILE HERE ARE THE COMMENTS
+/*
+  This is a JSON array containing the filenames of images used in the application.
+  These filenames can be used to dynamically load and display images.
+*/
 
-site for cub uniforms
+---------------------------------------------------------------
+site for cub uniforms THAT CAN BE AN EXTERNAL LINK
 
 https://shop.scouts.org.uk/scouts-sections/scouts
+
 -----------------------------------------------------
+BACKEND
 to get started, set up backend and frontend folders. In the backends do the following: 
 create a file index.js
 then install the following into the backend folder
@@ -12,6 +20,7 @@ npm i mongoose
 npm i cors
 npm install bcryptjs
 npm install jsonwebtoken
+npm install express-validator 
 
 -------------------------------------------
 Frontend

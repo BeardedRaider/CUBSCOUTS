@@ -61,7 +61,7 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-//------------------------fetching the user data
+//------------------------fetching the user data for single user
 app.get('/api/users', async (req, res) => {
     try {
         // Extract the token from the request headers
@@ -137,6 +137,65 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+
+// -----------------fetch all users
+app.get('/api/allusers', async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+const { body, validationResult } = require('express-validator');
+
+
+// -----------------update user
+app.put('/api/users/:id', 
+    [
+        body('name').trim().escape().notEmpty().withMessage('Name is required'),
+        body('email').isEmail().normalizeEmail().withMessage('Invalid email address'),
+        body('role').isIn(['user', 'admin']).withMessage('Invalid role')
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+        }
+
+        try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        user.name = req.body.name;
+        user.email = req.body.email;
+        user.role = req.body.role;
+        await user.save();
+
+        res.json(user);
+        } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+);
+
+  // DELETE /api/users/:id
+    app.delete('/api/users/:id', async (req, res) => {
+        try {
+        await User.findByIdAndDelete(req.params.id);
+        res.json({ message: 'User deleted successfully' });
+        } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+        }
+    });
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
