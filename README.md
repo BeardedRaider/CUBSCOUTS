@@ -13,7 +13,11 @@ npm i cors
 npm install bcryptjs
 npm install jsonwebtoken
 
+-------------------------------------------
 Frontend
+
+ 
+
 make sure that the node_modules are in the FRONTEND folder.
 
 
@@ -22,6 +26,13 @@ npm i react
 npm i tailwind
 npm i react-router-dom axios
 npm install react-hot-toast for notifications
+
+--------------------------------------------------
+for modals in gallery
+npm i react-modal
+
+
+--------------------------------------------------
 
 root install
 
