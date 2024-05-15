@@ -11,7 +11,7 @@ import Gallery from './pages/shared/Gallery';
 // admin pages
 import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/Users';
-import Events from './pages/admin/Events';
+import Events from './pages/shared/Events';
 // parent pages
 import Parent from './pages/parent/Parent';
 // child pages
