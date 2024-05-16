@@ -64,7 +64,7 @@ const Header = ({ className }) => {
                   <Link to="/users">Users</Link>
                 </li>
                 <li>
-                  <Link to="/events">Events</Link>
+                  <Link to="/Aevents">Events</Link>
                 </li>
                 <li>
                   <button className="logoutBtn" onClick={handleLogout}>

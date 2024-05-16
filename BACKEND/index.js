@@ -152,6 +152,12 @@ app.get('/api/allusers', async (req, res) => {
 
 const { body, validationResult } = require('express-validator');
 
+//number of users on the database
+app.get('/api/users/count', async (req, res) => {
+    const count = await User.countDocuments();
+    res.json({ count });
+});
+
 
 // -----------------update user
 app.put('/api/users/:id', 

@@ -11,7 +11,7 @@ import Gallery from './pages/shared/Gallery';
 // admin pages
 import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/Users';
-import Events from './pages/shared/Events';
+import Events from './pages/admin/Aevents';
 // parent pages
 import Parent from './pages/parent/Parent';
 // child pages
@@ -41,6 +41,7 @@ const App = () => {
             <Route path="/child" element={<Child />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/users" element={<Users />} />
+            <Route path="/Aevents" element={<Events />} />
             <Route path="/events" element={<Events />} />
             <Route path="/gallery" element={<Gallery />} />
           </Routes>
