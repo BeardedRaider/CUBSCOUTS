@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; // Import the 'useState' and 'useEffect' hooks from React.
 import axios from 'axios'; // Import the 'axios' library for making HTTP requests.
+import UserInformation from '../../UserInfo'
 import getAllUsers from '../../components/GetAllUsers'; // Import the 'getAllUsers' function from the 'GetAllUsers' module.
 import toast, { Toaster } from 'react-hot-toast';
 import { format } from 'date-fns';
@@ -14,7 +15,7 @@ const Users = () => {
       .catch((error) => console.error('Error fetching users:', error)); // Log an error message if an error occurs during the request.
   }, []); // The empty array passed as the second argument to 'useEffect' ensures that the side effect runs only once after the initial render.
 
-  // UPDATE USER-------------------------------------
+  // UPDATE USER-------------OLD CODE INCASE MY NEW CODE DIDNT WORK AS INTENDED------------------------
   // const updateUser = async (user) => { // Define an 'updateUser' function that takes a 'user' object as an argument.
   //   try {
   //     const response = await axios.put(`http://localhost:5000/api/users/${user._id}`, user); // Send a PUT request to update the user data.
@@ -24,7 +25,7 @@ const Users = () => {
   //   }
   // };
 
-    // Define a 'handleSave' function that takes a 'user' object as an argument.
+    // Define a 'handleSave' function that takes a 'user' object as an argument. OLD CODE INCASE MY NEW CODE DIDNT WORK AS INTENDED
   // const handleSave = (user) => {
   //   console.log(user);// Log the user object to the console.
   //   updateUser(user)
@@ -97,91 +98,102 @@ const Users = () => {
     }
   };
 
-
-
-
+  const user = UserInformation(); // Call the 'UserInformation' function to fetch the user data.
 
   return (
-    <div className="text-gray-900 bg-gray-200">
-      <Toaster />
-      <div className="p-4 flex">
-        <h1 className="text-3xl">Users</h1>
-      </div>
-      {/* Table of users */}
-      <section>
-        <div className="px-3 py-4 flex justify-center">
-          <table className="w-full text-md bg-white shadow-md rounded mb-4">
-
-            {/* // Render the table body with the user data. */}
-            <tbody>
-              <tr className="border-b">
-                <th className="text-left p-3 px-5">Name</th>
-                <th className="text-left p-3 px-5">Email</th>
-                <th className="text-left p-3 px-5">D.O.B</th>
-                <th className="text-left p-3 px-5">Address</th>
-                <th className="text-left p-5 px-5">Role</th>
-                <th></th>
-              </tr>
-              {users.map((user, index) => {
-                const handleInputChange = (event) => {
-                  const { name, value } = event.target;
-                  let updatedUser;
-                  if (name === 'dob' && value === '') {
-                    updatedUser = { ...user };
-                  } else {
-                    updatedUser = { ...user, [name]: value };
-                  }
-                  const updatedUsers = users.map((u) => (u._id === user._id ? updatedUser : u));
-                  setUsers(updatedUsers);
-                };
-
-                // Format the date of birth using the 'format' function from the 'date-fns' library.
-                const formattedDob = format(new Date(user.dob), 'yyyy-MM-dd');
-
-                return (
-                  <tr key={index} className={`border-b hover:bg-yellow-300 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
-                    {/* ^^ Add the 'hover:bg-yellow-300' class to highlight the row on hover. ^^ */}
-
-                    <td className="p-3 px-5">
-                      <input type="text" name="name" value={user.name} onChange={handleInputChange} className="bg-transparent" />
-                    </td>
-                    <td className="p-3 px-5">
-                      <input type="text" name="email" value={user.email} onChange={handleInputChange} className="bg-transparent" />
-                    </td>
-                    <td className="p-3 px-5">
-                    <input type="date" name="dob" value={formattedDob} onChange={handleInputChange} />
-                    </td>
-                    <td className="p-3 px-5">
-                    <input type="text" name="address" value={user.address} onChange={handleInputChange} />
-                    </td>
-                    {/* Role select */}
-                    <td className="p-3 px-5">
-                    <select 
-                    name="role" 
-                    value={user.role} 
-                    onChange={(event) => { console.log(event.target.value); handleInputChange(event); }} 
-                    className="bg-transparent"
-                    style={{ width: '100px', padding: '0 0 0 10px'}}
-                    >
-                      <option value="admin">admin</option>
-                      <option value="parent">parent</option>
-                      <option value="child">child</option>
-                    </select>
-                    </td>
-                    <td className="p-3 px-5 flex justify-end">
-                      {/* <button onClick={() => handleSave(user)} type="button" className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Save</button> */}
-                      <button onClick={() => handleSaveClick(user)} type="button" className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Save</button>
-                      <button onClick={() => handleDelete(user._id)} type="button" className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Delete</button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+    <>
+      {/* // Render the table of users with the ability to edit and delete users. */}
+      <div className="text-gray-900 bg-gray-200">
+      <section className='patientSection bg-gray-300 py-24 px-4 lg:px-16'>
+        <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2'>
+          <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose">Welcome
+          </h1>
+          <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white"> 
+          {user ? user.name : 'Loading...'}!
+          </h2>
         </div>
       </section>
-      
-    </div>
+        <section>
+        <Toaster />
+        
+        {/* Table of users */}
+        <div className="p-4 flex mt-10">
+          <h1 className="text-3xl">Existing Users</h1>
+        </div>
+        
+        
+          <div className="px-3 py-4 flex justify-center mb-10">
+            <table className="w-full text-md bg-white shadow-md rounded mb-4">
+
+              {/* // Render the table body with the user data. */}
+              <tbody>
+                <tr className="border-b">
+                  <th className="text-left p-3 px-5">Name</th>
+                  <th className="text-left p-3 px-5">Email</th>
+                  <th className="text-left p-3 px-5">D.O.B</th>
+                  <th className="text-left p-3 px-5">Address</th>
+                  <th className="text-left p-5 px-5">Role</th>
+                  <th></th>
+                </tr>
+                {users.map((user, index) => {
+                  const handleInputChange = (event) => {
+                    const { name, value } = event.target;
+                    let updatedUser;
+                    if (name === 'dob' && value === '') {
+                      updatedUser = { ...user };
+                    } else {
+                      updatedUser = { ...user, [name]: value };
+                    }
+                    const updatedUsers = users.map((u) => (u._id === user._id ? updatedUser : u));
+                    setUsers(updatedUsers);
+                  };
+
+                  // Format the date of birth using the 'format' function from the 'date-fns' library.
+                  const formattedDob = format(new Date(user.dob), 'yyyy-MM-dd');
+
+                  return (
+                    <tr key={index} className={`border-b hover:bg-yellow-300 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
+                      {/* ^^ Add the 'hover:bg-yellow-300' class to highlight the row on hover. ^^ */}
+
+                      <td className="p-3 px-5">
+                        <input type="text" name="name" value={user.name} onChange={handleInputChange} className="bg-transparent" />
+                      </td>
+                      <td className="p-3 px-5">
+                        <input type="text" name="email" value={user.email} onChange={handleInputChange} className="bg-transparent" />
+                      </td>
+                      <td className="p-3 px-5">
+                      <input type="date" name="dob" value={formattedDob} onChange={handleInputChange} />
+                      </td>
+                      <td className="p-3 px-5">
+                      <input type="text" name="address" value={user.address} onChange={handleInputChange} />
+                      </td>
+                      {/* Role select */}
+                      <td className="p-3 px-5">
+                      <select 
+                      name="role" 
+                      value={user.role} 
+                      onChange={(event) => { console.log(event.target.value); handleInputChange(event); }} 
+                      className="bg-transparent"
+                      style={{ width: '100px', padding: '0 0 0 10px'}}
+                      >
+                        <option value="admin">admin</option>
+                        <option value="parent">parent</option>
+                        <option value="child">child</option>
+                      </select>
+                      </td>
+                      <td className="p-3 px-5 flex justify-end">
+                        <button onClick={() => handleSaveClick(user)} type="button" className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Save</button>
+                        <button onClick={() => handleDelete(user._id)} type="button" className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Delete</button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </>
   );
 };
 
