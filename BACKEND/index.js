@@ -156,9 +156,11 @@ const { body, validationResult } = require('express-validator');
 // -----------------update user
 app.put('/api/users/:id', 
     [
-        body('name').trim().escape().notEmpty().withMessage('Name is required'),
-        body('email').isEmail().normalizeEmail().withMessage('Invalid email address'),
-        body('role').isIn(['user', 'admin']).withMessage('Invalid role')
+        body('name').trim().escape().notEmpty().withMessage('Name is required'),// Validate the name
+        body('email').isEmail().normalizeEmail().withMessage('Invalid email address'),// Validate the email
+        body('dob').isDate().withMessage('Invalid date of birth'),// Validate the date of birth
+        body('address').trim().escape().notEmpty().withMessage('Address is required'),// Validate the address
+        body('role').isIn(['admin', 'parent', 'child']).withMessage('Invalid role'),// Validate the role
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -174,6 +176,8 @@ app.put('/api/users/:id',
 
         user.name = req.body.name;
         user.email = req.body.email;
+        user.dob = req.body.dob;
+        user.address = req.body.address;
         user.role = req.body.role;
         await user.save();
 
