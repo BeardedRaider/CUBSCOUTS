@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const User = require('./models/User');// Import the User model
 require('./models/Events');// Import the Event model
+const router = express.Router();
 
 const app = express();// Create the express app
 const PORT = process.env.PORT || 5000;// Define the port to listen to
@@ -138,7 +139,6 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-
 // -----------------fetch all users
 app.get('/api/allusers', async (req, res) => {
     try {
@@ -157,7 +157,6 @@ app.get('/api/users/count', async (req, res) => {
     const count = await User.countDocuments();
     res.json({ count });
 });
-
 
 // -----------------update user
 app.put('/api/users/:id', 
@@ -205,6 +204,39 @@ app.put('/api/users/:id',
         res.status(500).json({ error: 'Internal Server Error' });
         }
     });
+
+// -------------Create events
+router.post('/api/events', async (req, res) => {
+    const event = new Event(req.body);
+    await event.save();
+    res.status(201).send(event);
+});
+
+// update events
+router.put('/events/:id', async (req, res) => {
+    const updates = Object.keys(req.body);
+    const event = await Event.findById(req.params.id);
+    
+    if (!event) {
+        return res.status(404).send();
+    }
+
+    updates.forEach((update) => event[update] = req.body[update]);
+    await event.save();
+    res.send(event);
+    });
+
+    // Delete event
+router.delete('/events/:id', async (req, res) => {
+    const event = await Event.findByIdAndDelete(req.params.id);
+
+    if (!event) {
+        return res.status(404).send();
+    }
+
+    res.send(event);
+});
+module.exports = router;
 
 
 app.listen(PORT, () => {

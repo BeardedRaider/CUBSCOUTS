@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'; // Import the 'useState' and 'useEffect' hooks from React.
 import axios from 'axios'; // Import the 'axios' library for making HTTP requests.
-import UserInformation from '../../UserInfo'
+import UserInformation from '../../UserInfo'// Import the 'UserInformation' function from the 'UserInfo' module.
 import getAllUsers from '../../components/GetAllUsers'; // Import the 'getAllUsers' function from the 'GetAllUsers' module.
 import toast, { Toaster } from 'react-hot-toast';
 import { format } from 'date-fns';
@@ -104,7 +104,7 @@ const Users = () => {
     <>
       {/* // Render the table of users with the ability to edit and delete users. */}
       <div className="text-gray-900 bg-gray-200">
-      <section className='patientSection bg-gray-300 py-24 px-4 lg:px-16'>
+      <section className='bg-gray-300 py-24 px-4 lg:px-16'>
         <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2'>
           <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose">Welcome
           </h1>
@@ -113,6 +113,7 @@ const Users = () => {
           </h2>
         </div>
       </section>
+
         <section>
         <Toaster />
         
@@ -120,7 +121,6 @@ const Users = () => {
         <div className="p-4 flex mt-10">
           <h1 className="text-3xl">Existing Users</h1>
         </div>
-        
         
           <div className="px-3 py-4 flex justify-center mb-10">
             <table className="w-full text-md bg-white shadow-md rounded mb-4">
