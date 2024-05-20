@@ -11,13 +11,13 @@ require('dotenv').config();
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
 
-const router = express.Router();
 
 const app = express();// Create the express app
 const PORT = process.env.PORT || 5000;// Define the port to listen to
 
-app.use(express.json());// Use the json parser
 app.use(cors());// Use the cors middleware
+app.use(express.json());// Use the json parser
+app.use(express.urlencoded({ extended: true }));// Use the urlencoded parser
 
 // Connect to the mongodb server
 const MONGO_URI = process.env.MONGO_URI;
@@ -37,13 +37,14 @@ const storage = multer.diskStorage({
       cb(null, 'uploads/'); // Set the destination folder for uploaded files
     },
     filename: (req, file, cb) => {
+        
       cb(null, `${Date.now()}-${file.originalname}`); // Set the file name
     },
 });
 
 const upload = multer({ storage });
 
-// --------------register the user
+// --------------register the user by saving the user data to the database
 app.post('/api/register', async (req, res) => {
     try {
         const { email, password, name, dob, address, role } = req.body;// Extract the email and password etc from the request body
@@ -225,7 +226,7 @@ app.put('/api/users/:id',
 app.post('/api/events', upload.single('image'), async (req, res) => {
     try {
         const { title, description, date, time, location } = req.body;
-        const image = req.file ? req.file.path : 'null';
+        const image = req.file ? req.file.path : '';
 
         const event = new Event({
             title,
@@ -235,9 +236,8 @@ app.post('/api/events', upload.single('image'), async (req, res) => {
             location,
             image,
         });
-
         await event.save();
-        res.status(201).send(event);
+
         res.json({ message: 'Event created successfully' });
     } catch (error) {
         console.error(error);

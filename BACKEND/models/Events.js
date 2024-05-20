@@ -1,30 +1,13 @@
 const mongoose = require('mongoose');
 
+// Define the Events schema and model
 const eventSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-    },
-        description: {
-        type: String,
-        required: true,
-    },
-        date: {
-        type: Date,
-        required: true,
-    },
-        time: {
-        type: String,
-        required: true,
-    },
-        location: {
-        type: String,
-        required: true,
-    },
-        image: {
-        type: String,
-        required: false, // Set required to false initially
-    },
+    title: String,
+    description: String,
+    date: Date,
+    time: String,
+    location: String,
+    image: String
 });
 
 const Events = mongoose.model('Events', eventSchema);// Create a model called 'Events' from the eventSchema
