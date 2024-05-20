@@ -21,6 +21,7 @@ npm i cors
 npm install bcryptjs
 npm install jsonwebtoken
 npm install express-validator 
+npm i multer for file uploads
 
 -------------------------------------------
 Frontend

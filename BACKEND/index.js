@@ -2,11 +2,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const multer = require('multer');// Import the multer package
+const path = require('path');// Import the path package
+
+const bcrypt = require('bcryptjs');// Import the bcryptjs package
+const jwt = require('jsonwebtoken');// Import the jsonwebtoken package
 require('dotenv').config();
+const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
-require('./models/Events');// Import the Event model
+
 const router = express.Router();
 
 const app = express();// Create the express app
@@ -26,6 +30,18 @@ mongoose.connect(MONGO_URI, {
 mongoose.connection.on('connected', () => {
     console.log(' Connected to MongoDB');
 });
+
+//---------- Configure the multer storage ----------------
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/'); // Set the destination folder for uploaded files
+    },
+    filename: (req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`); // Set the file name
+    },
+});
+
+const upload = multer({ storage });
 
 // --------------register the user
 app.post('/api/register', async (req, res) => {
@@ -205,38 +221,58 @@ app.put('/api/users/:id',
         }
     });
 
-// -------------Create events
-router.post('/api/events', async (req, res) => {
-    const event = new Event(req.body);
-    await event.save();
-    res.status(201).send(event);
+// -------------Create events with image upload
+app.post('/api/events', upload.single('image'), async (req, res) => {
+    try {
+        const { title, description, date, time, location } = req.body;
+        const image = req.file ? req.file.path : 'null';
+
+        const event = new Event({
+            title,
+            description,
+            date,
+            time,
+            location,
+            image,
+        });
+
+        await event.save();
+        res.status(201).send(event);
+        res.json({ message: 'Event created successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    } 
 });
 
-// update events
-router.put('/events/:id', async (req, res) => {
-    const updates = Object.keys(req.body);
-    const event = await Event.findById(req.params.id);
+// -----------------Make the uploaded images accessible
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// // update events
+// router.put('/events/:id', async (req, res) => {
+//     const updates = Object.keys(req.body);
+//     const event = await Event.findById(req.params.id);
     
-    if (!event) {
-        return res.status(404).send();
-    }
+//     if (!event) {
+//         return res.status(404).send();
+//     }
 
-    updates.forEach((update) => event[update] = req.body[update]);
-    await event.save();
-    res.send(event);
-    });
+//     updates.forEach((update) => event[update] = req.body[update]);
+//     await event.save();
+//     res.send(event);
+//     });
 
-    // Delete event
-router.delete('/events/:id', async (req, res) => {
-    const event = await Event.findByIdAndDelete(req.params.id);
+//     // Delete event
+// router.delete('/events/:id', async (req, res) => {
+//     const event = await Event.findByIdAndDelete(req.params.id);
 
-    if (!event) {
-        return res.status(404).send();
-    }
+//     if (!event) {
+//         return res.status(404).send();
+//     }
 
-    res.send(event);
-});
-module.exports = router;
+//     res.send(event);
+// });
+// module.exports = router;
 
 
 app.listen(PORT, () => {
