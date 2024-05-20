@@ -37,8 +37,10 @@ const storage = multer.diskStorage({
       cb(null, 'uploads/'); // Set the destination folder for uploaded files
     },
     filename: (req, file, cb) => {
-        
-      cb(null, `${Date.now()}-${file.originalname}`); // Set the file name
+        const originalname = file.originalname;// Get the original file name
+        const extension = path.extname(originalname);// Get the file extension
+        const basename = path.basename(originalname, extension);// Get the file name without the extension
+        cb(null, `${basename}${extension}`);// // Use the original filename without the timestamp
     },
 });
 
