@@ -15,30 +15,7 @@ const Users = () => {
       .catch((error) => console.error('Error fetching users:', error)); // Log an error message if an error occurs during the request.
   }, []); // The empty array passed as the second argument to 'useEffect' ensures that the side effect runs only once after the initial render.
 
-  // UPDATE USER-------------OLD CODE INCASE MY NEW CODE DIDNT WORK AS INTENDED------------------------
-  // const updateUser = async (user) => { // Define an 'updateUser' function that takes a 'user' object as an argument.
-  //   try {
-  //     const response = await axios.put(`http://localhost:5000/api/users/${user._id}`, user); // Send a PUT request to update the user data.
-  //     return response.data; // Return the response data.
-  //   } catch (error) {
-  //     console.error('Error updating user:', error); // Log an error message if an error occurs during the request.
-  //   }
-  // };
-
-    // Define a 'handleSave' function that takes a 'user' object as an argument. OLD CODE INCASE MY NEW CODE DIDNT WORK AS INTENDED
-  // const handleSave = (user) => {
-  //   console.log(user);// Log the user object to the console.
-  //   updateUser(user)
-  //     .then(() => {
-  //       toast.success('User updated successfully');// Display a success message using the 'toast' library.
-  //       setTimeout(() => {
-  //         window.location.reload();
-  //       }, 2000);// Reload the page after 2 seconds
-  //     })
-  //     .then(() => getAllUsers())// Call the 'getAllUsers' function to fetch the updated user data.
-  //     .then((data) => setUsers(data))
-  //     .catch((error) => console.error('Error saving user:', error));
-  // };
+  // UPDATE USER-------------------------------------
   const handleSaveClick = async (user) => {
     console.log(user); // Log the user object
     const { dob, ...userWithoutDob } = user;
