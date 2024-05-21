@@ -91,27 +91,27 @@ const Users = () => {
         </div>
       </section>
 
-        <section>
+      <section>
         <Toaster />
-        
         {/* Table of users */}
-        <div className="p-4 flex mt-10">
+        <div className="p-4 mt-10">
           <h1 className="text-3xl">Existing Users</h1>
         </div>
         
-          <div className="px-3 py-4 flex justify-center mb-10">
-            <table className="w-full text-md bg-white shadow-md rounded mb-4">
-
+          <div className="px-3 py-4 overflow-x-auto">
+            <table className="w-full text-sm md:text-md bg-white shadow-md rounded mb-4">
               {/* // Render the table body with the user data. */}
-              <tbody>
+              <thead>
                 <tr className="border-b">
-                  <th className="text-left p-3 px-5">Name</th>
-                  <th className="text-left p-3 px-5">Email</th>
-                  <th className="text-left p-3 px-5">D.O.B</th>
-                  <th className="text-left p-3 px-5">Address</th>
-                  <th className="text-left p-5 px-5">Role</th>
+                  <th className="text-left p-2 md:p-3 px2 md:px-5">Name</th>
+                  <th className="text-left p-2 md:p-3 px2 md:px-5">Email</th>
+                  <th className="text-left p-2 md:p-3 px2 md:px-5">D.O.B</th>
+                  <th className="text-left p-2 md:p-3 px2 md:px-5">Address</th>
+                  <th className="text-left p-2 md:p-5 px2 md:px-5">Role</th>
                   <th></th>
                 </tr>
+              </thead>
+              <tbody>
                 {users.map((user, index) => {
                   const handleInputChange = (event) => {
                     const { name, value } = event.target;
@@ -124,7 +124,6 @@ const Users = () => {
                     const updatedUsers = users.map((u) => (u._id === user._id ? updatedUser : u));
                     setUsers(updatedUsers);
                   };
-
                   // Format the date of birth using the 'format' function from the 'date-fns' library.
                   const formattedDob = format(new Date(user.dob), 'yyyy-MM-dd');
 
@@ -132,20 +131,20 @@ const Users = () => {
                     <tr key={index} className={`border-b hover:bg-yellow-300 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
                       {/* ^^ Add the 'hover:bg-yellow-300' class to highlight the row on hover. ^^ */}
 
-                      <td className="p-3 px-5">
+                      <td className="p-2 md:p-3 px-2 md:px-5">
                         <input type="text" name="name" value={user.name} onChange={handleInputChange} className="bg-transparent" />
                       </td>
-                      <td className="p-3 px-5">
+                      <td className="p-2 md:p-3 px-2 md:px-5">
                         <input type="text" name="email" value={user.email} onChange={handleInputChange} className="bg-transparent" />
                       </td>
-                      <td className="p-3 px-5">
+                      <td className="p-2 md:p-3 px-2 md:px-5">
                       <input type="date" name="dob" value={formattedDob} onChange={handleInputChange} />
                       </td>
-                      <td className="p-3 px-5">
+                      <td className="p-2 md:p-3 px-2 md:px-5">
                       <input type="text" name="address" value={user.address} onChange={handleInputChange} />
                       </td>
                       {/* Role select */}
-                      <td className="p-3 px-5">
+                      <td className="p-2 md:p-3 px-2 md:px-5">
                       <select 
                       name="role" 
                       value={user.role} 
@@ -158,9 +157,9 @@ const Users = () => {
                         <option value="child">child</option>
                       </select>
                       </td>
-                      <td className="p-3 px-5 flex justify-end">
-                        <button onClick={() => handleSaveClick(user)} type="button" className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Save</button>
-                        <button onClick={() => handleDelete(user._id)} type="button" className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Delete</button>
+                      <td className="p-2 md:p-3 px-2 md:px-5 flex justify-end">
+                        <button onClick={() => handleSaveClick(user)} type="button" className="mr-3 text-xs md:text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Save</button>
+                        <button onClick={() => handleDelete(user._id)} type="button"  className="text-xs md:text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Delete</button>
                       </td>
                     </tr>
                   );
