@@ -250,31 +250,15 @@ app.post('/api/events', upload.single('image'), async (req, res) => {
 // -----------------Make the uploaded images accessible
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// // update events
-// router.put('/events/:id', async (req, res) => {
-//     const updates = Object.keys(req.body);
-//     const event = await Event.findById(req.params.id);
-    
-//     if (!event) {
-//         return res.status(404).send();
-//     }
-
-//     updates.forEach((update) => event[update] = req.body[update]);
-//     await event.save();
-//     res.send(event);
-//     });
-
-//     // Delete event
-// router.delete('/events/:id', async (req, res) => {
-//     const event = await Event.findByIdAndDelete(req.params.id);
-
-//     if (!event) {
-//         return res.status(404).send();
-//     }
-
-//     res.send(event);
-// });
-// module.exports = router;
+// -----------------fetch all events
+app.get('/api/events', async (req, res) => {
+    try {
+        const events = await Event.find({});
+        res.status(200).json(events);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch events' });
+    }
+});
 
 
 app.listen(PORT, () => {

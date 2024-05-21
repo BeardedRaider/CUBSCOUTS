@@ -1,4 +1,5 @@
 # CUBSCOUTS
+Main colour rgb(72, 12, 136)
 FOR THE IMAGES.JSON FILE HERE ARE THE COMMENTS
 /*
   This is a JSON array containing the filenames of images used in the application.
@@ -52,4 +53,3 @@ npm i vite
 App.jsx is where the routes are.
 
 -----------------------------------
-Main colour rgb(72, 12, 136)

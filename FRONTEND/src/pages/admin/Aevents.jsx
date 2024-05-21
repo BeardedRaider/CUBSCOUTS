@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import UserInformation from '../../UserInfo'
 import { toast } from 'react-hot-toast';
+
 
 
 
@@ -15,8 +16,23 @@ const Aevents = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [location, setLocation] = useState('');
-  const [image, setImage] = useState('null');
+  const [image, setImage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false); // To prevent multiple submissions
+
+  // Fetch events
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/events');
+        setEvents(response.data);
+      } catch (error) {
+        console.error('Failed to fetch Events', error);
+      }
+    };
+    fetchEvents();
+  }, []);
 
   const handleUpload = async (event) => {
     event.preventDefault();
@@ -80,7 +96,7 @@ const handleFileChange = (e) => {
 };
 
 
-  // ---------------Create events
+
   return (
     <div>
       <section className='patientSection bg-gray-300 py-24 px-4 lg:px-16'>
@@ -104,7 +120,7 @@ const handleFileChange = (e) => {
       <div className='text-gray-900 bg-gray-200'>
         
       {/* --------------- Create events------------- */}
-        <section className='bg-gray-300 py-24 px-4 lg:px-16'>
+      <section className='bg-gray-300 py-24 px-4 lg:px-16'>
           
           <div className="flex items-center justify-center px-3">
           <h1 className="text-3xl">Create Events</h1>
@@ -204,10 +220,33 @@ const handleFileChange = (e) => {
               <h2 className="text-6xl font-bold">Coming Soon</h2>
             </div>
           </div> */}
-        </section>
+      </section>
+
+      {/* --------------- Display events------------- */}
+      <section className='bg-gray-500 py-24 px-4 lg:px-16'>
+        <div className='container mx-auto'>
+          <h2 className='text-3xl mb-4'>Current Events</h2>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+            {events.map(event => (
+              <div key={event._id} className='bg-white rounded-lg shadow-md p-6'>
+                {/* // Display the title, description, date, time, location, and image of the event by appending the path to the base URL  */}
+                <h3 className='text-xl font-bold mb-2'>{event.title}</h3>
+                <p className='text-gray-700 mb-2'>{event.description}</p>
+                <p className='text-gray-700 mb-2'>Date: {new Date(event.date).toLocaleDateString()}</p>
+                <p className='text-gray-700 mb-2'>Time: {event.time}</p>
+                <p className='text-gray-700 mb-2'>Location: {event.location}</p>
+                {event.image && (
+                  <img src={`http://localhost:5000/${event.image.replace('\\', '/')}`} alt={event.title} className='w-full h-48 object-cover mb-2 rounded' />// Display the image by appending the image path to the base URL
+          )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Aevents;

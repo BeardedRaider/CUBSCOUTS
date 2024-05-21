@@ -27,7 +27,7 @@ const Home = () => {
           <h1 className="text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl">
             Meet the Team
           </h1>
-          <p className='my-4 max-w-2xl text-1x1 text-gray-800'>
+          <p className='my-4 max-w-2xl text-1x1 text-white'>
             Our team is made up of a group of dedicated volunteers who are passionate about providing the best experience for our cubs.
           </p>
 
@@ -42,7 +42,7 @@ const Home = () => {
               <h1 className="mt-4 text-2xl font-semibold capitalize text-gray-700 group-hover:text-white dark:text-white">
               arthur melo
               </h1>
-              <p class="mt-2 capitalize text-gray-800">
+              <p class="mt-2 capitalize text-white">
                 design director
               </p>
             </div>
@@ -58,7 +58,7 @@ const Home = () => {
                 Amelia. Anderson
               </h1>
 
-              <p class="mt-2 capitalize text-gray-800">
+              <p class="mt-2 capitalize text-white">
                 Lead Developer
               </p>
             </div>
@@ -74,7 +74,7 @@ const Home = () => {
                 John Doe
               </h1>
 
-              <p class="mt-2 capitalize text-gray-800">
+              <p class="mt-2 capitalize text-white">
                 Full stack developer
               </p>
             </div>
@@ -90,7 +90,7 @@ const Home = () => {
                 Mia
               </h1>
 
-              <p class="mt-2 capitalize text-gray-800">
+              <p class="mt-2 capitalize text-white">
                 Graphic Designer
               </p>
             </div>
