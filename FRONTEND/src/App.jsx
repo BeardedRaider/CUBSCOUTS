@@ -8,6 +8,7 @@ import Home from './pages/shared/Home';
 import Login from './pages/shared/Login';
 import Register from './pages/shared/Register';
 import Gallery from './pages/shared/Gallery';
+import Uevents from './pages/shared/Events';
 // admin pages
 import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/Users';
@@ -42,7 +43,7 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/users" element={<Users />} />
             <Route path="/Aevents" element={<Events />} />
-            <Route path="/events" element={<Events />} />
+            <Route path="/events" element={<Uevents />} />
             <Route path="/gallery" element={<Gallery />} />
           </Routes>
           <Footer />

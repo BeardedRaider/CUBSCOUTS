@@ -147,8 +147,8 @@ const Register = () => {
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
                         >
-                            {/* <option value="admin">Admin</option> */}
-                            <option value="parent">User</option>
+                            {/* No option to be admin as this would be a security risk in the real world */}
+                            <option value="parent">parent</option>
                             <option value="child">child</option>
                         </select>
                     </div>

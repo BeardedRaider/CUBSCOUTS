@@ -237,15 +237,14 @@ const handleFileChange = (e) => {
                 <p className='text-gray-700 font-bold mb-2'>Location: {event.location}</p>
                 {event.image && (
                   <img src={`http://localhost:5000/${event.image.replace('\\', '/')}`} alt={event.title} className='w-full h-48 object-cover mb-2 rounded' />// Display the image by appending the image path to the base URL
-          )}
+              )}
               </div>
             ))}
           </div>
         </div>
-
       </section>
-      </div>
     </div>
+  </div>
   );
 };
 

@@ -224,6 +224,12 @@ app.put('/api/users/:id',
         }
     });
 
+    //number of events on the database
+    app.get('/api/events/count', async (req, res) => {
+        const count = await Event.countDocuments();
+        res.json({ count });
+    });
+
 // -------------Create events with image upload
 app.post('/api/events', upload.single('image'), async (req, res) => {
     try {
