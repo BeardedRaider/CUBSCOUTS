@@ -232,9 +232,9 @@ const handleFileChange = (e) => {
                 {/* // Display the title, description, date, time, location, and image of the event by appending the path to the base URL  */}
                 <h3 className='text-xl font-bold mb-2'>{event.title}</h3>
                 <p className='text-gray-700 mb-2'>{event.description}</p>
-                <p className='text-gray-700 mb-2'>Date: {new Date(event.date).toLocaleDateString()}</p>
-                <p className='text-gray-700 mb-2'>Time: {event.time}</p>
-                <p className='text-gray-700 mb-2'>Location: {event.location}</p>
+                <p className='text-gray-700 font-bold mb-2'>Date: {new Date(event.date).toLocaleDateString()}</p>
+                <p className='text-gray-700 font-bold mb-2'>Time: {event.time}</p>
+                <p className='text-gray-700 font-bold mb-2'>Location: {event.location}</p>
                 {event.image && (
                   <img src={`http://localhost:5000/${event.image.replace('\\', '/')}`} alt={event.title} className='w-full h-48 object-cover mb-2 rounded' />// Display the image by appending the image path to the base URL
           )}
