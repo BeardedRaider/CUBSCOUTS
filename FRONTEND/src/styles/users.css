@@ -1,0 +1,61 @@
+/* Base styles */
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/*------ Styles for mobile ------*/
+@media (max-width: 768px) {
+    .responsive-table thead {
+        display: none;
+    }
+    .responsive-table tbody, .responsive-table tr, .responsive-table td {
+        display: block;
+        width: 100%;
+    }
+    .responsive-table tr {
+        margin-bottom: 10px;
+    }
+    .responsive-table td {
+        text-align: right;
+        padding-left: 25%;
+        position: relative;
+    }
+    .responsive-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+/*------ Styles for tablets ------*/
+@media (min-width: 769px) and (max-width: 1024px) {
+    .responsive-table {
+        font-size: 1rem; /* 16px */
+    }
+    .responsive-table thead tr, .responsive-table tbody tr {
+        padding: 10px 15px;
+    }
+    .responsive-table thead td {
+        position: static;
+        text-align: left;
+        padding: 15px;
+    }
+    .responsive-table td::before {
+        content: none;
+    }
+}
+
+/*------ Styles for larger screens ------*/
+@media (min-width: 1025px) {
+    .responsive-table {
+      font-size: 1rem; /* Default font size for larger screens */
+    }
+    .responsive-table thead th, .responsive-table tbody td {
+      padding: 15px 20px; /* Default padding for larger screens */
+    }
+}

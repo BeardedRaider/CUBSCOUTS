@@ -4,6 +4,7 @@ import UserInformation from '../../UserInfo'// Import the 'UserInformation' func
 import getAllUsers from '../../components/GetAllUsers'; // Import the 'getAllUsers' function from the 'GetAllUsers' module.
 import toast, { Toaster } from 'react-hot-toast';
 import { format } from 'date-fns';
+import "../../styles/users.css" 
 
 
 const Users = () => {
@@ -99,7 +100,7 @@ const Users = () => {
         </div>
         
           <div className="px-3 py-4 overflow-x-auto">
-            <table className="w-full text-sm md:text-md bg-white shadow-md rounded mb-4">
+            <table className="w-full text-sm md:text-md bg-white shadow-md rounded mb-4 responsive-table">
               {/* // Render the table body with the user data. */}
               <thead>
                 <tr className="border-b">
@@ -111,6 +112,7 @@ const Users = () => {
                   <th></th>
                 </tr>
               </thead>
+              
               <tbody>
                 {users.map((user, index) => {
                   const handleInputChange = (event) => {
@@ -131,33 +133,34 @@ const Users = () => {
                     <tr key={index} className={`border-b hover:bg-yellow-300 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
                       {/* ^^ Add the 'hover:bg-yellow-300' class to highlight the row on hover. ^^ */}
 
-                      <td className="p-2 md:p-3 px-2 md:px-5">
-                        <input type="text" name="name" value={user.name} onChange={handleInputChange} className="bg-transparent" />
+                      <td data-label="Name" className="p-2 md:p-3 px-2 md:px-5">
+                        <input type="text" name="name" value={user.name} onChange={handleInputChange} className="bg-transparent w-full" />
                       </td>
-                      <td className="p-2 md:p-3 px-2 md:px-5">
-                        <input type="text" name="email" value={user.email} onChange={handleInputChange} className="bg-transparent" />
+                      <td data-label="Email" className="p-2 md:p-3 px-2 md:px-5">
+                        <input type="text" name="email" value={user.email} onChange={handleInputChange} className="bg-transparent  w-full" />
                       </td>
-                      <td className="p-2 md:p-3 px-2 md:px-5">
-                      <input type="date" name="dob" value={formattedDob} onChange={handleInputChange} />
+                      <td data-label="D.O.B" className="p-2 md:p-3 px-2 md:px-5">
+                      <input type="date" name="dob" value={formattedDob} onChange={handleInputChange} className="w-full"/>
                       </td>
-                      <td className="p-2 md:p-3 px-2 md:px-5">
-                      <input type="text" name="address" value={user.address} onChange={handleInputChange} />
+                      <td data-label="Address" className="p-2 md:p-3 px-2 md:px-5">
+                      <input type="text" name="address" value={user.address} onChange={handleInputChange}className="w-full" />
                       </td>
                       {/* Role select */}
-                      <td className="p-2 md:p-3 px-2 md:px-5">
+                      <td data-label="Role" className="p-2 md:p-3 px-2 md:px-5">
                       <select 
                       name="role" 
                       value={user.role} 
                       onChange={(event) => { console.log(event.target.value); handleInputChange(event); }} 
-                      className="bg-transparent"
-                      style={{ width: '100px', padding: '0 0 0 10px'}}
+                      className="bg-transparent w-full"
+                      style={{ height: '40px', padding: '0 0 0 10px'}}
                       >
                         <option value="admin">admin</option>
                         <option value="parent">parent</option>
                         <option value="child">child</option>
                       </select>
                       </td>
-                      <td className="p-2 md:p-3 px-2 md:px-5 flex justify-end">
+                      {/* Save and Delete buttons */}
+                      <td data-label="" className="p-2 md:p-3 px-2 md:px-5 flex justify-end">
                         <button onClick={() => handleSaveClick(user)} type="button" className="mr-3 text-xs md:text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Save</button>
                         <button onClick={() => handleDelete(user._id)} type="button"  className="text-xs md:text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Delete</button>
                       </td>
