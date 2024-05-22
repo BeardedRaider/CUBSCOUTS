@@ -1,5 +1,8 @@
 # CUBSCOUTS
 Main colour rgb(72, 12, 136)
+
+JWT_SECRET=3Xj&yP!QFZ$2qH8yBvN9sW4xV%JrTkL2mU
+
 FOR THE IMAGES.JSON FILE HERE ARE THE COMMENTS
 /*
   This is a JSON array containing the filenames of images used in the application.
