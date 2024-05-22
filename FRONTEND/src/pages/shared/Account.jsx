@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import UserInformation from '../../UserInfo';
-import getAllUsers from '../../components/GetAllUsers'; // Import the 'getAllUsers' function from the 'GetAllUsers' module.
+import getUser from '../../components/GetUser'; // Import the 'getAllUsers' function from the 'GetAllUsers' module.
 import toast, { Toaster } from 'react-hot-toast';
 import { format } from 'date-fns';
 import "../../styles/users.css"
 
 const Account = () => {
-  const [user, setUser] = useState({}); // Create a state variable 'user' and a setter function 'setUser' with an initial value of an empty object.
+  const [userId, setUser] = useState({}); // Create a state variable 'user' and a setter function 'setUser' with an initial value of an empty object.
 
   useEffect(() => { // Use the 'useEffect' hook to run a side effect after the component mounts.
-    getAllUsers() // Call the 'getUser' function.
+    getUser() // Call the 'getUser' function.
       .then((data) => setUser(data)) // Set the 'user' state with the data returned.
       .catch((error) => console.error('Error fetching user:', error)); // Log an error message if an error occurs during the request.
   }, []); // The empty array passed as the second argument to 'useEffect' ensures that the side effect runs only once after the initial render.
@@ -48,17 +48,18 @@ const Account = () => {
     }
   };
 
-  const userId = UserInformation();// Call the 'UserInformation' function to get the user data.
+  const user = UserInformation();// Call the 'UserInformation' function to get the user data.
 
 
   return (
+    <>
     <div className='text-gray-900 bg-gray-200'>
       <section className='bg-gray-300 py-24 px-4 lg:px-16'>
         <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2'>
           <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose">Welcome
           </h1>
           <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white"> 
-          {userId ? user.name : 'Loading...'}!
+          {user ? user.name : 'Loading...'}!
           </h2>
         </div>
       </section>
@@ -66,11 +67,13 @@ const Account = () => {
       <section>
         <Toaster />
         {/* Display the user details in a form for editing */}
-        <div className='px-3'>
+        <div className='p-4 mt-10'>
+          <h1 className='text-3xl'>Your  account iformation</h1>
 
         </div>
       </section>
     </div>
+    </>
   )
 }
 

@@ -9,7 +9,7 @@ app.get('/api/users', async (req, res) => {
       }
   
       // Verify the token
-      jwt.verify(token, 'your-secret-key', async (err, decoded) => {
+      jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
         if (err) {
           return res.status(401).json({ error: 'Unauthorized: Invalid token' });
         }
