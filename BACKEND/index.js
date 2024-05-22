@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');// Import the jsonwebtoken package
 require('dotenv').config();
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
-
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const app = express();// Create the express app
 const PORT = process.env.PORT || 5000;// Define the port to listen to
@@ -30,6 +30,9 @@ mongoose.connect(MONGO_URI, {
 mongoose.connection.on('connected', () => {
     console.log(' Connected to MongoDB');
 });
+
+
+
 
 //---------- Configure the multer storage ----------------
 const storage = multer.diskStorage({
@@ -60,7 +63,6 @@ app.post('/api/register', async (req, res) => {
 
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
-
         // Create a new user and save it to the users collection
         const user = new User({
             name,
@@ -92,7 +94,7 @@ app.get('/api/users', async (req, res) => {
         }
 
         // Verify the token
-        jwt.verify(token, 'your-secret-key', async (err, decoded) => {
+        jwt.verify(token, JWT_SECRET, async (err, decoded) => {
             if (err) {
                 return res.status(401).json({ error: 'Unauthorized: Invalid token' });
             }
@@ -147,7 +149,7 @@ app.post('/api/login', async (req, res) => {
             userId: user._id,
         };
         // Sign the token
-        const token = jwt.sign(tokenPayload, 'your-secret-key', { expiresIn: '1h',
+        const token = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: '1h',
         });// token expires in 1 hour
         res.json({ token, role: user.role });// Return the token and the user role
 
@@ -177,7 +179,11 @@ app.get('/api/users/count', async (req, res) => {
     res.json({ count });
 });
 
-// -----------------update user
+//------------------------------------------------------------------------
+// User self-update route
+
+
+// -----------------Admin update users
 app.put('/api/users/:id', 
     [
         body('name').trim().escape().notEmpty().withMessage('Name is required'),// Validate the name
@@ -224,12 +230,7 @@ app.put('/api/users/:id',
         }
     });
 
-    //number of events on the database
-    app.get('/api/events/count', async (req, res) => {
-        const count = await Event.countDocuments();
-        res.json({ count });
-    });
-
+    //-------------------EVENTS---------------------
 // -------------Create events with image upload
 app.post('/api/events', upload.single('image'), async (req, res) => {
     try {
@@ -252,7 +253,6 @@ app.post('/api/events', upload.single('image'), async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     } 
 });
-
 // -----------------Make the uploaded images accessible
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -265,6 +265,13 @@ app.get('/api/events', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch events' });
     }
 });
+
+//----------number of events on the database
+    app.get('/api/events/count', async (req, res) => {
+        const count = await Event.countDocuments();
+        res.json({ count });
+    });
+
 
 
 app.listen(PORT, () => {

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/AuthContext";
 import "../styles/header.css";
 import logo from "../images/symbol.png";
+import userLogo from "../images/default-user.png";
 
 const Header = ({ className }) => {
   console.log('Header is rendering...');
@@ -66,6 +67,15 @@ const Header = ({ className }) => {
                 <li>
                   <Link to="/Aevents">Events</Link>
                 </li>
+
+                <li>
+                {auth.token && (
+                  <Link to="/account">
+                    <img className="rounded-icon" src={userLogo} alt="My Account"  />
+                  </Link>
+                )}
+                </li>
+
                 <li>
                   <button className="logoutBtn" onClick={handleLogout}>
                     Logout
