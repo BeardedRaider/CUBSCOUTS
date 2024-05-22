@@ -34,19 +34,29 @@
 
 /*------ Styles for tablets ------*/
 @media (min-width: 769px) and (max-width: 1024px) {
-    .responsive-table {
-        font-size: 1rem; /* 16px */
+    .responsive-table thead {
+        display: none;
     }
-    .responsive-table thead tr, .responsive-table tbody tr {
-        padding: 10px 15px;
+    .responsive-table tbody, .responsive-table tr, .responsive-table td {
+        display: block;
+        width: 100%;
     }
-    .responsive-table thead td {
-        position: static;
+    .responsive-table tr {
+        margin-bottom: 10px;
+    }
+    .responsive-table td {
+        text-align: right;
+        padding-left: 20%;
+        position: relative;
+    }
+    .responsive-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 25px;
+        font-weight: bold;
         text-align: left;
-        padding: 15px;
-    }
-    .responsive-table td::before {
-        content: none;
     }
 }
 

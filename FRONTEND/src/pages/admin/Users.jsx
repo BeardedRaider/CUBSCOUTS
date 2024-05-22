@@ -152,7 +152,7 @@ const Users = () => {
                       value={user.role} 
                       onChange={(event) => { console.log(event.target.value); handleInputChange(event); }} 
                       className="bg-transparent w-full"
-                      style={{ height: '40px', padding: '0 0 0 10px'}}
+                      style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
                       >
                         <option value="admin">admin</option>
                         <option value="parent">parent</option>
