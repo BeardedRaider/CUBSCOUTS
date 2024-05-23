@@ -39,6 +39,8 @@ npm i tailwind
 npm i react-router-dom axios
 npm install react-hot-toast for notifications
 
+npm i flowbite-react for styling (a bit like tailwind)
+
 --------------------------------------------------
 for modals in gallery
 npm i react-modal
