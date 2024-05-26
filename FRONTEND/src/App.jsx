@@ -31,7 +31,9 @@ const App = () => {
 
   return (
     <AuthProvider value={{auth, setAuth}}>
-      <Toaster />
+      <Toaster 
+      position="bottom-right"
+      reverseOrder={false}/>
       <div className="App">       
         <Router>
           <Header />

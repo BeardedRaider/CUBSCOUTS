@@ -93,7 +93,7 @@ const Users = () => {
       </section>
 
       <section>
-        <Toaster />
+        {/* <Toaster /> this does not need to be here as we are calling the toast in the app, leaving ut here creates 2 notifications */}
         {/* Table of users */}
         <div className="p-4 mt-10">
           <h1 className="text-3xl">Existing Users</h1>
