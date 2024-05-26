@@ -12,13 +12,9 @@ const Account = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        console.log("Token:", token); // Add this line
-
         const response = await axios.get('http://localhost:5000/api/users', {
           headers: { Authorization: `Bearer ${token}` }
         });
-
-        console.log("User data:", response.data); // Add this line
         setUser(response.data);
         setLoading(false);
       } catch (error) {
@@ -45,8 +41,6 @@ const Account = () => {
       // Remove the role from userToUpdate object
       delete userToUpdate.role;
 
-      console.log("Updating user:", userToUpdate); // Add this line
-
       const response = await axios.put('http://localhost:5000/api/users/self', userToUpdate, {
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +48,6 @@ const Account = () => {
         }
       });
 
-      console.log("Update response:", response.status); // Add this line
 
       if (response.status === 200) {
         toast.success('User updated successfully');
@@ -77,28 +70,43 @@ const Account = () => {
 
   return (
     <>
-      <Toaster />
-      <div className="account-container">
-        <h1 className="account-title">Account Settings</h1>
-        <div className="account-form">
-          <label>
-            Name:
-            <input type="text" name="name" value={user.name || ''} onChange={handleInputChange} />
-          </label>
-          <label>
-            Email:
-            <input type="email" name="email" value={user.email || ''} onChange={handleInputChange} />
-          </label>
-          <label>
-            Date of Birth:
-            <input type="date" name="dob" value={user.dob ? format(new Date(user.dob), 'yyyy-MM-dd') : ''} onChange={handleInputChange} />
-          </label>
-          <label>
-            Address:
-            <input type="text" name="address" value={user.address || ''} onChange={handleInputChange} />
-          </label>
-          <button onClick={handleSaveClick} className="save-button">Save</button>
+      <div className="text-gray-900 bg-gray-200">
+        <section className='bg-gray-300 py-24 px-4 lg:px-16'>
+          <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2'>
+            <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose" > Welcome to your account page
+            </h1>
+            <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white"> 
+              {user ? user.name : 'Loading...'}!
+            </h2>
+          </div>
+        </section>
+
+        <section className="px-3 py-4 overflow-x-auto">
+          <Toaster />
+        <div className="account-container p-4 mt-10">
+          <h1 className="account-title">Profile Settings</h1>
+        
+          <div className="account-form mt-4">
+            <label className="block mb-2">
+              Name:
+              <input type="text" name="name" value={user.name || ''} onChange={handleInputChange} className="form-input mt-1 block w-full" />
+            </label>
+            <label className="block mb-2">
+              Email:
+              <input type="email" name="email" value={user.email || ''} onChange={handleInputChange} className="form-input mt-1 block w-full" />
+            </label>
+            <label className="block mb-2">
+              Date of Birth:
+              <input type="date" name="dob" value={user.dob ? format(new Date(user.dob), 'yyyy-MM-dd') : ''} onChange={handleInputChange} className="form-input mt-1 block w-full" />
+            </label>
+            <label className="block mb-2">
+              Address:
+              <input type="text" name="address" value={user.address || ''} onChange={handleInputChange} className="form-input mt-1 block w-full" />
+            </label>
+            <button onClick={handleSaveClick} className="save-button bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">Save</button>
+          </div>
         </div>
+      </section>
       </div>
     </>
   );
