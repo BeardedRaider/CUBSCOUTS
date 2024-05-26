@@ -171,7 +171,7 @@ app.get('/api/allusers', async (req, res) => {
     }
 });
 
-const { body, validationResult } = require('express-validator');
+
 
 //number of users on the database
 app.get('/api/users/count', async (req, res) => {
@@ -181,7 +181,33 @@ app.get('/api/users/count', async (req, res) => {
 
 //------------------------------------------------------------------------
 // User self-update route
+app.put('/api/users/self', async (req, res) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+        return res.status(401).json({ error: 'Unauthorized: No token provided' });
+    }
 
+    try {
+        jwt.verify(token, JWT_SECRET, async (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ error: 'Unauthorized: Invalid token' });
+        }
+
+        const { name, email, dob, address } = req.body;
+        const updatedUser = await User.findByIdAndUpdate(
+            decoded.userId,
+            { name, email, dob, address },
+            { new: true }
+        );
+        res.json(updatedUser);
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+const { body, validationResult } = require('express-validator');
 
 // -----------------Admin update users
 app.put('/api/users/:id', 

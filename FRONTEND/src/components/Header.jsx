@@ -93,6 +93,15 @@ const Header = ({ className }) => {
                 <li>
                   <Link to="/gallery">Gallery</Link>
                 </li>
+                
+                <li>
+                {auth.token && (
+                  <Link to="/account">
+                    <img className="rounded-icon" src={userLogo} alt="My Account"  />
+                  </Link>
+                )}
+                </li>
+
                 <li>
                   <Link to="https://www.scouts.org.uk/scouts" target="_blank">
                     Scouts
@@ -115,6 +124,15 @@ const Header = ({ className }) => {
                 <li>
                   <Link to="/gallery">Gallery</Link>
                 </li>
+                
+                <li>
+                {auth.token && (
+                  <Link to="/account">
+                    <img className="rounded-icon" src={userLogo} alt="My Account"  />
+                  </Link>
+                )}
+                </li>
+                
                 <li>
                   <Link to="https://www.scouts.org.uk/scouts" target="_blank">
                     Scouts

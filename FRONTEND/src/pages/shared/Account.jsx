@@ -82,7 +82,7 @@ const Account = () => {
         </section>
 
         <section className="px-3 py-4 overflow-x-auto">
-          <Toaster />
+        
         <div className="account-container p-4 mt-10">
           <h1 className="account-title">Profile Settings</h1>
         

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import regImg from "../../images/fire.jpg";
 import "../../styles/register.css";
 
 const Register = () => {
@@ -56,115 +57,121 @@ const Register = () => {
         }
     };
 // ---------------Register form/card
-    return (
-    <>
-        <div className="flex items-center justify-center h-screen bg-gray-200">
-            <div class="bg-white p-8 rounded shadow-lg w-96">
-                <h1 class="text-2xl font-semibold mb-6 text-center">Register</h1>
+return (
+    <div className="bg-gray-100 flex justify-center items-center h-screen">
+      {/* Left: Image */}
+      <div className="w-1/2 h-screen hidden lg:block">
+        <img
+          src={regImg}
+          alt="Register background"
+          className="object-cover w-full h-full"
+        />
+      </div>
 
-            <form onSubmit={handleRegister} className='space-y-4'>
-                <div className='flex flex-col items-center'>
-                    <div>
-                    <label for="email" className='block text-white'>
-                        Email
-                    </label>
-                        <input
-                        class="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500"
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
-                        autocomplete="off"
-                        />
-                    </div>
-                    
-                    <div>
-                    <label for="password" className='block text-white'>
-                        Password
-                    </label>
-                        <input
-                        class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                        autocomplete="off"
-                        />
-                    </div>
+      {/* Right: Register Form */}
+      <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+        <h1 className="text-2xl font-semibold mb-4">Register</h1>
+        <form onSubmit={handleRegister} className="space-y-4">
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-gray-600">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email Address"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              autoComplete="off"
+            />
+          </div>
 
-                    <div>
-                    <label for="name" className='block text-white'>
-                        Name
-                    </label>
-                        <input
-                        class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                        type="name"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Name"
-                        autocomplete="off"
-                        />
-                    </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-gray-600">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              autoComplete="off"
+            />
+          </div>
 
-                    <div>
-                        <label for="dob" className='block text-white'>
-                        Date of Birth
-                        </label>
-                        <input
-                        class="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                        type="date"
-                        id="dob"
-                        value={dob}
-                        onChange={(e) => setDob(e.target.value)}
-                        autocomplete="off"
-                        />
-                    </div>
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-gray-600">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Name"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              autoComplete="off"
+            />
+          </div>
 
-                    <div className='w-full'>
-                        <label for="address" className='block text-white'>
-                        Address
-                        </label>
-                        <input
-                        className="border border-gray-300 rounded-md py-2 px-3 w-full focus:outline-none focus:border-blue-500"
-                        type="text"
-                        id="address"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                        placeholder="Address"
-                        autocomplete="off"
-                        />
-                    </div>
-                    
-                    <div>
-                        <label for="role" className='block text-white'>Role</label>
-                        <select 
-                        id="role" 
-                        name='role'
-                        class="border border-gray-300 rounded-md py-2 px-8 focus:outline-none focus:border-blue-500"
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                        >
-                            {/* No option to be admin as this would be a security risk in the real world */}
-                            <option value="parent">parent</option>
-                            <option value="child">child</option>
-                        </select>
-                    </div>
+          <div className="mb-4">
+            <label htmlFor="dob" className="block text-gray-600">
+              Date of Birth
+            </label>
+            <input
+              type="date"
+              id="dob"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              autoComplete="off"
+            />
+          </div>
 
-                </div>
-                    <div className='flex justify-center'>
-                    <button type="submit"  className="registerBtn w-full">
-                    Register
-                    </button>
-                    </div>    
-            </form>
-            
-            </div>
-        </div>
-    </>
-    );
+          <div className="mb-4">
+            <label htmlFor="address" className="block text-gray-600">
+              Address
+            </label>
+            <input
+              type="text"
+              id="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Address"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              autoComplete="off"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="role" className="block text-gray-600">
+              Role
+            </label>
+            <select
+              id="role"
+              name="role"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="parent">Parent</option>
+              <option value="child">Child</option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
+          >
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default Register;
