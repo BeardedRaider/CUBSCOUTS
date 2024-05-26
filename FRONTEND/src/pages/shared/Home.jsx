@@ -4,8 +4,8 @@ import "../../styles/home.css"
 const Home = () => {
   return (
     <div>
-      <section className='sectionBg section-half-height'>
-        <div className='text-white py-8 mt-20'>
+      <section className='sectionBg 100vh'>
+        <div className='text-white  py-4'>
           <div className='container mx-auto flex flex-col md:flex-row items-center my-12 md:my-20'>
             <div className='flex flex-col w-full lg:w-1/2 justify-center items-start p-4'>
               <h1 className='text-3xl md:text-5xl p-1 text-white tracking-loose'>Welcome!
