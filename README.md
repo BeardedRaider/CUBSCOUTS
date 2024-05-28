@@ -1,6 +1,8 @@
 # CUBSCOUTS
 Main colour rgb(72, 12, 136)
 
+EDIT OTHER BACKGROUND SECTIONG TO MATCH THE GRADIENT STYLE OF THE ACCOUNT PAGE, IF THERES TIME.
+
 FOR THE IMAGES.JSON FILE HERE ARE THE COMMENTS
 /*
   This is a JSON array containing the filenames of images used in the application.

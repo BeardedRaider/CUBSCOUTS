@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const multer = require('multer');// Import the multer package
 const path = require('path');// Import the path package
+const upload = multer({ dest: 'uploads/' }); // Configuring multer
 
 const bcrypt = require('bcryptjs');// Import the bcryptjs package
 const jwt = require('jsonwebtoken');// Import the jsonwebtoken package
@@ -46,8 +47,6 @@ const storage = multer.diskStorage({
         cb(null, `${basename}${extension}`);// // Use the original filename without the timestamp
     },
 });
-
-const upload = multer({ storage });
 
 // --------------register the user by saving the user data to the database
 app.post('/api/register', async (req, res) => {
@@ -261,23 +260,20 @@ app.put('/api/users/:id',
 app.post('/api/events', upload.single('image'), async (req, res) => {
     try {
         const { title, description, date, time, location } = req.body;
-        const image = req.file ? req.file.path : '';
-
-        const event = new Event({
+        const newEvent = new Event({
             title,
             description,
             date,
             time,
             location,
-            image,
+            image: req.file ? req.file.path : undefined
         });
-        await event.save();
-
-        res.json({ message: 'Event created successfully' });
+        const savedEvent = await newEvent.save();
+        res.json(savedEvent);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
-    } 
+    }
 });
 // -----------------Make the uploaded images accessible
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -291,6 +287,37 @@ app.get('/api/events', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch events' });
     }
 });
+
+// --------- ADMIN UPDATING/DELETING THE CURRENT EVENTS
+app.put('/api/events/:id', upload.single('image'), async (req, res) => {
+    try {
+        const { title, description, date, time, location } = req.body;
+        let updateFields = { title, description, date, time, location };
+
+            // Update image field only if a new image is uploaded
+            if (req.file) {
+                updateFields.image = req.file.path;
+            }
+
+            const event = await Event.findByIdAndUpdate(req.params.id, updateFields, { new: true });
+            res.json(event);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    });
+
+    app.delete('/api/events/:id', async (req, res) => {
+        try {
+            await Event.findByIdAndDelete(req.params.id);
+            res.json({ message: 'Event deleted' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    });
+
+
 
 //----------number of events on the database
     app.get('/api/events/count', async (req, res) => {
