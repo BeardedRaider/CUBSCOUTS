@@ -266,7 +266,8 @@ app.post('/api/events', upload.single('image'), async (req, res) => {
             date,
             time,
             location,
-            image: req.file ? req.file.path : undefined
+            image: req.file ? req.file.path : undefined,
+            moreInfo
         });
         const savedEvent = await newEvent.save();
         res.json(savedEvent);
@@ -291,15 +292,19 @@ app.get('/api/events', async (req, res) => {
 // --------- ADMIN UPDATING/DELETING THE CURRENT EVENTS
 app.put('/api/events/:id', upload.single('image'), async (req, res) => {
     try {
-        const { title, description, date, time, location } = req.body;
-        let updateFields = { title, description, date, time, location };
+        const { title, description, date, time, location, moreInfo } = req.body;
+        let updateFields = { title, description, date, time, location, moreInfo };
 
             // Update image field only if a new image is uploaded
             if (req.file) {
                 updateFields.image = req.file.path;
             }
 
-            const event = await Event.findByIdAndUpdate(req.params.id, updateFields, { new: true });
+            const event = await Event.findByIdAndUpdate(
+                req.params.id, 
+                updateFields, 
+                { new: true }
+            );
             res.json(event);
         } catch (error) {
             console.error(error);

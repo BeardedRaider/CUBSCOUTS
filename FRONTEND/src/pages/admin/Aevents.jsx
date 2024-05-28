@@ -14,6 +14,7 @@ const Aevents = () => {
   const [time, setTime] = useState('');
   const [location, setLocation] = useState('');
   const [image, setImage] = useState(null);
+  const [moreInfo, setMoreInfo] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // State for fetching and managing existing events
@@ -37,7 +38,7 @@ const Aevents = () => {
     event.preventDefault();
 
     // Check if all fields are filled
-    if (!title || !description || !date || !time || !location || !image) {
+    if (!title || !description || !date || !time || !location || !image || !moreInfo) {
       toast.error('All fields are required');
       return;
     }
@@ -52,6 +53,7 @@ const Aevents = () => {
       formData.append('time', time);
       formData.append('location', location);
       formData.append('image', image);
+      formData.append('moreInfo', moreInfo);
 
       await axios.post('http://localhost:5000/api/events', formData, {
         headers: {
@@ -65,6 +67,7 @@ const Aevents = () => {
       setTime('');
       setLocation('');
       setImage(null);
+      setMoreInfo('');
 
       toast.success('Event created successfully');
 
@@ -108,6 +111,7 @@ const handleUpdate = async (eventId) => {
   formData.append('date', eventToUpdate.date);
   formData.append('time', eventToUpdate.time);
   formData.append('location', eventToUpdate.location);
+  formData.append('moreInfo', eventToUpdate.moreInfo);
 
   // check if a new image is uploaded
   if (eventToUpdate.imageFile) {
@@ -122,6 +126,7 @@ const handleUpdate = async (eventId) => {
     time: eventToUpdate.time,
     location: eventToUpdate.location,
     image: eventToUpdate.imageFile ? eventToUpdate.imageFile.name : 'No new image',
+    moreInfo: eventToUpdate.moreInfo,
   });
 
   setIsSubmitting(true);
@@ -131,7 +136,6 @@ const handleUpdate = async (eventId) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log('Update Response:', updateResponse.data);
     toast.success('Event updated successfully');
 
     // Update state with the updated event
@@ -256,7 +260,20 @@ const handleUpdate = async (eventId) => {
                 placeholder="Location"
               />
             </div>
-
+            
+            <label htmlFor="moreInfo" className='block text-gray-700 ml-3 flex items-center justify-center w-1/2'>
+                More Info
+            </label>
+            <div className='mb-4 flex items-center justify-center'>
+                <textarea
+                    className='shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                    id='moreInfo'
+                    value={moreInfo}
+                    onChange={(e) => setMoreInfo(e.target.value)}
+                    placeholder="More Info"
+                />
+            </div>
+            
             <label htmlFor="image" className='block text-gray-700 ml-12 flex items-center justify-center w-1/2'>
               Upload Image
             </label>
@@ -269,6 +286,7 @@ const handleUpdate = async (eventId) => {
                 accept='image/*' // Accept only image files
               />
             </div>
+
             <div className='flex items-center justify-center'>
               <button
                 className='bg-purple-600 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
@@ -334,6 +352,15 @@ const handleUpdate = async (eventId) => {
                     type="text"
                     name="location"
                     value={event.location}
+                    onChange={(e) => handleInputChange(e, event._id)}
+                    className='w-full border rounded px-3 py-2'
+                  />
+                </div>
+                <div className='mb-4'>
+                  <label className='block text-gray-700'>More Info</label>
+                  <textarea
+                    name="moreInfo"
+                    value={event.moreInfo}
                     onChange={(e) => handleInputChange(e, event._id)}
                     className='w-full border rounded px-3 py-2'
                   />
