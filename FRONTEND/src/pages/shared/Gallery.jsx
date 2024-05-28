@@ -50,6 +50,33 @@ const Gallery = () => {
     document.body.style.overflow = 'auto'; // Enable scrolling
   };
 
+  const handlePrint = () => {
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+    <html>
+    <head>
+      <title>Print Image</title>
+      <style>
+        body, html { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        img { max-width: 100%; max-height: 100%; }
+      </style>
+    </head>
+    <body>
+      <img src="${selectedImage}" alt="Image for Printing" />
+      <script>
+        window.onload = function() {
+          window.print();
+          window.onafterprint = function() {
+            window.close();
+          };
+        };
+      </script>
+    </body>
+  </html>
+    `);
+    printWindow.document.close();
+    };
+
   return (
     <div>
       {/* WELCOME MESSAGE */}
@@ -89,9 +116,11 @@ const Gallery = () => {
           overlayClassName='modal-overlay' // Apply the class to the overlay
         >
           <img src={selectedImage} alt='' className='modal-image'/>{/* Apply the class to the image */}
-          <button onClick={closeModal} className='closeBtn text-yellow-400'>X</button>
+          <div>
+            <button onClick={closeModal} className='closeBtn text-yellow-400'>X</button>
+            <button onClick={handlePrint} className='printBtn text-yellow-400'>Print</button>
+          </div>
         </Modal>
-
       </section>
     </div>
   );
