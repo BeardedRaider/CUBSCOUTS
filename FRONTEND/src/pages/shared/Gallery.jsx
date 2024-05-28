@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import images from '../../components/images.json';
+import UserInformation from '../../UserInfo';
 import '../../styles/gallery.css';
 
 // import image directly
@@ -36,6 +37,7 @@ const imageMap = {// imageMap is an object that contains all the images
 
 
 const Gallery = () => {
+  const user = UserInformation();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -78,20 +80,18 @@ const Gallery = () => {
     };
 
   return (
-    <div>
+    <>
+      <div className="text-gray-900 bg-gray-200">
       {/* WELCOME MESSAGE */}
-      <section className='sectionBg'>
-        <div className='text-white py-4 mt-5'>
-          <div className='container mx-auto flex flex-col md:flex-row items-center my-12 md:my-20'>
-            <div className='flex flex-col w-full lg:w-1/2 justify-center items-start p-4'>
-              <h2 className='text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2'>Welcome</h2>
-              <p className='text-2xl text-gray-50 mb-4'>
-                To The Cub Scouts Gallery!
-              </p>
-            </div>
+      <section className=' hero overlay py-24 px-4 lg:px-16'>
+          <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2'>
+            <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose" > Welcome to the Cub Scouts Gallery
+            </h1>
+            <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white"> 
+              {user ? user.name : 'Loading...'}!
+            </h2>
           </div>
-        </div>
-      </section>
+        </section>
       {/* GALLERY */}
       <section className='sectionBg3 pt-10'>
         <div className='container mx-auto p-4'>
@@ -123,6 +123,7 @@ const Gallery = () => {
         </Modal>
       </section>
     </div>
+  </>
   );
 };
 

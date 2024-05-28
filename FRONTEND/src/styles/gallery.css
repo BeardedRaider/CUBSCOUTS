@@ -1,3 +1,21 @@
+.overlay {
+    border-image: 
+        linear-gradient(hsla(40, 90%, 35%, 0.3),
+        hsla(0, 0%, 3%, 0.5))
+        fill 1;
+}
+
+.hero {
+    background-image: url("../../../public/images/forest.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    position: relative;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);/* adds shadow to the section*/
+    overflow: auto;/* hides the overflow content */
+}
+
 .gallery {
     column-count: 4;
     /* Adjust this to change the number of columns */
