@@ -4,6 +4,28 @@
     border-collapse: collapse;
 }
 
+/* this is supposed to cause the image to have a gradient, but its not working at the moment, com back if i have the time */
+/* GOT IT WORKING, NO GAP BETWEEN GRADIENT AND ( */
+.overlay {
+    border-image: 
+        linear-gradient(hsla(40, 90%, 35%, 0.3),
+        hsla(0, 0%, 3%, 0.3))
+        fill 1;
+}
+
+.hero {
+    background-image: url("../../../public/images/forest.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    position: relative;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);/* adds shadow to the section*/
+    overflow: auto;/* hides the overflow content */
+}
+
+
+
 /*------ Styles for mobile ------*/
 @media (max-width: 768px) {
     .responsive-table thead {
