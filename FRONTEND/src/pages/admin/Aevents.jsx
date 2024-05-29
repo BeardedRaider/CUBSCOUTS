@@ -101,7 +101,6 @@ const Aevents = () => {
   };
 
   // Handle updating an existing event
-  // Handle updating an existing event
 const handleUpdate = async (eventId) => {
   const eventToUpdate = events.find(event => event._id === eventId);
 

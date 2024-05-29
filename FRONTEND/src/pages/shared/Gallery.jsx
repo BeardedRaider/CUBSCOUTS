@@ -1,50 +1,80 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import images from '../../components/images.json';
+import axios from 'axios';
 import UserInformation from '../../UserInfo';
+import { toast } from 'react-hot-toast';
 import '../../styles/gallery.css';
 
-// import image directly
-import beach from '../../images/beach.jpg';
-import beach1 from '../../images/beach1.jpg';
-import camping from '../../images/camping.jpg';
-import chess from '../../images/chess.jpg';
-import ducks from '../../images/ducks.jpg';
-import fire from '../../images/fire.jpg';
-import group1 from '../../images/group1.jpg';
-import landing from '../../images/landing.jpg';
-import leader2 from '../../images/leader2.jpg';
-import leaders from '../../images/leaders.jpg';
-import loginImg from '../../images/loginImg.jpg';
-import tentgame from '../../images/tentgame.jpg';
-import walk from '../../images/walk.jpg';
-
-const imageMap = {// imageMap is an object that contains all the images
-  'beach.jpg': beach,
-  'beach1.jpg': beach1,
-  'camping.jpg': camping,
-  'chess.jpg': chess,
-  'ducks.jpg': ducks,
-  'fire.jpg': fire,
-  'group1.jpg': group1,
-  'landing.jpg': landing,
-  'leader2.jpg': leader2,
-  'leaders.jpg': leaders,
-  'loginImg.jpg': loginImg,
-  'tentgame.jpg': tentgame,
-  'walk.jpg': walk,
-};
 
 
 const Gallery = () => {
   const user = UserInformation();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [title, setTitle] = useState('');
+  const [image, setImage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [gallery, setGallery] = useState([]);
+  const [imageMap, setImageMap] = useState({}); // Define imageMap state
+  const [selectedImage, setSelectedImage] = useState(null); // Define selectedImage state
 
   const openModal = (image) => {
     setSelectedImage(imageMap[image]);
     setModalIsOpen(true);
     document.body.style.overflow = 'hidden'; // Prevent scrolling
+  };
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/gallery');
+        const galleryData = response.data;
+        setGallery(galleryData);
+        // Create a map of image names to image URLs
+        const imageMapData = {};
+        galleryData.forEach((gallery) => {
+          imageMapData[gallery.title] = `http://localhost:5000/${gallery.image}`; // Adjust this based on your API response structure
+        });
+        setImageMap(imageMapData);
+      } catch (error) {
+        console.error('Failed to fetch Gallery', error);
+      }
+    };
+    fetchGallery();
+  }, []);
+
+  // handleUpload function to upload an image
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+      formData.append('title', title);
+      formData.append('image', image);
+    // Check if the title and image are provided
+    if (!title || !image) {
+      toast.error('Please provide a title and image');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/gallery', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      setGallery((prevGallery) => [...prevGallery, response.data]);
+      setImageMap((prevImageMap) => ({
+        ...prevImageMap,
+        [response.data.title]: `http://localhost:5000/${response.data.image}`,
+      }));
+
+      setTitle('');
+      setImage(null);
+    } catch (error) {
+      console.error('Failed to upload image', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const closeModal = () => {
@@ -59,7 +89,7 @@ const Gallery = () => {
     <head>
       <title>Print Image</title>
       <style>
-        body, html { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        body, html { margin: 0; padding: 0; display: flex; justify-content: center; align-gallerys: center; height: 100vh; }
         img { max-width: 100%; max-height: 100%; }
       </style>
     </head>
@@ -92,15 +122,62 @@ const Gallery = () => {
             </h2>
           </div>
         </section>
+      {/* UPLOAD IMAGE */}
+      <section className='bg-gray-300 py-24 px-4 lg:px-16'>
+        <div className="flex gallerys-center justify-center px-3">
+        <h1 className="text-3xl">Upload An Image</h1>
+        </div>
+        <div className="flex gallerys-center justify-center px-3 py-4">
+          <form onSubmit={handleUpload} className='w-1/2 text-md bg-white shadow-md rounded p-5'>
+          
+          <label htmlFor="title" className='block text-gray-700 ml-3 flex gallerys-center justify-center w-1/2'>
+              Title
+            </label>
+            <div className='mb-4 flex gallerys-center justify-center'>
+              <input
+                className='shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                type="text"
+                id='title'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Title"
+              />
+            </div>
+
+            <label htmlFor="image" className='block text-gray-700 ml-12 flex gallerys-center justify-center w-1/2'>
+              Upload Image
+            </label>
+            <div className='mb-4 flex gallerys-center justify-center'>
+              <input
+                className='shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                type="file"
+                id='image'
+                onChange={(e) => setImage(e.target.files[0])} // Set the image to the first file selected
+                accept='image/*' // Accept only image files
+              />
+            </div>
+            <div className='flex gallerys-center justify-center'>
+              <button
+                className='bg-purple-600 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Submitting...' : 'Upload'}
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </section>  
       {/* GALLERY */}
       <section className='sectionBg3 pt-10'>
         <div className='container mx-auto p-4'>
           <div className='gallery'>
-            {images.map((image, index) => (
-              <div key={index} className='gallery-item'>
+            {gallery.map((image, index) => (
+              <div key={index} className='gallery-gallery'>
                 <img
                   className='h-auto max-w-full rounded-lg cursor-pointer'
-                  src={imageMap[image]}
+                  src={imageMap[image.title]}
                   alt=''
                   onClick={() => openModal(image)}
                 />

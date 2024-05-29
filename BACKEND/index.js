@@ -16,6 +16,8 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const app = express();// Create the express app
 const PORT = process.env.PORT || 5000;// Define the port to listen to
 
+const Image = require('./models/image');// Import the Image model
+
 app.use(cors());// Use the cors middleware
 app.use(express.json());// Use the json parser
 app.use(express.urlencoded({ extended: true }));// Use the urlencoded parser
@@ -33,19 +35,66 @@ mongoose.connection.on('connected', () => {
 });
 
 
+const corsOptions = {
+    origin: 'http://localhost:3000', // Frontend URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+};
 
+app.use(cors(corsOptions));
 
 //---------- Configure the multer storage ----------------
-const storage = multer.diskStorage({
+// Multer storage configuration for events
+const eventStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, 'uploads/'); // Set the destination folder for uploaded files
+      cb(null, 'uploads/events'); // Store in events directory
     },
     filename: (req, file, cb) => {
-        const originalname = file.originalname;// Get the original file name
-        const extension = path.extname(originalname);// Get the file extension
-        const basename = path.basename(originalname, extension);// Get the file name without the extension
-        cb(null, `${basename}${extension}`);// // Use the original filename without the timestamp
+      cb(null, file.originalname); // Keep the original file name
+    }
+});
+
+// Multer storage configuration for gallery
+const galleryStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/gallery'); // Store in gallery directory
     },
+    filename: (req, file, cb) => {
+      cb(null, file.originalname); // Keep the original file name
+    }
+});
+
+// Multer upload instance for events
+const uploadEvent = multer({
+    storage: eventStorage,
+    limits: { fileSize: 1000000 }, // Limit file size to 1MB
+    fileFilter: (req, file, cb) => {
+        const filetypes = /jpeg|jpg|png|gif/;
+        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+        const mimetype = filetypes.test(file.mimetype);
+        if (mimetype && extname) {
+            return cb(null, true);
+        } else {
+            cb('Error: Images Only!');
+        }
+    }
+});
+
+// Multer upload instance for gallery
+const uploadGallery = multer({
+    storage: galleryStorage,
+    limits: { fileSize: 1000000 }, // Limit file size to 1MB
+    fileFilter: (req, file, cb) => {
+        const filetypes = /jpeg|jpg|png|gif/;
+        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+        const mimetype = filetypes.test(file.mimetype);
+        if (mimetype && extname) {
+            return cb(null, true);
+        } else {
+            cb('Error: Images Only!');
+        }
+    }
 });
 
 // --------------register the user by saving the user data to the database
@@ -170,8 +219,6 @@ app.get('/api/allusers', async (req, res) => {
     }
 });
 
-
-
 //number of users on the database
 app.get('/api/users/count', async (req, res) => {
     const count = await User.countDocuments();
@@ -255,8 +302,7 @@ app.put('/api/users/:id',
         }
     });
 
-    //-------------------EVENTS---------------------
-// -------------Create events with image upload
+    // -------------Create events with image upload
 app.post('/api/events', upload.single('image'), async (req, res) => {
     try {
         const { title, description, date, time, location, moreInfo} = req.body;
@@ -276,6 +322,7 @@ app.post('/api/events', upload.single('image'), async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 // -----------------Make the uploaded images accessible
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -328,6 +375,39 @@ app.put('/api/events/:id', upload.single('image'), async (req, res) => {
         res.json({ count });
     });
 
+    app.post('/api/gallery', upload.single('image'), async (req, res) => {
+        try {
+            const { title } = req.body;
+            if (!title) {
+                return res.status(400).json({ error: 'Title is required' });
+            }
+            if (!req.file) {
+            return res.status(400).json({ error: 'Image file is required' });
+        }
+    
+        const newImage = new Image({
+            title,
+            image: req.file.path,
+        });
+
+        const savedImage = await newImage.save();
+        res.json(savedImage);
+        } catch (error) {
+            console.error('Error in /api/gallery:', error.message);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    });
+
+    app.get('/api/gallery', async (req, res) => {
+        try {
+            const images = await Image.find({});
+            res.json(images);
+        } catch (error) {
+            res.status(500).json({ error: 'Failed to fetch gallery' });
+        }
+    });
+
+    app.use('/gallery', express.static(path.join(__dirname, 'gallery')));
 
 
 app.listen(PORT, () => {
