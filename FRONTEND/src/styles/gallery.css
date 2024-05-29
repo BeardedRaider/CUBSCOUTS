@@ -1,12 +1,12 @@
-.overlay {
+.overlayGallery {
     border-image: 
-        linear-gradient(hsla(40, 90%, 35%, 0.3),
-        hsla(0, 0%, 3%, 0.5))
+        linear-gradient(hsla(44, 78%, 82%, 0.3),
+        hsla(0, 0%, 0%, 0.5))
         fill 1;
 }
 
-.hero {
-    background-image: url("../../../public/images/forest.jpg");
+.heroGallery {
+    background-image: url("../../../public/images/gall.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
