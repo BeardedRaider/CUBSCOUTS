@@ -4,19 +4,22 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const multer = require('multer');// Import the multer package
 const path = require('path');// Import the path package
-const upload = multer({ dest: 'uploads/' }); // Configuring multer
-
+const fs = require('fs');
 const bcrypt = require('bcryptjs');// Import the bcryptjs package
 const jwt = require('jsonwebtoken');// Import the jsonwebtoken package
 require('dotenv').config();
+
+const JWT_SECRET = process.env.JWT_SECRET;
+
+
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
-const JWT_SECRET = process.env.JWT_SECRET;
+const Image = require('./models/image');// Import the Image model This model now uses the 'gallery' collection
 
 const app = express();// Create the express app
 const PORT = process.env.PORT || 5000;// Define the port to listen to
+const upload = multer({ dest: 'uploads/' }); // Configuring multer
 
-const Image = require('./models/image');// Import the Image model
 
 app.use(cors());// Use the cors middleware
 app.use(express.json());// Use the json parser
@@ -58,17 +61,23 @@ const eventStorage = multer.diskStorage({
 // Multer storage configuration for gallery
 const galleryStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, 'uploads/gallery'); // Store in gallery directory
+      cb(null, 'gallery'); // Store in gallery directory
     },
     filename: (req, file, cb) => {
       cb(null, file.originalname); // Keep the original file name
     }
 });
 
+// Ensure gallery directory exists
+    const galleryDir = path.join(__dirname, 'gallery');
+    if (!fs.existsSync(galleryDir)){
+        fs.mkdirSync(galleryDir);
+    }
+
 // Multer upload instance for events
 const uploadEvent = multer({
     storage: eventStorage,
-    limits: { fileSize: 1000000 }, // Limit file size to 1MB
+    limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to 10MB    
     fileFilter: (req, file, cb) => {
         const filetypes = /jpeg|jpg|png|gif/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -84,7 +93,7 @@ const uploadEvent = multer({
 // Multer upload instance for gallery
 const uploadGallery = multer({
     storage: galleryStorage,
-    limits: { fileSize: 1000000 }, // Limit file size to 1MB
+    limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to 10MB 
     fileFilter: (req, file, cb) => {
         const filetypes = /jpeg|jpg|png|gif/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -96,6 +105,8 @@ const uploadGallery = multer({
         }
     }
 });
+
+
 
 // --------------register the user by saving the user data to the database
 app.post('/api/register', async (req, res) => {
@@ -302,7 +313,8 @@ app.put('/api/users/:id',
         }
     });
 
-    // -------------Create events with image upload
+// -------------CREATRION OF EVENTS ADMIN ----------------
+
 app.post('/api/events', upload.single('image'), async (req, res) => {
     try {
         const { title, description, date, time, location, moreInfo} = req.body;
@@ -358,7 +370,7 @@ app.put('/api/events/:id', upload.single('image'), async (req, res) => {
             res.status(500).json({ error: 'Internal Server Error' });
         }
     });
-
+// --------------Delete events
     app.delete('/api/events/:id', async (req, res) => {
         try {
             await Event.findByIdAndDelete(req.params.id);
@@ -369,20 +381,26 @@ app.put('/api/events/:id', upload.single('image'), async (req, res) => {
         }
     });
 
+    app.use('/uploads/events', express.static(path.join(__dirname, 'uploads/events')));
+
 //----------number of events on the database
     app.get('/api/events/count', async (req, res) => {
         const count = await Event.countDocuments();
         res.json({ count });
     });
 
-    app.post('/api/gallery', upload.single('image'), async (req, res) => {
+
+// -----------------CREATRION OF GALLERY IMAGES ----------------
+
+
+    app.post('/api/gallery', uploadGallery.single('image'), async (req, res) => {
         try {
             const { title } = req.body;
             if (!title) {
                 return res.status(400).json({ error: 'Title is required' });
             }
             if (!req.file) {
-            return res.status(400).json({ error: 'Image file is required' });
+            return res.status(400).json({ error: 'Valid Image file is required' });
         }
     
         const newImage = new Image({
@@ -407,8 +425,8 @@ app.put('/api/events/:id', upload.single('image'), async (req, res) => {
         }
     });
 
-    app.use('/gallery', express.static(path.join(__dirname, 'gallery')));
-
+// Serve uploaded gallery images
+app.use('/gallery', express.static(path.join(__dirname, 'gallery')));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
