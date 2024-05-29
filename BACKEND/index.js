@@ -259,7 +259,7 @@ app.put('/api/users/:id',
 // -------------Create events with image upload
 app.post('/api/events', upload.single('image'), async (req, res) => {
     try {
-        const { title, description, date, time, location } = req.body;
+        const { title, description, date, time, location, moreInfo} = req.body;
         const newEvent = new Event({
             title,
             description,
