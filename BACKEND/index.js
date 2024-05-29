@@ -322,8 +322,6 @@ app.put('/api/events/:id', upload.single('image'), async (req, res) => {
         }
     });
 
-
-
 //----------number of events on the database
     app.get('/api/events/count', async (req, res) => {
         const count = await Event.countDocuments();
