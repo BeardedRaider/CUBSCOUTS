@@ -124,6 +124,9 @@ const Header = ({ className }) => {
                 <li>
                   <Link to="/gallery">Gallery</Link>
                 </li>
+                <li>
+                  <Link to="/badges">Badges</Link>
+                </li>
                 
                 <li>
                 {auth.token && (
@@ -132,12 +135,7 @@ const Header = ({ className }) => {
                   </Link>
                 )}
                 </li>
-                
-                <li>
-                  <Link to="https://www.scouts.org.uk/scouts" target="_blank">
-                    Scouts
-                  </Link>
-                </li>
+
                 <li>
                   <button className="logoutBtn" onClick={handleLogout}>
                     Logout

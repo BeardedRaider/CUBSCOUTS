@@ -10,6 +10,7 @@ import Register from './pages/shared/Register';
 import Gallery from './pages/shared/Gallery';
 import Uevents from './pages/shared/Events';
 import Account from './pages/shared/Account';
+import Badges from './pages/shared/Badges';
 // admin pages
 import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/Users';
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="/events" element={<Uevents />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/badges" element={<Badges />} />
           </Routes>
           <Footer />
         </Router>        
