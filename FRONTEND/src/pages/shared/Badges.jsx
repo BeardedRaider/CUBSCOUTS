@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../axiosInstance';
 import UserInformation from '../../UserInfo';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import "../../styles/parent.css";
 
@@ -26,47 +25,55 @@ const Badges = () => {
                 setError(error.message);
             });
 
-        // Fetch completed badges
-        if (user && user.id) {
-            axios.get(`/badges/${user.id}`)
-                .then((response) => {
-                    const userBadges = response.data?.badges || [];
-                    const completed = userBadges.reduce((acc, badge) => {
-                        acc[badge.title] = badge.completed;
-                        return acc;
-                    }, {});
-                    setCompletedBadges(completed);
-                })
-                .catch((error) => {
-                    console.error('Error fetching user badges', error);
-                    setError(error.message);
-                });
+    // Fetch completed badges
+    if (user && user.id) {
+        axiosInstance.get(`/badges/${user.id}`, {
+            headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add the token if you are storing it in localStorage
+            }
+        })
+            .then((response) => {
+            const userBadges = response.data?.badges || [];
+            const completed = userBadges.reduce((acc, badge) => {
+                acc[badge.title] = badge.completed;
+                return acc;
+            }, {});
+            setCompletedBadges(completed);
+            })
+            .catch((error) => {
+            console.error('Error fetching user badges', error);
+            setError(error.message);
+            });
         }
     }, [user]);
 
     const handleCompletionToggle = (badgeTitle) => {
         const isCompleted = !completedBadges[badgeTitle];
-
+    
         setCompletedBadges({
             ...completedBadges,
             [badgeTitle]: isCompleted,
         });
-
-        axios.post(`/badges/${user.id}`, {
-            badge: {
-                title: badgeTitle,
-                completed: isCompleted,
+    
+        axiosInstance.post('/badges', {
+            userId: user._id,
+            title: badgeTitle,
+            completed: isCompleted,
+        }, {
+            headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add the token if you are storing it in localStorage
             }
-        }).catch((error) => {
+        })
+        .then((response) => {
+            // Show success toast
+            toast.success('Badge completion updated successfully!');
+        })
+        .catch((error) => {
             console.error('Error updating badge completion', error);
             setError(error.message);
             toast.error('Failed to update badge completion');
         });
     };
-
-    if (error) {
-        return <div className='text-red-500'>{error}</div>;
-    }
 
     return (
         <div>
@@ -78,9 +85,9 @@ const Badges = () => {
                             <div key={badge.title} className='bg-white rounded-xl shadow-lg p-8 flex flex-col items-center'>
                                 <p className='text-xl text-gray-500'>{badge.title}</p>
                                 <img src={badge.image} alt={badge.title} className='w-24 h-24 my-4' />
-                                <Link to={badge.infoLink} className='bg-blue-500 text-white px-4 py-2 rounded-md mb-2'>
-                                    How to Complete
-                                </Link>
+                                <a href={badge.infoLink} target='_blank' rel='noopener noreferrer' className='bg-blue-500 text-white px-4 py-2 rounded-md mb-2'>
+                                    How To Complete
+                                </a>
                                 <button
                                     onClick={() => handleCompletionToggle(badge.title)}
                                     className={`px-4 py-2 rounded-md ${completedBadges[badge.title] ? 'bg-green-500' : 'bg-red-500'} text-white`}

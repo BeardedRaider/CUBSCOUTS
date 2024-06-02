@@ -8,14 +8,15 @@ const fs = require('fs');
 const bcrypt = require('bcryptjs');// Import the bcryptjs package
 const jwt = require('jsonwebtoken');// Import the jsonwebtoken package
 require('dotenv').config();
-const bodyParser = require('body-parser');
 
 const JWT_SECRET = process.env.JWT_SECRET;
+
+
 
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
 const Image = require('./models/image');// Import the Image model This model now uses the 'gallery' collection
-const Badge = require('./models/Badges');// Import the Badges model
+const badgesRoute = require('./routes/badges');// Import the badges route
 
 const app = express();// Create the express app
 const PORT = process.env.PORT || 5000;// Define the port to listen to
@@ -29,6 +30,8 @@ app.use(cors({
 
 app.use(express.json());// Use the json parser
 app.use(express.urlencoded({ extended: true }));// Use the urlencoded parser
+app.use('/badges', badgesRoute);
+
 
 // Connect to the mongodb server
 const MONGO_URI = process.env.MONGO_URI;
