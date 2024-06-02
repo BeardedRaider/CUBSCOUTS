@@ -25,27 +25,48 @@ const Badges = () => {
                 setError(error.message);
             });
 
-    // Fetch completed badges
-    if (user && user.id) {
-        axiosInstance.get(`/badges/${user.id}`, {
+        // Fetch completed badges
+        if (user && user.id) {
+            axiosInstance.get(`/badges/${user.id}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add the token if you are storing it in localStorage
+                }
+            })
+            .then((response) => {
+                const userBadges = response.data?.badges || [];
+                const completed = userBadges.reduce((acc, badge) => {
+                    acc[badge.title] = badge.completed;
+                    return acc;
+                }, {});
+                setCompletedBadges(completed);
+                
+            })
+            .catch((error) => {
+                console.error('Error fetching user badges', error);
+                setError(error.message);
+            });
+        }
+    }, [user]);
+
+    const fetchBadges = () => {
+        axiosInstance.get(`/user/${user.id}/badges`, {
             headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add the token if you are storing it in localStorage
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
             }
         })
-            .then((response) => {
-            const userBadges = response.data?.badges || [];
+        .then((response) => {
+            const userBadges = response.data || [];
             const completed = userBadges.reduce((acc, badge) => {
                 acc[badge.title] = badge.completed;
                 return acc;
             }, {});
             setCompletedBadges(completed);
-            })
-            .catch((error) => {
+        })
+        .catch((error) => {
             console.error('Error fetching user badges', error);
             setError(error.message);
-            });
-        }
-    }, [user]);
+        });
+    };
 
     const handleCompletionToggle = (badgeTitle) => {
         const isCompleted = !completedBadges[badgeTitle];
@@ -61,13 +82,16 @@ const Badges = () => {
             completed: isCompleted,
         }, {
             headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add the token from localStorage
+                'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add the token from localStorage
             }
         })
         .then((response) => {
             // Show success toast
             toast.success('Badge completion updated successfully!');
             console.log('Updated badge:', response.data.badge);
+            
+            // Fetch the latest badge data after successful update
+            fetchBadges();
         })
         .catch((error) => {
             console.error('Error updating badge completion', error);
@@ -75,6 +99,7 @@ const Badges = () => {
             toast.error('Failed to update badge completion');
         });
     };
+
 
     return (
         <div>
@@ -113,6 +138,7 @@ const Badges = () => {
 };
 
 export default Badges;
+
 
 
 

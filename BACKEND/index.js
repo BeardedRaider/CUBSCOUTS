@@ -11,7 +11,8 @@ require('dotenv').config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-const Badge = require('./models/Badge');
+const Badge = require('./models/Badge');// Import the Badge model
+const badgeCountRouter = require('./routes/badgeCount');// Import the badgeCount route
 
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
@@ -460,6 +461,31 @@ app.delete('/api/events/:id', async (req, res) => {
 app.use('/gallery', express.static(path.join(__dirname, 'gallery')));
 
 //----------------BADGES FOR THE USERS----------------
+// Add or update user badge
+app.post('/badges/update', async (req, res) => {
+    try {
+        const { userId, title, completed } = req.body;
+
+        // Find the badge by userId and title
+        const badge = await Badge.findOneAndUpdate(
+            { userId, title },
+            { completed },
+            { new: true } // Return the updated badge
+        );
+
+        if (!badge) {
+            return res.status(404).json({ error: 'Badge not found' });
+        }
+
+        console.log('Badge updated successfully:', badge); // Add this line for debugging
+
+        res.json({ message: 'Badge completion updated successfully', badge });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 // Fetch user badges
 app.get('/user/:userId/badges', async (req, res) => {
     try {
@@ -474,31 +500,8 @@ app.get('/user/:userId/badges', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
-// Add or update user badge
-app.post('/badges', async (req, res) => {
-    try {
-        const { userId, title, completed } = req.body;
-
-        // Find the badge by userId and title
-        let badge = await Badge.findOne({ userId, title });
-
-        if (badge) {
-            // If the badge exists, update it
-            badge.completed = completed;
-        } else {
-            // If the badge does not exist, create a new one
-            badge = new Badge({ userId, title, completed });
-        }
-
-        await badge.save();
-
-        res.json({ message: 'Badge updated successfully', badge });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+//-----------BADGE COUNT-----------
+app.use('/api', badgeCountRouter);
 
 
 app.listen(PORT, () => {// Start the server
