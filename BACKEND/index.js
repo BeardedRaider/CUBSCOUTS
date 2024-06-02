@@ -11,7 +11,7 @@ require('dotenv').config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-
+const Badge = require('./models/Badge');
 
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
@@ -461,10 +461,44 @@ app.use('/gallery', express.static(path.join(__dirname, 'gallery')));
 
 //----------------BADGES FOR THE USERS----------------
 // Fetch user badges
+app.get('/user/:userId/badges', async (req, res) => {
+    try {
+        const { userId } = req.params;
 
+        // Find all badges for the user
+        const badges = await Badge.find({ userId });
+
+        res.json(badges);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 // Add or update user badge
+app.post('/badges', async (req, res) => {
+    try {
+        const { userId, title, completed } = req.body;
 
+        // Find the badge by userId and title
+        let badge = await Badge.findOne({ userId, title });
+
+        if (badge) {
+            // If the badge exists, update it
+            badge.completed = completed;
+        } else {
+            // If the badge does not exist, create a new one
+            badge = new Badge({ userId, title, completed });
+        }
+
+        await badge.save();
+
+        res.json({ message: 'Badge updated successfully', badge });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 app.listen(PORT, () => {// Start the server

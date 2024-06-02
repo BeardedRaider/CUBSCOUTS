@@ -61,12 +61,13 @@ const Badges = () => {
             completed: isCompleted,
         }, {
             headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add the token if you are storing it in localStorage
+            'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add the token from localStorage
             }
         })
         .then((response) => {
             // Show success toast
             toast.success('Badge completion updated successfully!');
+            console.log('Updated badge:', response.data.badge);
         })
         .catch((error) => {
             console.error('Error updating badge completion', error);
