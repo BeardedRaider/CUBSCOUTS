@@ -12,10 +12,6 @@ const Badges = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (!user) {
-            return;
-        }
-
         // Fetch all badges
         fetch('/badges/badges.json')
             .then((response) => {
@@ -31,7 +27,7 @@ const Badges = () => {
             });
 
         // Fetch completed badges
-        if (user.id) {
+        if (user && user.id) {
             axios.get(`/badges/${user.id}`)
                 .then((response) => {
                     const userBadges = response.data?.badges || [];
@@ -83,7 +79,7 @@ const Badges = () => {
                                 <p className='text-xl text-gray-500'>{badge.title}</p>
                                 <img src={badge.image} alt={badge.title} className='w-24 h-24 my-4' />
                                 <Link to={badge.infoLink} className='bg-blue-500 text-white px-4 py-2 rounded-md mb-2'>
-                                    Learn More
+                                    How to Complete
                                 </Link>
                                 <button
                                     onClick={() => handleCompletionToggle(badge.title)}
@@ -99,7 +95,7 @@ const Badges = () => {
             <section className='bg-gray-500 py-24 px-4 lg:px-16'>
                 <div className="flex items-center justify-center py-10">
                     <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
-                        <p className="text-xl text-gray-500">More Badges</p>
+                        <p className="text-xl text-gray-500">Badge Collection</p>
                         <h2 className="text-6xl font-bold">Coming Soon!</h2>
                     </div>
                 </div>
@@ -109,5 +105,7 @@ const Badges = () => {
 };
 
 export default Badges;
+
+
 
 
