@@ -99,7 +99,7 @@ const Badges = () => {
             <section className='bg-gray-500 py-24 px-4 lg:px-16'>
                 <div className="flex items-center justify-center py-10">
                     <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
-                        <p className="text-xl text-gray-500">Badge Collection</p>
+                        <p className="text-xl text-gray-500">More Badges</p>
                         <h2 className="text-6xl font-bold">Coming Soon!</h2>
                     </div>
                 </div>

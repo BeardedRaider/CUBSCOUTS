@@ -8,6 +8,7 @@ const fs = require('fs');
 const bcrypt = require('bcryptjs');// Import the bcryptjs package
 const jwt = require('jsonwebtoken');// Import the jsonwebtoken package
 require('dotenv').config();
+const bodyParser = require('body-parser');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -21,8 +22,11 @@ const PORT = process.env.PORT || 5000;// Define the port to listen to
 const upload = multer({ dest: 'uploads/' }); // Configuring multer
 
 
-app.use(cors());// Use the cors middleware
-app.use(express.json());// Use the json parser
+app.use(cors({
+    origin: 'http://localhost:3000', // Your frontend origin
+    methods: ['GET', 'POST', 'DELETE', 'PUT'], // Include DELETE method and PUT (save) method
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));app.use(express.json());// Use the json parser
 app.use(express.urlencoded({ extended: true }));// Use the urlencoded parser
 
 // Connect to the mongodb server
@@ -45,7 +49,7 @@ const corsOptions = {
     optionsSuccessStatus: 204
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions));//
 
 //---------- Configure the multer storage ----------------
 // Multer storage configuration for events

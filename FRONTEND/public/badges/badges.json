@@ -82,191 +82,191 @@
     {
         "title":"Cubs Athletics Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/1031/activity-cu-athletics.svg",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":"https://www.scouts.org.uk/cubs/activity-badges/athletics-activity-badge/"
     },
     {
         "title":"Explorers Athletics Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/1067/activity-ex-athletics.svg",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":"https://www.scouts.org.uk/cubs/activity-badges/athletics-plus/"
     },
     {
         "title":"Cubs Athletics Plus Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/1032/activity-cu-athleticsplus.svg",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":"https://www.scouts.org.uk/cubs/activity-badges/athletics-plus/"
     },
     {
         "title":"Scouts Athletics Plus Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/1121/activity-sc-athleticsplus.svg",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":"https://www.scouts.org.uk/scouts/activity-badges/athletics-plus/"
     },
     {
         "title":"Cubs Backwoods Cooking Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/1033/activity-cu-backwooks-cooking.svg",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":""
     },
     {
         "title":"Squirrels Be Active Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/13946/be-active-activity-badge.png",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":""
     },
     {
         "title":"Cubs Book Reader Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/4313/activity-cu-book-reader.png",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":""
     },
     {
         "title":"Beavers Book Reader Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/4285/activity-be-book-reader.png",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":""
     },
     {
         "title":"Squirrels Brilliant Builder Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/13947/brilliant-builder-activity-badge.png",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":""
     },
     {
         "title":"Beavers Builder Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/1008/activity-be-builder.svg",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":""
     },
     {
         "title":"Beavers Camp Craft Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/1009/activity-be-camp-craft.svg",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":""
     },
     {
         "title":"Scouts Camper Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/1122/activity-sc-camper-rgbmin.svg",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
+        "link":""
     },
     {
         "title":"Explorers Camper Activity Badge",
         "image":"https://prod-cms.scouts.org.uk/media/4348/activity-ex-camper.png",
-        "link":"https://prod-cms.scouts.org.uk/media/5580/activity-badges-sc-athletics-rgb.png"
-    },
-    {
-        "title":"",
-        "image":"/badges/badgeImages/",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Scouts Caver Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/4385/activity-sc-caver.png",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Explorers Caving Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1069/activity-ex-caving.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Cubs Chef Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1035/activity-cu-chef.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Explorers Chef Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/4350/activity-ex-chef.png",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Scouts Chef Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1127/activity-sc-chef.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Scouts Circus Skills Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1130/activity-sc-circus-skills.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Explorers Climber Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1071/activity-ex-climber.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Scouts Climber Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1131/activity-sc-climber.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Beavers Collector Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/4288/activity-be-collector.png",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Cubs Collector Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/4315/activity-cu-collector.png",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Scouts Communicator Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1132/activity-sc-communicator.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Beavers Communicator Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1011/activity-be-communicator.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Cubs Communicator Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1037/activity-cu-communicator.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Community Impact Staged Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1287/staged-community.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Beavers Cook Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1012/activity-be-cook.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Scouts Craft Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1136/activity-sc-craft.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Beavers Creative Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1013/activity-be-creative.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Explorers Creative Arts Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/4352/activity-ex-creativearts.png",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Beavers Cyclist Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/19911/beavers-cyclist-02-01-1.png",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Cubs Cyclist Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/19912/cubs-cyclist-02-01-1.png",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Scouts Cyclist Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/19910/scouts-cyclist-02-01-1.png",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Cubs DIY Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/4319/activity-cu-diy.png",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Scouts DIY Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/1140/activity-sc-diy.svg",
         "link":""
     },
     {
-        "title":"",
-        "image":"/badges/badgeImages/",
+        "title":"Digital Citizen Staged Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/4229/digital-citizen-stage-1-nominet.png",
+        "link":""
+    },
+    {
+        "title":"Digital Maker Staged Activity Badge",
+        "image":"https://prod-cms.scouts.org.uk/media/6450/raspberry_pi_1-01.png",
         "link":""
     }
     
