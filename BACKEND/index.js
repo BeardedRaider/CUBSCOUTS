@@ -55,7 +55,7 @@ app.use(cors(corsOptions));//
 // Multer storage configuration for events
 const eventStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, 'uploads/events'); // Store in events directory
+      cb(null, 'uploads'); // Store in uploads directory
     },
     filename: (req, file, cb) => {
       cb(null, file.originalname); // Keep the original file name
@@ -319,7 +319,7 @@ app.put('/api/users/:id',
 
 // -------------CREATRION OF EVENTS ADMIN ----------------
 
-app.post('/api/events', upload.single('image'), async (req, res) => {
+app.post('/api/events', uploadEvent.single('image'), async (req, res) => {
     try {
         const { title, description, date, time, location, moreInfo} = req.body;
         const newEvent = new Event({
@@ -375,15 +375,38 @@ app.put('/api/events/:id', upload.single('image'), async (req, res) => {
         }
     });
 // --------------Delete events
-    app.delete('/api/events/:id', async (req, res) => {
-        try {
-            await Event.findByIdAndDelete(req.params.id);
-            res.json({ message: 'Event deleted' });
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: 'Internal Server Error' });
+app.delete('/api/events/:id', async (req, res) => {
+    try {
+        const eventId = req.params.id;
+
+        // Find the event by ID
+        const event = await Event.findById(eventId);
+
+        if (!event) {
+            return res.status(404).json({ error: 'Event not found' });
         }
-    });
+
+        // Get the image path
+        const imagePath = event.image;
+
+        // Delete the event from the database
+        await Event.findByIdAndDelete(eventId);
+
+        // Delete the image file if it exists
+        if (imagePath) {
+            fs.unlink(path.resolve(imagePath), (err) => {
+                if (err) {
+                    console.error('Failed to delete image file:', err);
+                }
+            });
+        }
+
+        res.json({ message: 'Event deleted successfully' });
+    } catch (error) {
+        console.error('Failed to delete event:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
     app.use('/uploads/events', express.static(path.join(__dirname, 'uploads/events')));
 
