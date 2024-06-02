@@ -12,21 +12,22 @@ const bodyParser = require('body-parser');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
 const Image = require('./models/image');// Import the Image model This model now uses the 'gallery' collection
+const Badge = require('./models/Badges');// Import the Badges model
 
 const app = express();// Create the express app
 const PORT = process.env.PORT || 5000;// Define the port to listen to
 const upload = multer({ dest: 'uploads/' }); // Configuring multer
 
-
 app.use(cors({
     origin: 'http://localhost:3000', // Your frontend origin
     methods: ['GET', 'POST', 'DELETE', 'PUT'], // Include DELETE method and PUT (save) method
     allowedHeaders: ['Content-Type', 'Authorization']
-}));app.use(express.json());// Use the json parser
+}));
+
+app.use(express.json());// Use the json parser
 app.use(express.urlencoded({ extended: true }));// Use the urlencoded parser
 
 // Connect to the mongodb server
@@ -455,7 +456,15 @@ app.delete('/api/events/:id', async (req, res) => {
 // Serve uploaded gallery images
 app.use('/gallery', express.static(path.join(__dirname, 'gallery')));
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+//----------------BADGES FOR THE USERS----------------
+// Fetch user badges
+
+
+// Add or update user badge
+
+
+
+app.listen(PORT, () => {// Start the server
+    console.log(`Server is running on port ${PORT}`);// Log a message
 });
 

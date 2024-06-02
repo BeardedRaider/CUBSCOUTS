@@ -6,7 +6,7 @@ import axios from "axios";
 
 const UserInformation = () => {
   // The 'useState' hook is used to create a state variable 'user' and a setter function 'setUser'. The initial state is set to null.
-const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
   // The 'useEffect' hook is used to run a side effect after the component mounts. In this case, it fetches the user data from the server. The empty array passed as the second argument to 'useEffect' ensures that the side effect runs only once after the initial render.
   useEffect(() => {
   const fetchUserData = async () => {
