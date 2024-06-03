@@ -26,4 +26,18 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Fetch user badges
+router.get('/user/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        // Find all badges for the user
+        const badges = await Badge.find({ userId });
+
+        res.json(badges);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 module.exports = router;

@@ -8,19 +8,22 @@ const fs = require('fs');
 const bcrypt = require('bcryptjs');// Import the bcryptjs package
 const jwt = require('jsonwebtoken');// Import the jsonwebtoken package
 require('dotenv').config();
+const bodyParser = require('body-parser');
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
-const Badge = require('./models/Badge');// Import the Badge model
-const badgeCountRouter = require('./routes/badgeCount');// Import the badgeCount route
-
-const Event = require('./models/Events');// Import the Event model
-const User = require('./models/User');// Import the User model
-const Image = require('./models/image');// Import the Image model This model now uses the 'gallery' collection
-const badgesRoute = require('./routes/badges');// Import the badges route
 
 const app = express();// Create the express app
 const PORT = process.env.PORT || 5000;// Define the port to listen to
+
+const JWT_SECRET = process.env.JWT_SECRET;
+const MONGO_URI = process.env.MONGO_URI;
+
+const Badge = require('./models/Badge');// Import the Badge model
+const badgeCountRouter = require('./routes/badgeCount');// Import the badgeCount route
+const badgesRoute = require('./routes/badges');// Import the badges route
+const Event = require('./models/Events');// Import the Event model
+const User = require('./models/User');// Import the User model
+const Image = require('./models/image');// Import the Image model This model now uses the 'gallery' collection
+
 const upload = multer({ dest: 'uploads/' }); // Configuring multer
 
 app.use(cors({
@@ -31,15 +34,16 @@ app.use(cors({
 
 app.use(express.json());// Use the json parser
 app.use(express.urlencoded({ extended: true }));// Use the urlencoded parser
+app.use(bodyParser.json());
 app.use('/badges', badgesRoute);
-
+app.use('/api', badgeCountRouter);
 
 // Connect to the mongodb server
-const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
+
 
 //event listener for when the connection is open
 mongoose.connection.on('connected', () => {
@@ -462,44 +466,31 @@ app.use('/gallery', express.static(path.join(__dirname, 'gallery')));
 
 //----------------BADGES FOR THE USERS----------------
 // Add or update user badge
-app.post('/badges/update', async (req, res) => {
-    try {
-        const { userId, title, completed } = req.body;
+// app.post('/badges/update', async (req, res) => {
+//     try {
+//         const { userId, title, completed } = req.body;
 
-        // Find the badge by userId and title
-        const badge = await Badge.findOneAndUpdate(
-            { userId, title },
-            { completed },
-            { new: true } // Return the updated badge
-        );
+//         // Find the badge by userId and title
+//         const badge = await Badge.findOneAndUpdate(
+//             { userId, title },
+//             { completed },
+//             { new: true } // Return the updated badge
+//         );
 
-        if (!badge) {
-            return res.status(404).json({ error: 'Badge not found' });
-        }
+//         if (!badge) {
+//             return res.status(404).json({ error: 'Badge not found' });
+//         }
 
-        console.log('Badge updated successfully:', badge); // Add this line for debugging
+//         console.log('Badge updated successfully:', badge); // Add this line for debugging
 
-        res.json({ message: 'Badge completion updated successfully', badge });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+//         res.json({ message: 'Badge completion updated successfully', badge });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
 
-// Fetch user badges
-app.get('/user/:userId/badges', async (req, res) => {
-    try {
-        const { userId } = req.params;
 
-        // Find all badges for the user
-        const badges = await Badge.find({ userId });
-
-        res.json(badges);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
 //-----------BADGE COUNT-----------
 app.use('/api', badgeCountRouter);
 
