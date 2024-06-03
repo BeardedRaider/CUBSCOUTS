@@ -24,32 +24,15 @@ const Badges = () => {
                 console.error('Error fetching badges', error);
                 setError(error.message);
             });
-
+    
         // Fetch completed badges
-        if (user && user.id) {
-            axiosInstance.get(`/badges/${user.id}`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add the token if you are storing it in localStorage
-                }
-            })
-            .then((response) => {
-                const userBadges = response.data?.badges || [];
-                const completed = userBadges.reduce((acc, badge) => {
-                    acc[badge.title] = badge.completed;
-                    return acc;
-                }, {});
-                setCompletedBadges(completed);
-                
-            })
-            .catch((error) => {
-                console.error('Error fetching user badges', error);
-                setError(error.message);
-            });
+        if (user && user._id) {
+            fetchBadges(user._id); // Pass user._id as parameter
         }
     }, [user]);
-
-    const fetchBadges = () => {
-        axiosInstance.get(`/user/${user.id}/badges`, {
+    
+    const fetchBadges = (userId) => { // Accept userId as parameter
+        axiosInstance.get(`/api/badges/${userId}`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
             }
@@ -70,28 +53,36 @@ const Badges = () => {
 
     const handleCompletionToggle = (badgeTitle) => {
         const isCompleted = !completedBadges[badgeTitle];
-    
+
         setCompletedBadges({
             ...completedBadges,
             [badgeTitle]: isCompleted,
         });
-    
-        axiosInstance.post('/badges', {
-            userId: user._id,
+
+        // Log the token to ensure it's correctly retrieved
+        const token = localStorage.getItem('token');
+        console.log('Token:', token);
+
+            // Log data before sending the request
+
+    console.log('Data to send:', {
+        userId: user._id,
+        title: badgeTitle,
+        completed: isCompleted,
+    });
+
+        axiosInstance.post('/api/badges', {
+            userId: user._id, // ensure this is user._id, not user.id
             title: badgeTitle,
             completed: isCompleted,
         }, {
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`, // Add the token from localStorage
+                'Authorization': `Bearer ${token}`,
             }
         })
         .then((response) => {
-            // Show success toast
             toast.success('Badge completion updated successfully!');
-            console.log('Updated badge:', response.data.badge);
-            
-            // Fetch the latest badge data after successful update
-            fetchBadges();
+            fetchBadges(); // Refresh badges after update
         })
         .catch((error) => {
             console.error('Error updating badge completion', error);
@@ -99,7 +90,6 @@ const Badges = () => {
             toast.error('Failed to update badge completion');
         });
     };
-
 
     return (
         <div>
@@ -138,8 +128,5 @@ const Badges = () => {
 };
 
 export default Badges;
-
-
-
 
 

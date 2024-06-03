@@ -17,9 +17,9 @@ const PORT = process.env.PORT || 5000;// Define the port to listen to
 const JWT_SECRET = process.env.JWT_SECRET;
 const MONGO_URI = process.env.MONGO_URI;
 
-const Badge = require('./models/Badge');// Import the Badge model
+// Import the routes
 const badgeCountRouter = require('./routes/badgeCount');// Import the badgeCount route
-const badgesRoute = require('./routes/badges');// Import the badges route
+const badgesRouter = require('./routes/badges'); // Import the badges router
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
 const Image = require('./models/image');// Import the Image model This model now uses the 'gallery' collection
@@ -35,15 +35,16 @@ app.use(cors({
 app.use(express.json());// Use the json parser
 app.use(express.urlencoded({ extended: true }));// Use the urlencoded parser
 app.use(bodyParser.json());
-app.use('/badges', badgesRoute);
+// Use the badge count router
 app.use('/api', badgeCountRouter);
+// Use the badges router
+app.use('/api/badges', badgesRouter);
 
 // Connect to the mongodb server
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
-
 
 //event listener for when the connection is open
 mongoose.connection.on('connected', () => {
@@ -463,36 +464,6 @@ app.delete('/api/events/:id', async (req, res) => {
 
 // Serve uploaded gallery images
 app.use('/gallery', express.static(path.join(__dirname, 'gallery')));
-
-//----------------BADGES FOR THE USERS----------------
-// Add or update user badge
-// app.post('/badges/update', async (req, res) => {
-//     try {
-//         const { userId, title, completed } = req.body;
-
-//         // Find the badge by userId and title
-//         const badge = await Badge.findOneAndUpdate(
-//             { userId, title },
-//             { completed },
-//             { new: true } // Return the updated badge
-//         );
-
-//         if (!badge) {
-//             return res.status(404).json({ error: 'Badge not found' });
-//         }
-
-//         console.log('Badge updated successfully:', badge); // Add this line for debugging
-
-//         res.json({ message: 'Badge completion updated successfully', badge });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
-
-//-----------BADGE COUNT-----------
-app.use('/api', badgeCountRouter);
 
 
 app.listen(PORT, () => {// Start the server

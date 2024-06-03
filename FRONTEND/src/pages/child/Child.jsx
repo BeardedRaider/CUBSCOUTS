@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserInformation from '../../UserInfo';
+import Modal from 'react-modal';
 
 import "../../styles/parent.css";
+import '../../styles/gallery.css'; // Assuming you have common styles
 
 const ChildDash = () => {
   const user = UserInformation();
   const videoUrl = 'https://videos.pexels.com/video-files/9304251/9304251-hd_1366_720_25fps.mp4';
 
   const [badgeCount, setBadgeCount] = useState(0); // Get badge count for the current user
+  const [badges, setBadges] = useState([]); // State to store badges
+  const [modalIsOpen, setModalIsOpen] = useState(false); // State to control modal
+  const [selectedBadge, setSelectedBadge] = useState(null); // State for the selected badge for printing
+
   useEffect(() => {
     const fetchBadgeCount = async () => {
       try {
@@ -26,6 +32,118 @@ const ChildDash = () => {
     fetchBadgeCount();
   }, []);
 
+  const fetchCompletedBadges = async () => {
+    if (!user) {
+      console.error('User not loaded yet');
+      return;
+    }
+
+    try {
+      console.log(`Fetching badges for user with ID: ${user._id}`);
+      const response = await axios.get(`http://localhost:5000/api/badges/${user._id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      // Fetch badge details from JSON file
+      const badgeDataResponse = await fetch('/badges/badges.json');
+      const badgeData = await badgeDataResponse.json();
+
+      const userBadges = response.data.filter(badge => badge.completed);
+      const completedBadges = userBadges.map(userBadge => {
+        const badgeDetail = badgeData.find(b => b.title === userBadge.title);
+        return {
+          ...userBadge,
+          ...badgeDetail
+        };
+      });
+
+      setBadges(completedBadges);
+    } catch (error) {
+      console.error('Error fetching completed badges:', error);
+    }
+  };
+
+  const openModal = () => {
+    fetchCompletedBadges();
+    setModalIsOpen(true);
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    document.body.style.overflow = 'auto'; // Enable scrolling
+  };
+
+  const handlePrint = (badge) => {
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+      <head>
+        <title>Print Badge Certificate</title>
+        <style>
+        @media print {
+          @page {
+            size: A4;
+            margin: 0;
+          }
+          .certificate {
+            border: 10px solid #ccc;
+            padding: 40px;
+            text-align: center;
+            width: 90%; /* Adjusted to fill more of the A4 width */
+            box-sizing: border-box;
+          }
+          .certificate h1 {
+            font-size: 3em; /* Increased font size */
+          }
+          .certificate p {
+            font-size: 1.5em; /* Increased font size */
+            margin: 20px 20px; /* Increased margin */
+          }
+          .certificate h2 {
+            font-size: 2.5em; /* Increased font size */
+          }
+          .certificate h3 {
+            font-size: 2em; /* Increased font size */
+          }
+          .certificate img {
+            max-width: 300px; /* Increased max width for image */
+            margin-top: 30px; /* Increased margin-top */
+            margin-bottom: 30px; /* Increased margin-bottom */
+          }
+        }
+          body, html { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif; }
+          .certificate { border: 10px solid #ccc; padding: 20px; text-align: center; width: 80%; }
+          .certificate h1 { font-size: 2.5em; }
+          .certificate p { font-size: 1.2em; margin: 10px 0; }
+          .certificate img { max-width: 200px; margin-top: 20px; }
+        </style>
+      </head>
+      <body>
+        <div class="certificate">
+          <h1>Certificate of Achievement</h1>
+          <p>This is to certify that</p>
+          <h2>${user.name}</h2>
+          <p>has successfully completed the</p>
+          <h3>${badge.title}</h3>
+          <img src="${badge.image}" alt="${badge.title} Badge" />
+          <p>Date: ${new Date().toLocaleDateString()}</p>
+        </div>
+        <script>
+          window.onload = function() {
+            window.print();
+            window.onafterprint = function() {
+              window.close();
+            };
+          };
+        </script>
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
+  };
 
   return (
     <div>
@@ -45,7 +163,7 @@ const ChildDash = () => {
       <section>
         <div className="flex items-center justify-center py-10">
           {/* Badge count card */}
-          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
+          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center cursor-pointer" onClick={openModal}>
             <p className="text-xl text-gray-500">Badges Completed</p>
             <h2 className="text-6xl font-bold">{badgeCount}</h2>
           </div>
@@ -59,8 +177,34 @@ const ChildDash = () => {
           </div>
         </div>
       </section>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel='Badges Modal'
+        className='modal-content'
+        overlayClassName='modal-overlay'
+      >
+        <div>
+          <h2 className="text-2xl mb-4">Completed Badges</h2>
+          <div className='gallery'>
+            {badges.map((badge, index) => (
+              <div key={index} className='gallery-item'>
+                <img
+                  className='h-auto max-w-full rounded-lg cursor-pointer'
+                  src={badge.image}
+                  alt={badge.title}
+                  onClick={() => setSelectedBadge(badge)}
+                />
+                <p>{badge.title}</p>
+                <button onClick={() => handlePrint(badge)} className='printBtn text-yellow-400'>Print</button>
+              </div>
+            ))}
+          </div>
+          <button onClick={closeModal} className='closeBtn text-yellow-400'>Close</button>
+        </div>
+      </Modal>
     </div>
   )
 }
 
-export default ChildDash
+export default ChildDash;

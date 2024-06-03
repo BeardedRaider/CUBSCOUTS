@@ -15,7 +15,7 @@ app.get('/api/users', async (req, res) => {
         }
   
         // The decoded.userId should match the structure used in jwt.sign during login
-        const user = await User.findById(decoded.userId);
+        const user = await user.findById(decoded.userId);
   
         if (!user) {
           return res.status(404).json({ error: 'User not found' });

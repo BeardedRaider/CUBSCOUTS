@@ -1,0 +1,21 @@
+
+  .certificate {
+    border: 10px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+  }
+
+  .certificate h1 {
+    font-size: 55.5em;
+  }
+  
+  .certificate p {
+    font-size: 1.2em;
+    margin: 100px 0;
+  }
+  
+  .certificate img {
+    max-width: 200px;
+    margin-top: 20px;
+  }
