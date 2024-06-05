@@ -9,6 +9,9 @@ const Badges = () => {
     const [badges, setBadges] = useState([]);
     const [completedBadges, setCompletedBadges] = useState({});
     const [error, setError] = useState(null);
+    const [searchTerm, setSearchTerm] = useState(''); // Add state for search term
+    const [filteredBadges, setFilteredBadges] = useState([]); // Add state for filtered badges
+
 
     useEffect(() => {
         // Fetch all badges
@@ -19,7 +22,10 @@ const Badges = () => {
                 }
                 return response.json();
             })
-            .then((data) => setBadges(data))
+            .then((data) => {
+                setBadges(data);
+                setFilteredBadges(data); // Initialize filtered badges with all badges
+            })
             .catch(error => {
                 console.error('Error fetching badges', error);
                 setError(error.message);
@@ -91,27 +97,71 @@ const Badges = () => {
         });
     };
 
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const clearSearch = () => {
+        setSearchTerm('');
+    };
+
+    useEffect(() => {
+        const results = badges.filter(badge =>
+            badge.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredBadges(results);
+    }, [searchTerm, badges]);
+
     return (
         <div>
             <section className='bg-gray-300 py-24 px-4 lg:px-16'>
                 <div className='container mx-auto'>
                     <h1 className='text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose'>Badge Collection</h1>
+                                        
+                    {/* Search Input */}
+                    <div className='relative mb-4'>
+                        <input
+                            type="text"
+                            placeholder="Search badges..."
+                            value={searchTerm}
+                            onChange={handleSearch}
+                            className='w-full p-2 border border-gray-300 text-gray-500 rounded-md'
+                        />
+                        {searchTerm && (
+                            <button
+                                onClick={clearSearch}
+                                className='absolute right-2 top-2 text-purple-500 text-2xl'
+                            >
+                                &times;
+                            </button>
+                        )}
+                    </div>
+
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-                        {badges.map(badge => (
-                            <div key={badge.title} className='bg-white rounded-xl shadow-lg p-8 flex flex-col items-center'>
-                                <p className='text-xl text-gray-500'>{badge.title}</p>
-                                <img src={badge.image} alt={badge.title} className='w-24 h-24 my-4' />
-                                <a href={badge.infoLink} target='_blank' rel='noopener noreferrer' className='bg-blue-500 text-white px-4 py-2 rounded-md mb-2'>
-                                    How To Complete
-                                </a>
-                                <button
-                                    onClick={() => handleCompletionToggle(badge.title)}
-                                    className={`px-4 py-2 rounded-md ${completedBadges[badge.title] ? 'bg-green-500' : 'bg-red-500'} text-white`}
-                                >
-                                    {completedBadges[badge.title] ? 'Completed' : 'Mark as Complete'}
-                                </button>
+                        {filteredBadges.length > 0 ? (
+                            filteredBadges.map(badge => (
+                                <div key={badge.title} className='bg-white rounded-xl shadow-lg p-8 flex flex-col items-center'>
+                                    <p className='text-xl text-gray-500'>{badge.title}</p>
+                                    <img src={badge.image} alt={badge.title} className='w-24 h-24 my-4' />
+                                    <a href={badge.infoLink} target='_blank' rel='noopener noreferrer' className='bg-blue-500 text-white px-4 py-2 rounded-md mb-2'>
+                                        How To Complete
+                                    </a>
+                                    <button
+                                        onClick={() => handleCompletionToggle(badge.title)}
+                                        className={`px-4 py-2 rounded-md ${completedBadges[badge.title] ? 'bg-green-500' : 'bg-red-500'} text-white`}
+                                    >
+                                        {completedBadges[badge.title] ? 'Completed' : 'Mark as Complete'}
+                                    </button>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="flex items-center justify-center py-10">
+                                <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
+                                    <p className="text-xl text-gray-500">Badge Collection</p>
+                                    <h2 className="text-6xl font-bold">No badges found</h2>
+                                </div>
                             </div>
-                        ))}
+                        )}
                     </div>
                 </div>
             </section>
