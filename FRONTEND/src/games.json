@@ -1,8 +1,8 @@
 [
     {
-        "image": "/gameImages/pokeclicker.png",
-        "name": "Pokemon Click",
-        "description": "Gotta catch 'em all! Click on the Pokemon to catch them all!",
+        "image": "/gameImages/CookieHang.png",
+        "name": "Cookie Hangman",
+        "description": "Embark on a delightful word-guessing adventure, where you must unravel hidden words",
         "link": "https://www.pokeclicker.com/"
     },
     
@@ -15,10 +15,10 @@
     },
     
     {
-        "image": "/gameImages/jewl-monsters.png",
-        "name": "Jewel Monsters",
-        "description": "A match-3 game to attack the monster by matching identical gems of the same color.",
-        "link": "https://www.crazygames.com/game/jewel-monsters"
+        "image": "/gameImages/survive.png",
+        "name": "Survival Craft Adventure.",
+        "description": "This is a 2D-pixel game where you must gather resources, craft, and build in order to survive.",
+        "link": "https://www.crazygames.com/game/survival-craft-adventure"
     },
     
     {
@@ -29,10 +29,10 @@
     },
     
     {
-        "image": "/gameImages/hole.png",
-        "name": "Hole Battle Royale",
-        "description": "a battle royale game where you consume various items and opponents with smaller holes. You will grow bigger as you swallow! ",
-        "link": "https://www.crazygames.com/game/holey-io-battle-royale"
+        "image": "/gameImages/archery.png",
+        "name": "Pee Wee’s Archery Adventure",
+        "description": "You’ll need steady aim to hit the targets in this challenging archery game.",
+        "link": "https://scoutlife.org/games/mobile-games/160878/pee-wees-archery-adventure/"
     },
     
     {
@@ -40,5 +40,12 @@
         "name": "Jewel Monsters",
         "description": "World Geography: Flags and Capitals is an educational geography trivia quiz game that tests your geography knowledge!",
         "link": "https://www.crazygames.com/game/world-geography-flags-and-capitals"
+    },
+    
+    {
+        "image": "/gameImages/crush.png",
+        "name": "Camping Crush",
+        "description": "Beat the countdown in our fun new matching game.",
+        "link": "https://scoutlife.org/games/mobile-games/159836/camping-crush/"
     }
 ]

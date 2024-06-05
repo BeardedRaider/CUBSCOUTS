@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 
 
-import "../../styles/parent.css";
+
 import '../../styles/gallery.css'; // Assuming you have common styles
 
 const ChildDash = () => {
@@ -124,7 +124,7 @@ const ChildDash = () => {
         </style>
       </head>
       <body>
-        <div class="certificate">
+        <div className="certificate">
           <h1>Certificate of Achievement</h1>
           <p>This is to certify that</p>
           <h2>${user.name}</h2>
@@ -162,36 +162,37 @@ const ChildDash = () => {
         </div>
         <div className="absolute inset-0 bg-black opacity-20 z-0"></div>
       </section>
-      <section>
+      <section className='bg-gray-300 text-gray-500'>
         <div className="flex items-center justify-center py-10">
           {/* Badge count card */}
-          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center cursor-pointer" onClick={openModal}>
-            <p className="text-xl text-gray-500">Badges Completed</p>
+          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center cursor-pointer transition-all duration-300 ease-in-out hover:bg-purple-500 hover:text-yellow-400" onClick={openModal}>
+            <p className="text-xl hover:text-yellow-400">Badges Completed</p>
             <h2 className="text-6xl font-bold">{badgeCount}</h2>
           </div>
         </div>
       </section>
 
-      <section className='bg-gray-500'>
+      <section className='bg-purple-800 '>
           {/*-------- Entertainment -------- */}
-      <div class="py-12 relative overflow-hidden " style={{ boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
-        <div class="grid grid-cols-2 max-w-screen-lg mx-auto">
-          <div class="w-full flex flex-col items-end pr-16">
-            <h2 class="text-[#64618C] font-bold text-2xl max-w-xs text-right mb-12 mt-10">What can you do <br/> while waiting at the hospital?
+      <div className="marginLeft: '-100px' py-12 relative overflow-hidden " style={{ boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
+        <div className="grid grid-cols-2 max-w-screen-lg mx-auto">
+          <div className="w-full flex flex-col items-end pr-16">
+            <h2 className="text-yellow-300 font-bold text-2xl max-w-xs text-right mb-12 mt-10">After a hard day of scouting <br/> what can you do?
             </h2>
-            <div class="h-full mt-auto overflow-hidden relative">
-            <img src="/images/ballPit.jpg" className="h-full w-full object-contain rounded-r-full" alt="Ball Pit" />            
+            {/* -------------Left image---------------- */}
+            <div className="h-full mt-auto overflow-hidden relative">
+            <img src="/images/ballPit.jpg" className="h-full w-full object-contain rounded-r-full" alt="Ball Pit"style={{marginLeft: '-100px'}} />            
             </div>
         </div>
-          <div class="py-20 rightBox relative rounded-l-full shadow-2xl">
-            <div class="relative z-20 pl-16 ml-10">
-              <h2 class="text-[#f7d0b6] font-black text-4xl leading-snug mb-10">Play Some Awesome Games!</h2>
-              <p class="text-white text-sm mr-10">
+          <div className="py-20 rightBox relative rounded-l-full shadow-2xl">
+            <div className="relative z-20 pl-16 ml-10">
+              <h2 className="text-yellow-400 font-black text-4xl leading-snug mb-10">Play Some Awesome Games!</h2>
+              <p className="text-white text-sm mr-10">
                   Purus in massa tempor nec. Magna etiam tempor orci eu lobortis elementum nibh tellus molestie.
               </p>
-                <button class="mt-8 text-white uppercase py-3 text-sm px-10 border border-white ">
-                <Link to="/Games">Start Gaming</Link>
-                </button>
+              <button className='bg-transparent hover:bg-yellow-400 text-yellow-400 hover:text-black rounded shadow hover:shadow-lg mt-2 py-2 px-4 border border-yellow-400 hover:border-transparent transition-all duration-300 ease-in-out'>
+              Start Gaming
+            </button>
             </div>
           </div>
         </div>

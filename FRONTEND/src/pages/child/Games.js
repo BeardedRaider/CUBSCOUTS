@@ -13,18 +13,26 @@ const Games = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 300,
+    speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    swipeToSlide: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true,
+    cssEase: "ease-in-out", // Smoother transition
     responsive: [
       {
-        breakpoint: 810,
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          initialSlide: 2,
-          infinite: true,
         },
       },
       {
@@ -52,10 +60,10 @@ const Games = () => {
 
     {/* ---------Sub weclome--------- */}
     <section className='subIntro bg-purple-800 '>
-      <div className=" py-20 ml-10">
+      <div className=" py-10 mt-10">
         <div className="max-w-screen-lg mx-auto flex justify-between items-center">
           <div className="max-w-xl">
-            <h2 className="font-black text-yellow-300 text-3xl mb-4">Ready for some fun?.</h2>
+            <h2 className="font-black text-yellow-300 text-3xl mb-2">Ready for some fun?.</h2>
             <p className='text-yellow-400 text-2xl '>Here you can explore the games on offer! Just tap game you like and off you go!</p>
           </div>  
         </div>
@@ -66,21 +74,31 @@ const Games = () => {
       
 {/* This section of the code is responsible for rendering a slider with game cards. The 'Slider' component takes a settings object to configure its behavior. For each game in the 'gameData' array, a 'GameCard' component is rendered inside the slider. Each 'GameCard' displays the game's image, name, description, and a link to the game. The 'key' prop given to each 'div' in the map function is the index of the game in the 'gameData' array. */}
 
-    <Slider {...settings}>
-      {gameData.map((game, index) => (
-        <div key={index} className="px-2">
-          <div style={{ width: "85vw", height: "auto" }}>
-            <GameCard
-              image={game.image}
-              name={game.name}
-              description={game.description}
-              link={game.link}
-            />
+        {/* Game card slider */}
+        <Slider {...settings}>
+          {gameData.map((game, index) => (
+            <div key={index} className="px-2 mb-20">
+              <div style={{ width: "85vw", height: "auto" }}>
+                <GameCard
+                  image={game.image}
+                  name={game.name}
+                  description={game.description}
+                  link={game.link}
+                />
+              </div>
+            </div>
+          ))}
+        </Slider>
+    </section>
+    
+    <section className='bg-gray-300'>
+        <div className="flex items-center justify-center py-10">
+          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
+            <p className="text-2xl text-gray-500">More Ways to have fun</p>
+            <h2 className="text-6xl font-bold">Coming Soon!</h2>
           </div>
         </div>
-      ))}
-    </Slider>
-    </section>
+      </section>
   </>
   );
 };
