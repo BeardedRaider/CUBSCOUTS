@@ -1,0 +1,24 @@
+.sectionWelcome {
+    position : relative;
+    background-image: url("../images/ballPit.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.sectionWelcome::before{
+    content: "";
+    position: absolute; /* position the overlay */
+    top: 0;/* cover the entire section */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1); /* semi-transparent*/
+    z-index: 1;
+}
+
+.text-white {
+    position: relative;
+    z-index: 100; /* make sure the text is on top of the overlay */
+}

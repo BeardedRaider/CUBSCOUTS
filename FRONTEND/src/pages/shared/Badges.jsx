@@ -8,10 +8,11 @@ const Badges = () => {
     const user = UserInformation();
     const [badges, setBadges] = useState([]);
     const [completedBadges, setCompletedBadges] = useState({});
-    const [error, setError] = useState(null);
-    const [searchTerm, setSearchTerm] = useState(''); // Add state for search term
-    const [filteredBadges, setFilteredBadges] = useState([]); // Add state for filtered badges
-
+    const [setError] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredBadges, setFilteredBadges] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const badgesPerPage = 6;
 
     useEffect(() => {
         // Fetch all badges
@@ -69,13 +70,12 @@ const Badges = () => {
         const token = localStorage.getItem('token');
         console.log('Token:', token);
 
-            // Log data before sending the request
-
-    console.log('Data to send:', {
-        userId: user._id,
-        title: badgeTitle,
-        completed: isCompleted,
-    });
+        // Log data before sending the request
+        console.log('Data to send:', {
+            userId: user._id,
+            title: badgeTitle,
+            completed: isCompleted,
+        });
 
         axiosInstance.post('/api/badges', {
             userId: user._id, // ensure this is user._id, not user.id
@@ -88,7 +88,7 @@ const Badges = () => {
         })
         .then((response) => {
             toast.success('Badge completion updated successfully!');
-            fetchBadges(); // Refresh badges after update
+            fetchBadges(user._id); // Refresh badges after update
         })
         .catch((error) => {
             console.error('Error updating badge completion', error);
@@ -99,10 +99,12 @@ const Badges = () => {
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);
+        setCurrentPage(1); // Reset to first page on search
     };
 
     const clearSearch = () => {
         setSearchTerm('');
+        setCurrentPage(1); // Reset to first page on clear search
     };
 
     useEffect(() => {
@@ -112,12 +114,19 @@ const Badges = () => {
         setFilteredBadges(results);
     }, [searchTerm, badges]);
 
+    // Calculate paginated badges
+    const indexOfLastBadge = currentPage * badgesPerPage;
+    const indexOfFirstBadge = indexOfLastBadge - badgesPerPage;
+    const currentBadges = filteredBadges.slice(indexOfFirstBadge, indexOfLastBadge);
+
+    const totalPages = Math.ceil(filteredBadges.length / badgesPerPage);
+
     return (
         <div>
             <section className='bg-gray-300 py-24 px-4 lg:px-16'>
                 <div className='container mx-auto'>
                     <h1 className='text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose'>Badge Collection</h1>
-                                        
+                    
                     {/* Search Input */}
                     <div className='relative mb-4'>
                         <input
@@ -130,16 +139,16 @@ const Badges = () => {
                         {searchTerm && (
                             <button
                                 onClick={clearSearch}
-                                className='absolute right-2 top-2 text-purple-500 text-2xl'
+                                className='absolute right-2 top-2 text-gray-500 text-2xl p-2 focus:outline-none'
                             >
                                 &times;
                             </button>
                         )}
                     </div>
-
+                    
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-                        {filteredBadges.length > 0 ? (
-                            filteredBadges.map(badge => (
+                        {currentBadges.length > 0 ? (
+                            currentBadges.map(badge => (
                                 <div key={badge.title} className='bg-white rounded-xl shadow-lg p-8 flex flex-col items-center'>
                                     <p className='text-xl text-gray-500'>{badge.title}</p>
                                     <img src={badge.image} alt={badge.title} className='w-24 h-24 my-4' />
@@ -163,6 +172,35 @@ const Badges = () => {
                             </div>
                         )}
                     </div>
+                    
+                    {/* Pagination */}
+                    {filteredBadges.length > badgesPerPage && (
+                        <div className="flex justify-center mt-4">
+                            <button 
+                                onClick={() => setCurrentPage(currentPage - 1)}
+                                disabled={currentPage === 1}
+                                className={`px-3 py-1 mx-1 ${currentPage === 1 ? 'text-gray-400' : 'text-purple-500'}`}
+                            >
+                                &laquo; Prev
+                            </button>
+                            {Array.from({ length: totalPages }, (_, index) => (
+                                <button 
+                                    key={index + 1}
+                                    onClick={() => setCurrentPage(index + 1)}
+                                    className={`px-3 py-1 mx-1 ${currentPage === index + 1 ? 'bg-purple-600 text-yellow-400' : 'text-purple-500'}`}
+                                >
+                                    {index + 1}
+                                </button>
+                            ))}
+                            <button 
+                                onClick={() => setCurrentPage(currentPage + 1)}
+                                disabled={currentPage === totalPages}
+                                className={`px-3 py-1 mx-1 ${currentPage === totalPages ? 'text-gray-400' : 'text-purple-500'}`}
+                            >
+                                Next &raquo;
+                            </button>
+                        </div>
+                    )}
                 </div>
             </section>
             <section className='bg-gray-500 py-24 px-4 lg:px-16'>
@@ -178,5 +216,4 @@ const Badges = () => {
 };
 
 export default Badges;
-
 

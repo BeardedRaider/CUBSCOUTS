@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserInformation from '../../UserInfo';
 import Modal from 'react-modal';
+import { Link } from 'react-router-dom';
+
 
 import "../../styles/parent.css";
 import '../../styles/gallery.css'; // Assuming you have common styles
@@ -169,10 +171,37 @@ const ChildDash = () => {
           </div>
         </div>
       </section>
+
+      <section className='bg-gray-500'>
+          {/*-------- Entertainment -------- */}
+      <div class="py-12 relative overflow-hidden " style={{ boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
+        <div class="grid grid-cols-2 max-w-screen-lg mx-auto">
+          <div class="w-full flex flex-col items-end pr-16">
+            <h2 class="text-[#64618C] font-bold text-2xl max-w-xs text-right mb-12 mt-10">What can you do <br/> while waiting at the hospital?
+            </h2>
+            <div class="h-full mt-auto overflow-hidden relative">
+            <img src="/images/ballPit.jpg" className="h-full w-full object-contain rounded-r-full" alt="Ball Pit" />            
+            </div>
+        </div>
+          <div class="py-20 rightBox relative rounded-l-full shadow-2xl">
+            <div class="relative z-20 pl-16 ml-10">
+              <h2 class="text-[#f7d0b6] font-black text-4xl leading-snug mb-10">Play Some Awesome Games!</h2>
+              <p class="text-white text-sm mr-10">
+                  Purus in massa tempor nec. Magna etiam tempor orci eu lobortis elementum nibh tellus molestie.
+              </p>
+                <button class="mt-8 text-white uppercase py-3 text-sm px-10 border border-white ">
+                <Link to="/Games">Start Gaming</Link>
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </section>
+
       <section className='bg-gray-300'>
         <div className="flex items-center justify-center py-10">
           <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
-            <p className="text-xl text-gray-500">Events</p>
+            <p className="text-2xl text-gray-500">More</p>
             <h2 className="text-6xl font-bold">Coming Soon</h2>
           </div>
         </div>

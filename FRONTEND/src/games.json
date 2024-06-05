@@ -1,0 +1,44 @@
+[
+    {
+        "image": "/gameImages/pokeclicker.png",
+        "name": "Pokemon Click",
+        "description": "Gotta catch 'em all! Click on the Pokemon to catch them all!",
+        "link": "https://www.pokeclicker.com/"
+    },
+    
+    {
+        "image": "/gameImages/Tiny-fishing.png",
+        "name": "Tiny-Fishing",
+        "description": "Tiny Fishing is a fun fishing game where you draw your line and hook as many fish as possible.",        
+        "link": "https://www.crazygames.com/game/tiny-fishing"
+
+    },
+    
+    {
+        "image": "/gameImages/jewl-monsters.png",
+        "name": "Jewel Monsters",
+        "description": "A match-3 game to attack the monster by matching identical gems of the same color.",
+        "link": "https://www.crazygames.com/game/jewel-monsters"
+    },
+    
+    {
+        "image": "/gameImages/emoji-puzz.png",
+        "name": "Emoji Puzzle",
+        "description": "A unique game featuring various puzzles based on emojis. Explore the creative and emotional fun between the emojis we use daily.",
+        "link": "https://www.crazygames.com/game/emoji-puzzle"
+    },
+    
+    {
+        "image": "/gameImages/hole.png",
+        "name": "Hole Battle Royale",
+        "description": "a battle royale game where you consume various items and opponents with smaller holes. You will grow bigger as you swallow! ",
+        "link": "https://www.crazygames.com/game/holey-io-battle-royale"
+    },
+    
+    {
+        "image": "/gameImages/geography.png",
+        "name": "Jewel Monsters",
+        "description": "World Geography: Flags and Capitals is an educational geography trivia quiz game that tests your geography knowledge!",
+        "link": "https://www.crazygames.com/game/world-geography-flags-and-capitals"
+    }
+]

@@ -19,6 +19,7 @@ import Events from './pages/admin/Aevents';
 import Parent from './pages/parent/Parent';
 // child pages
 import Child from './pages/child/Child';
+import Games from './pages/child/Games';
 //notification
 import { Toaster } from 'react-hot-toast';
 // css
@@ -44,6 +45,7 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/parent" element={<Parent />} />
             <Route path="/child" element={<Child />} />
+            <Route path="/games" element={<Games />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/users" element={<Users />} />
             <Route path="/Aevents" element={<Events />} />
