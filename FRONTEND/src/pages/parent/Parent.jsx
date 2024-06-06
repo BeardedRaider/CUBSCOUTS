@@ -9,7 +9,7 @@ const ParentDash = () => {
   return (
     <div>
       {/* welcome section gets the users name and displays it back on screen so they know they are logged in correctly */}
-      <section className='bg-gray-300 py-24 px-4 lg:px-16'>
+      <section className='heroDash overlayDash bg-gray-300 py-24 px-4 lg:px-16'>
         <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2'>
           <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose">Welcome
           </h1>

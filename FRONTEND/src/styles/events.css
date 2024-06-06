@@ -1,3 +1,21 @@
+.overlayDash {
+  border-image: 
+      linear-gradient(hsla(44, 78%, 82%, 0.3),
+      hsla(0, 0%, 0%, 0.5))
+      fill 1;
+}
+
+.heroDash {
+  background-image: url("../../../public/images/landing.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  position: relative;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);/* adds shadow to the section*/
+  overflow: auto;/* hides the overflow content */
+}
+
 .card-inner {
     position: relative;
     width: 100%;

@@ -23,7 +23,7 @@ const Events = () => {
     <>
       <div className='text-gray-900 bg-gray-200'>
       {/* WELCOME MESSAGE */}
-        <section className='sectionBg py-24 px-4 lg:px-16'>
+        <section className='overlayDash heroDash py-24 px-4 lg:px-16'>
         <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px]'>
                 <h1 className='text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose'>Welcome to our events page</h1>
                 <p className='text-3xl md:text-2xl text-white leading-relaxed md:leading-snug mb-2'>
