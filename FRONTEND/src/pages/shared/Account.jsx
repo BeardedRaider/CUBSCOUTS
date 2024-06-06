@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { format } from 'date-fns';
+import { FaCheck } from 'react-icons/fa';
+
 import "../../styles/users.css";
 
 const Account = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -19,6 +22,7 @@ const Account = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching user data:', error.response ? error.response.data : error.message);
+        setError('Error fetching user data');
         setLoading(false);
       }
     };
@@ -31,12 +35,22 @@ const Account = () => {
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
+  const handleDisclosureClick = () => {
+    setUser((prevUser) => ({ ...prevUser, disclosureScotland: !prevUser.disclosureScotland }));
+  };
+  const handleHelperRegistration = () => {
+    setUser((prevUser) => ({ ...prevUser, helperRegistered: !prevUser.helperRegistered }));
+  };
+
   const handleSaveClick = async () => {
     try {
       const token = localStorage.getItem('token');
-      const { dob, ...userWithoutDob } = user;
+      const { dob, disclosureScotland, ...userWithoutDob } = user;
       const formattedDob = dob ? format(new Date(dob), 'yyyy-MM-dd') : null;
       const userToUpdate = { ...userWithoutDob, dob: formattedDob };
+
+      // Include disclosureScotland in the userToUpdate object
+      userToUpdate.disclosureScotland = user.disclosureScotland;
 
       // Remove the role from userToUpdate object
       delete userToUpdate.role;
@@ -47,7 +61,6 @@ const Account = () => {
           Authorization: `Bearer ${token}`
         }
       });
-
 
       if (response.status === 200) {
         toast.success('User updated successfully');
@@ -62,6 +75,10 @@ const Account = () => {
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   if (!user) {
@@ -103,8 +120,38 @@ const Account = () => {
               Address:
               <input type="text" name="address" value={user.address || ''} onChange={handleInputChange} className="form-input mt-1 block w-full" />
             </label>
+
+            <label htmlFor="disclosureScotland" className="block mb-2">
+                {user.disclosureScotland ? 'Registered for Disclosure Scotland' : 'Register for Disclosure Scotland:'}
+                  <br />
+                <button
+                  id="disclosureScotland"
+                  onClick={handleDisclosureClick}
+                  name="disclosureScotland"
+                  className={`middle none center mr-4 rounded-lg ${user.disclosureScotland ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md ${user.disclosureScotland ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.disclosureScotland ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                >
+                  {user.disclosureScotland ? 'Registered for Disclosure Scotland' : 'Register for Disclosure Scotland'}
+                  {user.disclosureScotland && <FaCheck className="ml-1" />}
+                </button>  
+              </label>
+
+              <label htmlFor="helperRegistered" className="block mb-2">
+    {user.helperRegistered ? 'Registered as Helper' : 'Register as Helper:'}
+    <br />
+    <button
+        id="helperRegistered"
+        onClick={handleHelperRegistration}
+        name="helperRegistered"
+        className={`middle none center mr-4 rounded-lg ${user.helperRegistered ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md ${user.helperRegistered ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.helperRegistered ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+    >
+        {user.helperRegistered ? 'Registered as Helper' : 'Register as Helper'}
+        {user.helperRegistered && <FaCheck className="ml-1" />}
+    </button>
+</label>
+            
+
             <button onClick={handleSaveClick} 
-            class="middle none center mr-4 rounded-lg bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            className="middle none center mr-4 rounded-lg bg-purple-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             >Save</button>
           </div>
         </div>

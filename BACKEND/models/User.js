@@ -13,6 +13,8 @@ const UserSchema = new Schema({
     dob: { type: Date, required: true },
     address: { type: String, required: true },
     role: { type: String, required: true },
+    disclosureScotland: { type: Boolean, default: false },// Add disclosureScotland field
+    helperRegistered: { type: Boolean, default: false },// Add helperRegistered field
     badges: [BadgeSchema] // Add badges as an array
 });
 

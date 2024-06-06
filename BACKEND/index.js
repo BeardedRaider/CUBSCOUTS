@@ -187,6 +187,8 @@ app.get('/api/users', async (req, res) => {
                 dob: user.dob,
                 address: user.address,
                 is_admin: user.role,
+                disclosureScotland: user.disclosureScotland,
+                helperRegistered: user.helperRegistered,
             };
 
             res.json(formattedUser);// Return the user data
@@ -264,10 +266,10 @@ app.put('/api/users/self', async (req, res) => {
             return res.status(401).json({ error: 'Unauthorized: Invalid token' });
         }
 
-        const { name, email, dob, address } = req.body;
+        const { name, email, dob, address, disclosureScotland, helperRegistered } = req.body;
         const updatedUser = await User.findByIdAndUpdate(
             decoded.userId,
-            { name, email, dob, address },
+            { name, email, dob, address, disclosureScotland, helperRegistered },
             { new: true }
         );
         res.json(updatedUser);

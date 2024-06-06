@@ -30,6 +30,7 @@ app.get('/api/users', async (req, res) => {
     dob: user.dob,
     address: user.address,
     is_admin: user.role,
+    disclosureScotland: user.disclosureScotland,
   };
   
   res.json(formattedUser);
