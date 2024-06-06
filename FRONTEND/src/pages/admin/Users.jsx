@@ -19,10 +19,13 @@ const Users = () => {
   // UPDATE USER-------------------------------------
   const handleSaveClick = async (user) => {
     console.log(user); // Log the user object
-    const { dob, ...userWithoutDob } = user;
+    const { dob, isHelperRegistered, ...userWithoutDob } = user;
     const formattedDob = dob ? format(new Date(dob), 'yyyy-MM-dd') : null;
-    const userToUpdate = { ...userWithoutDob, dob: formattedDob };
-
+    const userToUpdate = {
+        ...userWithoutDob,
+        dob: formattedDob,
+        isHelperRegistered: Boolean(isHelperRegistered) // Convert to boolean
+    };
     console.log(userToUpdate); // Log the userToUpdate object
 
   
@@ -108,6 +111,8 @@ const Users = () => {
                   <th className="text-left p-2 md:p-3 px2 md:px-5">Email</th>
                   <th className="text-left p-2 md:p-3 px2 md:px-5">D.O.B</th>
                   <th className="text-left p-2 md:p-3 px2 md:px-5">Address</th>
+                  <th className="text-left p-2 md:p-5 px2 md:px-5">Disclosure</th>
+                  <th className="text-left p-2 md:p-5 px2 md:px-5">Helper</th>
                   <th className="text-left p-2 md:p-5 px2 md:px-5">Role</th>
                   <th></th>
                 </tr>
@@ -115,14 +120,23 @@ const Users = () => {
               
               <tbody>
                 {users.map((user, index) => {
+                  // ----------HANDLE INPUT CHANGE----------
                   const handleInputChange = (event) => {
                     const { name, value } = event.target;
                     let updatedUser;
+
+                    // If the 'dob' field is empty, set the 'updatedUser' object to the current user object.
                     if (name === 'dob' && value === '') {
-                      updatedUser = { ...user };
+                        updatedUser = { ...user };
                     } else {
-                      updatedUser = { ...user, [name]: value };
+                        updatedUser = { ...user, [name]: value };
                     }
+
+                    // Convert the value of helperRegistered to boolean
+                    if (name === 'helperRegistered') {
+                        updatedUser[name] = value === 'true'; // Convert string 'true' or 'false' to boolean
+                    }
+
                     const updatedUsers = users.map((u) => (u._id === user._id ? updatedUser : u));
                     setUsers(updatedUsers);
                   };
@@ -145,12 +159,39 @@ const Users = () => {
                       <td data-label="Address" className="p-2 md:p-3 px-2 md:px-5">
                       <input type="text" name="address" value={user.address} onChange={handleInputChange}className="w-full" />
                       </td>
+                      {/* ----------REGISTERED DISCLOSURE---------- */}
+                      <td data-label="Disclosure" className="p-2 md:p-3 px-2 md:px-5">
+                        <select 
+                            name="disclosureScotland" 
+                            value={user.disclosureScotland} 
+                            onChange={handleInputChange} 
+                            className="bg-transparent w-full"
+                            style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
+                        >
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </td>
+                    {/* ----------REGISTERED HELPER---------- */}
+                    <td data-label="Helper" className="p-2 md:p-3 px-2 md:px-5">
+                    <select 
+                        name="helperRegistered" 
+                        value={user.helperRegistered ? 'true' : 'false'} // Set value based on the state of helperRegistered
+                        onChange={handleInputChange} 
+                        className="bg-transparent w-full"
+                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
+                    >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    </td>
+
                       {/* Role select */}
                       <td data-label="Role" className="p-2 md:p-3 px-2 md:px-5">
                       <select 
                       name="role" 
                       value={user.role} 
-                      onChange={(event) => { console.log(event.target.value); handleInputChange(event); }} 
+                      onChange={(event) => handleInputChange(event, user._id)} 
                       className="bg-transparent w-full"
                       style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
                       >

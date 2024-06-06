@@ -235,22 +235,7 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// -----------------fetch all users
-app.get('/api/allusers', async (req, res) => {
-    try {
-        const users = await User.find({});
-        res.json(users);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
 
-//number of users on the database
-app.get('/api/users/count', async (req, res) => {
-    const count = await User.countDocuments();
-    res.json({ count });
-});
 
 //------------------------------------------------------------------------
 // User self-update route
@@ -290,6 +275,8 @@ app.put('/api/users/:id',
         body('dob').isDate().withMessage('Invalid date of birth'),// Validate the date of birth
         body('address').trim().escape().notEmpty().withMessage('Address is required'),// Validate the address
         body('role').isIn(['admin', 'parent', 'child']).withMessage('Invalid role'),// Validate the role
+        body('helperRegistered').isBoolean().withMessage('helperRegistered must be a boolean'), // New validation
+        body('disclosureScotland').isBoolean().withMessage('disclosureScotland must be a boolean'), // New validation
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -308,6 +295,8 @@ app.put('/api/users/:id',
         user.dob = req.body.dob;
         user.address = req.body.address;
         user.role = req.body.role;
+        user.helperRegistered = req.body.helperRegistered; // Update helperRegistered
+        user.disclosureScotland = req.body.disclosureScotland; // Update disclosureScotland
         await user.save();
 
         res.json(user);
@@ -319,16 +308,32 @@ app.put('/api/users/:id',
 );
 
   // DELETE /api/users/:id
-    app.delete('/api/users/:id', async (req, res) => {
-        try {
-        await User.findByIdAndDelete(req.params.id);
-        res.json({ message: 'User deleted successfully' });
-        } catch (error) {
+app.delete('/api/users/:id', async (req, res) => {
+    try {
+    await User.findByIdAndDelete(req.params.id);
+    res.json({ message: 'User deleted successfully' });
+    } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// -----------------fetch all users----------------
+app.get('/api/allusers', async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.json(users);
+    } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
-        }
-    });
+    }
+});
 
+//number of users on the database
+app.get('/api/users/count', async (req, res) => {
+    const count = await User.countDocuments();
+    res.json({ count });
+});
 // -------------CREATRION OF EVENTS ADMIN ----------------
 
 app.post('/api/events', uploadEvent.single('image'), async (req, res) => {
