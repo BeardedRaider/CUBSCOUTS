@@ -190,9 +190,11 @@ const ChildDash = () => {
               <p className="text-white text-sm mr-10">
                   Purus in massa tempor nec. Magna etiam tempor orci eu lobortis elementum nibh tellus molestie.
               </p>
-              <button className='bg-transparent hover:bg-yellow-400 text-yellow-400 hover:text-black rounded shadow hover:shadow-lg mt-2 py-2 px-4 border border-yellow-400 hover:border-transparent transition-all duration-300 ease-in-out'>
-              Start Gaming
-            </button>
+              <Link to="/Games">
+                <button className='bg-transparent hover:bg-yellow-400 text-yellow-400 hover:text-black rounded shadow hover:shadow-lg mt-2 py-2 px-4 border border-yellow-400 hover:border-transparent transition-all duration-300 ease-in-out'>
+                  Start Gaming
+                </button>
+              </Link>
             </div>
           </div>
         </div>
