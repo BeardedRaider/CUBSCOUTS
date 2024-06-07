@@ -22,7 +22,6 @@ app.get('/api/users', async (req, res) => {
         }
   
         // Return data only for the authenticated user
-      // Inside the /api/users route
   const formattedUser = {
     _id: user._id,
     name: user.forename,
