@@ -16,6 +16,14 @@ const UserSchema = new Schema({
     disclosureScotland: { type: Boolean, default: false },// Add disclosureScotland field
     helperRegistered: { type: Boolean, default: false },// Add helperRegistered field
     monday: { type: Boolean, default: false },// Add Monday field
+    tuesday: { type: Boolean, default: false },// Add Tuesday field
+    wednesday: { type: Boolean, default: false },// Add Wednesday field
+    thursday: { type: Boolean, default: false },// Add Thursday field
+    friday: { type: Boolean, default: false },// Add Friday field
+    saturday: { type: Boolean, default: false },// Add Saturday field
+    sunday: { type: Boolean, default: false },// Add Sunday field
+
+
     badges: [BadgeSchema] // Add badges as an array
 });
 

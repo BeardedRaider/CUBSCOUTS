@@ -137,7 +137,7 @@ const Users = () => {
                         updatedUser[name] = value === 'true'; // Convert string 'true' or 'false' to boolean
                     }
                     // Convert the value of monday to boolean
-                    if (name === 'monday') {
+                    if (name === 'monday, tuesday, wednesday, thursday, friday, saturday, sunday') {
                         updatedUser[name] = value === 'true'; // Convert string 'true' or 'false' to boolean
                     }
 
