@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'; // Import the 'useState' and
 import axios from 'axios'; // Import the 'axios' library for making HTTP requests.
 import UserInformation from '../../UserInfo'// Import the 'UserInformation' function from the 'UserInfo' module.
 import getAllUsers from '../../components/GetAllUsers'; // Import the 'getAllUsers' function from the 'GetAllUsers' module.
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { format } from 'date-fns';
 import "../../styles/users.css" 
 
@@ -136,6 +136,10 @@ const Users = () => {
                     if (name === 'helperRegistered') {
                         updatedUser[name] = value === 'true'; // Convert string 'true' or 'false' to boolean
                     }
+                    // Convert the value of monday to boolean
+                    if (name === 'monday') {
+                        updatedUser[name] = value === 'true'; // Convert string 'true' or 'false' to boolean
+                    }
 
                     const updatedUsers = users.map((u) => (u._id === user._id ? updatedUser : u));
                     setUsers(updatedUsers);
@@ -185,8 +189,20 @@ const Users = () => {
                         <option value="false">No</option>
                     </select>
                     </td>
-
-                      {/* Role select */}
+                    {/*----------Monday Register----------*/}
+                    <td data-label="Monday" className="p-2 md:p-3 px-2 md:px-5">
+                    <select 
+                        name="monday" 
+                        value={user.monday ? 'true' : 'false'} // Set value based on the state of monday
+                        onChange={handleInputChange} 
+                        className="bg-transparent w-full"
+                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
+                    >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    </td>
+                    {/* Role select */}
                       <td data-label="Role" className="p-2 md:p-3 px-2 md:px-5">
                       <select 
                       name="role" 

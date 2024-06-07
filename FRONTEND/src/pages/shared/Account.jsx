@@ -41,6 +41,14 @@ const Account = () => {
   const handleHelperRegistration = () => {
     setUser((prevUser) => ({ ...prevUser, helperRegistered: !prevUser.helperRegistered }));
   };
+  const handleMondayAvailability = () => {
+    console.trace("handleMondayAvailability called"); // Add this line
+    setUser((prevUser) => {
+      const updatedUser = { ...prevUser, monday: !prevUser.monday };
+      console.log(updatedUser); // Log the updated user state
+      return updatedUser; // Return the updated user state
+    });
+  };
 
   const handleSaveClick = async () => {
     try {
@@ -49,11 +57,14 @@ const Account = () => {
       const formattedDob = dob ? format(new Date(dob), 'yyyy-MM-dd') : null;
       const userToUpdate = { ...userWithoutDob, dob: formattedDob };
 
-      // Include disclosureScotland in the userToUpdate object
+      // this includes the object to be updated
       userToUpdate.disclosureScotland = user.disclosureScotland;
+
 
       // Remove the role from userToUpdate object
       delete userToUpdate.role;
+
+      console.log('Updated user data to be sent to the server:', userToUpdate); // Add this console log
 
       const response = await axios.put('http://localhost:5000/api/users/self', userToUpdate, {
         headers: {
@@ -120,7 +131,7 @@ const Account = () => {
               Address:
               <input type="text" name="address" value={user.address || ''} onChange={handleInputChange} className="form-input mt-1 block w-full" />
             </label>
-
+            {/* ----------disclosureScotland---------- */}
             <label htmlFor="disclosureScotland" className="block mb-2">
                 {user.disclosureScotland ? 'Registered for Disclosure Scotland' : 'Register for Disclosure Scotland:'}
                   <br />
@@ -134,20 +145,34 @@ const Account = () => {
                   {user.disclosureScotland && <FaCheck className="ml-1" />}
                 </button>  
               </label>
-
+              {/* ----------helperRegistered---------- */}
               <label htmlFor="helperRegistered" className="block mb-2">
-    {user.helperRegistered ? 'Registered as Helper' : 'Register as Helper:'}
-    <br />
-    <button
-        id="helperRegistered"
-        onClick={handleHelperRegistration}
-        name="helperRegistered"
-        className={`middle none center mr-4 rounded-lg ${user.helperRegistered ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md ${user.helperRegistered ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.helperRegistered ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
-    >
-        {user.helperRegistered ? 'Registered as Helper' : 'Register as Helper'}
-        {user.helperRegistered && <FaCheck className="ml-1" />}
-    </button>
-</label>
+                {user.helperRegistered ? 'Registered as Helper' : 'Register as Helper:'}
+                <br />
+                <button
+                    id="helperRegistered"
+                    onClick={handleHelperRegistration}
+                    name="helperRegistered"
+                    className={`middle none center mr-4 rounded-lg ${user.helperRegistered ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md ${user.helperRegistered ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.helperRegistered ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                >
+                    {user.helperRegistered ? 'Registered as Helper' : 'Register as Helper'}
+                    {user.helperRegistered && <FaCheck className="ml-1" />}
+                </button>
+              </label>
+              {/* ----------DAYS ABLE TO HELP---------- */}
+              <label htmlFor="monday" className="block mb-2">
+                {user.monday ? 'Your Availability To Help:' : 'Your Availability To Help:'}
+                <br />
+                <button
+                  id="monday"
+                  onClick={handleMondayAvailability}
+                  name="monday"
+                  className={`middle none center mr-4 rounded-lg ${user.monday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md ${user.monday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.monday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                >
+                  {user.monday ? 'Monday Available' : 'Monday Not Available'}
+                  {user.monday && <FaCheck className="ml-1" />}
+                </button>
+              </label>
             
 
             <button onClick={handleSaveClick} 

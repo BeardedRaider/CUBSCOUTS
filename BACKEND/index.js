@@ -189,6 +189,7 @@ app.get('/api/users', async (req, res) => {
                 is_admin: user.role,
                 disclosureScotland: user.disclosureScotland,
                 helperRegistered: user.helperRegistered,
+                monday: user.monday,
             };
 
             res.json(formattedUser);// Return the user data
@@ -251,10 +252,10 @@ app.put('/api/users/self', async (req, res) => {
             return res.status(401).json({ error: 'Unauthorized: Invalid token' });
         }
 
-        const { name, email, dob, address, disclosureScotland, helperRegistered } = req.body;
+        const { name, email, dob, address, disclosureScotland, helperRegistered, monday } = req.body;
         const updatedUser = await User.findByIdAndUpdate(
             decoded.userId,
-            { name, email, dob, address, disclosureScotland, helperRegistered },
+            { name, email, dob, address, disclosureScotland, helperRegistered, monday },
             { new: true }
         );
         res.json(updatedUser);
@@ -277,6 +278,7 @@ app.put('/api/users/:id',
         body('role').isIn(['admin', 'parent', 'child']).withMessage('Invalid role'),// Validate the role
         body('helperRegistered').isBoolean().withMessage('helperRegistered must be a boolean'), // New validation
         body('disclosureScotland').isBoolean().withMessage('disclosureScotland must be a boolean'), // New validation
+        body('monday').isBoolean().withMessage('monday must be a boolean'), // New validation
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -297,6 +299,7 @@ app.put('/api/users/:id',
         user.role = req.body.role;
         user.helperRegistered = req.body.helperRegistered; // Update helperRegistered
         user.disclosureScotland = req.body.disclosureScotland; // Update disclosureScotland
+        user.monday = req.body.monday; // Update monday
         await user.save();
 
         res.json(user);
