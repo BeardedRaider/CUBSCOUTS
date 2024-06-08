@@ -114,6 +114,13 @@ const Users = () => {
                   <th className="text-left p-2 md:p-5 px2 md:px-5">Disclosure</th>
                   <th className="text-left p-2 md:p-5 px2 md:px-5">Helper</th>
                   <th className="text-left p-2 md:p-5 px2 md:px-5">Role</th>
+                  <th className="text-left p-2 md:p-5 px2 md:px-5">Monday</th>
+                  <th className="text-left p-2 md:p-5 px2 md:px-5">Tuesday</th>
+                  <th className="text-left p-2 md:p-5 px2 md:px-5">Wednesday</th>
+                  <th className="text-left p-2 md:p-5 px2 md:px-5">Thursday</th>
+                  <th className="text-left p-2 md:p-5 px2 md:px-5">Friday</th>
+                  <th className="text-left p-2 md:p-5 px2 md:px-5">Saturday</th>
+                  <th className="text-left p-2 md:p-5 px2 md:px-5">Sunday</th>
                   <th></th>
                 </tr>
               </thead>
@@ -202,6 +209,88 @@ const Users = () => {
                         <option value="false">No</option>
                     </select>
                     </td>
+                    {/*----------Tuesday Register----------*/}
+                    <td data-label="Tuesday" className="p-2 md:p-3 px-2 md:px-5">
+                    <select
+                        name="tuesday"
+                        value={user.tuesday ? 'true' : 'false'} // Set value based on the state of tuesday
+                        onChange={handleInputChange}
+                        className="bg-transparent w-full"
+                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
+                    >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    </td>
+                    {/*----------Wednesday Register----------*/}
+                    <td data-label="Wednesday" className="p-2 md:p-3 px-2 md:px-5">
+                    <select
+                        name="wednesday"
+                        value={user.wednesday ? 'true' : 'false'} // Set value based on the state of wednesday
+                        onChange={handleInputChange}
+                        className="bg-transparent w-full"
+                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
+                    >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    </td>
+                    {/*----------Thursday Register----------*/}
+                    <td data-label="Thursday" className="p-2 md:p-3 px-2 md:px-5">
+                    <select
+                        name="thursday"
+                        value={user.thursday ? 'true' : 'false'} // Set value based on the state of thursday
+                        onChange={handleInputChange}
+                        className="bg-transparent w-full"
+                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
+                    >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    </td>
+                    {/*----------Friday Register----------*/}
+                    <td data-label="Friday" className="p-2 md:p-3 px-2 md:px-5">
+                    <select
+                        name="friday"
+                        value={user.friday ? 'true' : 'false'} // Set value based on the state of friday
+                        onChange={handleInputChange}
+                        className="bg-transparent w-full"
+                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
+                    >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    </td>
+                    {/*----------Saturday Register----------*/}
+                    <td data-label="Saturday" className="p-2 md:p-3 px-2 md:px-5">
+                    <select
+                        name="saturday"
+                        value={user.saturday ? 'true' : 'false'} // Set value based on the state of saturday
+                        onChange={handleInputChange}
+                        className="bg-transparent w-full"
+                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
+                    >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    </td>
+                    {/*----------Sunday Register----------*/}
+                    <td data-label="Sunday" className="p-2 md:p-3 px-2 md:px-5">
+                    <select
+                        name="sunday"
+                        value={user.sunday ? 'true' : 'false'} // Set value based on the state of sunday
+                        onChange={handleInputChange}
+                        className="bg-transparent w-full"
+                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
+                    >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    </td>
+
+
+
+
                     {/* Role select */}
                       <td data-label="Role" className="p-2 md:p-3 px-2 md:px-5">
                       <select 

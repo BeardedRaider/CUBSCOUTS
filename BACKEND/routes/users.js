@@ -32,6 +32,12 @@ app.get('/api/users', async (req, res) => {
     disclosureScotland: user.disclosureScotland,
     helperRegistered: user.helperRegistered,
     mondayAvailability: user.mondayAvailability,
+    tuesdayAvailability: user.tuesdayAvailability,
+    wednesdayAvailability: user.wednesdayAvailability,
+    thursdayAvailability: user.thursdayAvailability,
+    fridayAvailability: user.fridayAvailability,
+    saturdayAvailability: user.saturdayAvailability,
+    sundayAvailability: user.sundayAvailability,
   };
   
   res.json(formattedUser);

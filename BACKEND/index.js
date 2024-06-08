@@ -190,6 +190,12 @@ app.get('/api/users', async (req, res) => {
                 disclosureScotland: user.disclosureScotland,
                 helperRegistered: user.helperRegistered,
                 monday: user.monday,
+                tuesday: user.tuesday,
+                wednesday: user.wednesday,
+                thursday: user.thursday,
+                friday: user.friday,
+                saturday: user.saturday,
+                sunday: user.sunday,
             };
 
             res.json(formattedUser);// Return the user data
@@ -252,10 +258,10 @@ app.put('/api/users/self', async (req, res) => {
             return res.status(401).json({ error: 'Unauthorized: Invalid token' });
         }
 
-        const { name, email, dob, address, disclosureScotland, helperRegistered, monday } = req.body;
+        const { name, email, dob, address, disclosureScotland, helperRegistered, monday, tuesday, wednesday, thursday, friday, saturday, sunday } = req.body;
         const updatedUser = await User.findByIdAndUpdate(
             decoded.userId,
-            { name, email, dob, address, disclosureScotland, helperRegistered, monday },
+            { name, email, dob, address, disclosureScotland, helperRegistered, monday, tuesday, wednesday, thursday, friday, saturday, sunday },
             { new: true }
         );
         res.json(updatedUser);
@@ -279,6 +285,12 @@ app.put('/api/users/:id',
         body('helperRegistered').isBoolean().withMessage('helperRegistered must be a boolean'), // New validation
         body('disclosureScotland').isBoolean().withMessage('disclosureScotland must be a boolean'), // New validation
         body('monday').isBoolean().withMessage('monday must be a boolean'), // New validation
+        body('tuesday').isBoolean().withMessage('tuesday must be a boolean'), // New validation
+        body('wednesday').isBoolean().withMessage('wednesday must be a boolean'), // New validation
+        body('thursday').isBoolean().withMessage('thursday must be a boolean'), // New validation
+        body('friday').isBoolean().withMessage('friday must be a boolean'), // New validation
+        body('saturday').isBoolean().withMessage('saturday must be a boolean'), // New validation
+        body('sunday').isBoolean().withMessage('sunday must be a boolean'), // New validation
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -300,6 +312,12 @@ app.put('/api/users/:id',
         user.helperRegistered = req.body.helperRegistered; // Update helperRegistered
         user.disclosureScotland = req.body.disclosureScotland; // Update disclosureScotland
         user.monday = req.body.monday; // Update monday
+        user.tuesday = req.body.tuesday; // Update tuesday
+        user.wednesday = req.body.wednesday; // Update wednesday
+        user.thursday = req.body.thursday; // Update thursday
+        user.friday = req.body.friday; // Update friday
+        user.saturday = req.body.saturday; // Update saturday
+        user.sunday = req.body.sunday; // Update sunday
         await user.save();
 
         res.json(user);
