@@ -83,7 +83,6 @@ const Users = () => {
 
   return (
     <>
-      {/* // Render the table of users with the ability to edit and delete users. */}
       <div className="text-gray-900 bg-gray-200">
       <section className='bg-gray-300 py-24 px-4 lg:px-16'>
         <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2'>
@@ -96,228 +95,148 @@ const Users = () => {
       </section>
 
       <section>
-        {/* <Toaster /> this does not need to be here as we are calling the toast in the app, leaving ut here creates 2 notifications */}
-        {/* Table of users */}
         <div className="p-4 mt-10">
           <h1 className="text-3xl">Existing Users</h1>
         </div>
         
-          <div className="px-3 py-4 overflow-x-auto">
-            <table className="w-full text-sm md:text-md bg-white shadow-md rounded mb-4 responsive-table">
-              {/* // Render the table body with the user data. */}
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left p-2 md:p-3 px2 md:px-5">Name</th>
-                  <th className="text-left p-2 md:p-3 px2 md:px-5">Email</th>
-                  <th className="text-left p-2 md:p-3 px2 md:px-5">D.O.B</th>
-                  <th className="text-left p-2 md:p-3 px2 md:px-5">Address</th>
-                  <th className="text-left p-2 md:p-5 px2 md:px-5">Disclosure</th>
-                  <th className="text-left p-2 md:p-5 px2 md:px-5">Helper</th>
-                  <th className="text-left p-2 md:p-5 px2 md:px-5">Role</th>
-                  <th className="text-left p-2 md:p-5 px2 md:px-5">Monday</th>
-                  <th className="text-left p-2 md:p-5 px2 md:px-5">Tuesday</th>
-                  <th className="text-left p-2 md:p-5 px2 md:px-5">Wednesday</th>
-                  <th className="text-left p-2 md:p-5 px2 md:px-5">Thursday</th>
-                  <th className="text-left p-2 md:p-5 px2 md:px-5">Friday</th>
-                  <th className="text-left p-2 md:p-5 px2 md:px-5">Saturday</th>
-                  <th className="text-left p-2 md:p-5 px2 md:px-5">Sunday</th>
-                  <th></th>
-                </tr>
-              </thead>
-              
-              <tbody>
-                {users.map((user, index) => {
-                  // ----------HANDLE INPUT CHANGE----------
-                  const handleInputChange = (event) => {
-                    const { name, value } = event.target;
-                    let updatedUser;
+        <div className="px-3 py-4 overflow-x-auto">
+          <table className="w-full text-sm md:text-md bg-white shadow-md rounded mb-4 responsive-table">
+            <thead>
+              <tr className="border-b">
+                <th className="text-left p-2 md:p-3 px2 md:px-5">Name</th>
+                <th className="text-left p-2 md:p-3 px2 md:px-5">Email</th>
+                <th className="text-left p-2 md:p-3 px2 md:px-5">D.O.B</th>
+                <th className="text-left p-2 md:p-3 px2 md:px-5">Address</th>
+                <th className="text-left p-2 md:p-5 px2 md:px-5">Disclosure</th>
+                <th className="text-left p-2 md:p-5 px2 md:px-5">Helper</th>
+                <th className="text-left p-2 md:p-5 px2 md:px-5">Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, index) => {
+                const handleInputChange = (event) => {
+                  const { name, value } = event.target;
+                  let updatedUser;
 
-                    // If the 'dob' field is empty, set the 'updatedUser' object to the current user object.
-                    if (name === 'dob' && value === '') {
-                        updatedUser = { ...user };
-                    } else {
-                        updatedUser = { ...user, [name]: value };
-                    }
+                  if (name === 'dob' && value === '') {
+                    updatedUser = { ...user };
+                  } else {
+                    updatedUser = { ...user, [name]: value };
+                  }
 
-                    // Convert the value of helperRegistered to boolean
-                    if (name === 'helperRegistered') {
-                        updatedUser[name] = value === 'true'; // Convert string 'true' or 'false' to boolean
-                    }
-                    // Convert the value of monday to boolean
-                    if (name === 'monday, tuesday, wednesday, thursday, friday, saturday, sunday') {
-                        updatedUser[name] = value === 'true'; // Convert string 'true' or 'false' to boolean
-                    }
+                  if (name === 'helperRegistered') {
+                    updatedUser[name] = value === 'true';
+                  }
 
-                    const updatedUsers = users.map((u) => (u._id === user._id ? updatedUser : u));
-                    setUsers(updatedUsers);
-                  };
-                  // Format the date of birth using the 'format' function from the 'date-fns' library.
-                  const formattedDob = format(new Date(user.dob), 'yyyy-MM-dd');
+                  if (['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].includes(name)) {
+                    updatedUser[name] = value === 'true';
+                  }
 
-                  return (
-                    <tr key={index} className={`border-b hover:bg-yellow-300 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
-                      {/* ^^ Add the 'hover:bg-yellow-300' class to highlight the row on hover. ^^ */}
+                  const updatedUsers = users.map((u) => (u._id === user._id ? updatedUser : u));
+                  setUsers(updatedUsers);
+                };
 
+                const formattedDob = format(new Date(user.dob), 'yyyy-MM-dd');
+
+                return (
+                  <React.Fragment key={user._id}>
+                    <tr className={`border-b hover:bg-yellow-300 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
                       <td data-label="Name" className="p-2 md:p-3 px-2 md:px-5">
                         <input type="text" name="name" value={user.name} onChange={handleInputChange} className="bg-transparent w-full" />
                       </td>
                       <td data-label="Email" className="p-2 md:p-3 px-2 md:px-5">
-                        <input type="text" name="email" value={user.email} onChange={handleInputChange} className="bg-transparent  w-full" />
+                        <input type="text" name="email" value={user.email} onChange={handleInputChange} className="bg-transparent w-full" />
                       </td>
                       <td data-label="D.O.B" className="p-2 md:p-3 px-2 md:px-5">
-                      <input type="date" name="dob" value={formattedDob} onChange={handleInputChange} className="w-full"/>
+                        <input type="date" name="dob" value={formattedDob} onChange={handleInputChange} className="w-full" />
                       </td>
                       <td data-label="Address" className="p-2 md:p-3 px-2 md:px-5">
-                      <input type="text" name="address" value={user.address} onChange={handleInputChange}className="w-full" />
+                        <input type="text" name="address" value={user.address} onChange={handleInputChange} className="w-full" />
                       </td>
-                      {/* ----------REGISTERED DISCLOSURE---------- */}
                       <td data-label="Disclosure" className="p-2 md:p-3 px-2 md:px-5">
                         <select 
-                            name="disclosureScotland" 
-                            value={user.disclosureScotland} 
-                            onChange={handleInputChange} 
-                            className="bg-transparent w-full"
-                            style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
+                          name="disclosureScotland" 
+                          value={user.disclosureScotland} 
+                          onChange={handleInputChange} 
+                          className="bg-transparent w-full"
+                          style={{ width: '80px', height: '30px', padding: '5px 10px' }}
                         >
-                            <option value="true">Yes</option>
-                            <option value="false">No</option>
+                          <option value="true">Yes</option>
+                          <option value="false">No</option>
                         </select>
-                    </td>
-                    {/* ----------REGISTERED HELPER---------- */}
-                    <td data-label="Helper" className="p-2 md:p-3 px-2 md:px-5">
-                    <select 
-                        name="helperRegistered" 
-                        value={user.helperRegistered ? 'true' : 'false'} // Set value based on the state of helperRegistered
-                        onChange={handleInputChange} 
-                        className="bg-transparent w-full"
-                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
-                    >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                    </td>
-                    {/*----------Monday Register----------*/}
-                    <td data-label="Monday" className="p-2 md:p-3 px-2 md:px-5">
-                    <select 
-                        name="monday" 
-                        value={user.monday ? 'true' : 'false'} // Set value based on the state of monday
-                        onChange={handleInputChange} 
-                        className="bg-transparent w-full"
-                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
-                    >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                    </td>
-                    {/*----------Tuesday Register----------*/}
-                    <td data-label="Tuesday" className="p-2 md:p-3 px-2 md:px-5">
-                    <select
-                        name="tuesday"
-                        value={user.tuesday ? 'true' : 'false'} // Set value based on the state of tuesday
-                        onChange={handleInputChange}
-                        className="bg-transparent w-full"
-                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
-                    >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                    </td>
-                    {/*----------Wednesday Register----------*/}
-                    <td data-label="Wednesday" className="p-2 md:p-3 px-2 md:px-5">
-                    <select
-                        name="wednesday"
-                        value={user.wednesday ? 'true' : 'false'} // Set value based on the state of wednesday
-                        onChange={handleInputChange}
-                        className="bg-transparent w-full"
-                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
-                    >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                    </td>
-                    {/*----------Thursday Register----------*/}
-                    <td data-label="Thursday" className="p-2 md:p-3 px-2 md:px-5">
-                    <select
-                        name="thursday"
-                        value={user.thursday ? 'true' : 'false'} // Set value based on the state of thursday
-                        onChange={handleInputChange}
-                        className="bg-transparent w-full"
-                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
-                    >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                    </td>
-                    {/*----------Friday Register----------*/}
-                    <td data-label="Friday" className="p-2 md:p-3 px-2 md:px-5">
-                    <select
-                        name="friday"
-                        value={user.friday ? 'true' : 'false'} // Set value based on the state of friday
-                        onChange={handleInputChange}
-                        className="bg-transparent w-full"
-                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
-                    >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                    </td>
-                    {/*----------Saturday Register----------*/}
-                    <td data-label="Saturday" className="p-2 md:p-3 px-2 md:px-5">
-                    <select
-                        name="saturday"
-                        value={user.saturday ? 'true' : 'false'} // Set value based on the state of saturday
-                        onChange={handleInputChange}
-                        className="bg-transparent w-full"
-                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
-                    >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                    </td>
-                    {/*----------Sunday Register----------*/}
-                    <td data-label="Sunday" className="p-2 md:p-3 px-2 md:px-5">
-                    <select
-                        name="sunday"
-                        value={user.sunday ? 'true' : 'false'} // Set value based on the state of sunday
-                        onChange={handleInputChange}
-                        className="bg-transparent w-full"
-                        style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
-                    >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                    </td>
-
-
-
-
-                    {/* Role select */}
-                      <td data-label="Role" className="p-2 md:p-3 px-2 md:px-5">
-                      <select 
-                      name="role" 
-                      value={user.role} 
-                      onChange={(event) => handleInputChange(event, user._id)} 
-                      className="bg-transparent w-full"
-                      style={{ width: '90px', height: '40px', padding: '0 0 0 10px'}}
-                      >
-                        <option value="admin">admin</option>
-                        <option value="parent">parent</option>
-                        <option value="child">child</option>
-                      </select>
                       </td>
-                      {/* Save and Delete buttons */}
-                      <td data-label="" className="p-2 md:p-3 px-2 md:px-5 flex justify-end">
-                        <button onClick={() => handleSaveClick(user)} type="button" className="mr-3 text-xs md:text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Save</button>
-                        <button onClick={() => handleDelete(user._id)} type="button"  className="text-xs md:text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Delete</button>
+                      <td data-label="Helper" className="p-2 md:p-3 px-2 md:px-5">
+                        <select 
+                          name="helperRegistered" 
+                          value={user.helperRegistered ? 'true' : 'false'} 
+                          onChange={handleInputChange} 
+                          className="bg-transparent w-full"
+                          style={{ width: '80px', height: '30px', padding: '5px 10px' }}
+                        >
+                          <option value="true">Yes</option>
+                          <option value="false">No</option>
+                        </select>
+                      </td>
+                      <td data-label="Role" className="p-2 md:p-3 px-2 md:px-5">
+                        <select 
+                          name="role" 
+                          value={user.role} 
+                          onChange={(event) => handleInputChange(event, user._id)} 
+                          className="bg-transparent w-full"
+                          style={{ width: '85px', height: '30px', padding: '5px 10px' }}
+                        >
+                          <option value="admin">admin</option>
+                          <option value="parent">parent</option>
+                          <option value="child">child</option>
+                        </select>
                       </td>
                     </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
+                    <tr className={`border-b hover:bg-yellow-300 ${index % 2 === 0 ? 'bg-gray-100':''} `}>
+                      <td colSpan="7" className="p-2 md:p-3 px-2 md:px-5">
+                        <div className="flex flex-wrap items-center justify-between">
+                          <div className="font-bold">Helper Availability</div>
+                          <div className="flex gap-1">
+                            {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => (
+                              <div key={day} className="text-left" style={{ padding: '5px 10px' }}>
+                                <label className="block font-bold">{day.charAt(0).toUpperCase() + day.slice(1)}</label>
+                                <select 
+                                  name={day} 
+                                  value={user[day] ? 'true' : 'false'} 
+                                  onChange={handleInputChange} 
+                                  className="bg-transparent w-full"
+                                  style={{ width: '80px', height: '30px', padding: '5px 10px' }}
+                                >
+                                  <option value="true">Yes</option>
+                                  <option value="false">No</option>
+                                </select>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => handleSaveClick(user)}
+                              className="middle none center mr-4 rounded-lg bg-purple-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={() => handleDelete(user._id)}
+                              className="middle none center mr-4 rounded-lg bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/50 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </React.Fragment>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
     </>
   );
 };
