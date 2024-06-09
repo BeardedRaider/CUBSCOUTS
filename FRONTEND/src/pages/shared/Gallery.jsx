@@ -57,33 +57,23 @@ const Gallery = () => {
       return;
     }
 
-// Calculates the file size in both bytes and MB.
-//Logs the file size to the console for debugging purposes.
-//Uses the calculated file size in MB for the comparison.
-    const fileSizeInBytes = image.size;
-    const fileSizeInMB = fileSizeInBytes / (1024 * 1024);
-  
-    console.log(`File size: ${fileSizeInMB} MB (${fileSizeInBytes} bytes)`);
-  
-    if (fileSizeInMB > 5) {
-      toast.error('File size exceeds 5MB');
+    const token = localStorage.getItem('token'); // Retrieve the authentication token from localStorage
+
+    if (!token) {
+      toast.error('User not authenticated');
       return;
     }
 
-    console.log(`File size: ${fileSizeInMB} MB (${fileSizeInBytes} bytes)`);
-  
-    if (fileSizeInMB > 5.1) { // Small buffer to account for floating-point precision issues
-      toast.error('File size exceeds 5MB');
-      return;
-    }
-    
+    const headers = {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': `Bearer ${token}` // Include the token in the request headers
+    };
+
     setIsSubmitting(true);
 
     try {
       const response = await axios.post('http://localhost:5000/api/gallery', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        headers: headers, // Pass the headers with the token
       });
       setGallery((prevGallery) => [...prevGallery, response.data]);
       setImageMap((prevImageMap) => ({
@@ -100,7 +90,7 @@ const Gallery = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
+};
 
   const handlePrint = () => {
     const printWindow = window.open('', '_blank');

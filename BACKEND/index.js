@@ -459,30 +459,53 @@ app.delete('/api/events/:id', async (req, res) => {
 
 
 // -----------------CREATRION OF GALLERY IMAGES ----------------
-
-
-    app.post('/api/gallery', uploadGallery.single('image'), async (req, res) => {
-        try {
-            const { title } = req.body;
-            if (!title) {
-                return res.status(400).json({ error: 'Title is required' });
-            }
-            if (!req.file) {
+app.post('/api/gallery', uploadGallery.single('image'), async (req, res) => {
+    try {
+        const { title } = req.body;
+        if (!title) {
+            return res.status(400).json({ error: 'Title is required' });
+        }
+        if (!req.file) {
             return res.status(400).json({ error: 'Valid Image file is required' });
         }
-    
-        const newImage = new Image({
-            title,
-            image: req.file.path,
-        });
 
-        const savedImage = await newImage.save();
-        res.json(savedImage);
-        } catch (error) {
-            console.error('Error in /api/gallery:', error.message);
-            res.status(500).json({ error: 'Internal Server Error' });
+        // Extract the token from the request headers
+        const token = req.headers.authorization?.split(' ')[1];
+
+        if (!token) {
+            return res.status(401).json({ error: 'Unauthorized: No token provided' });
         }
-    });
+
+        // Verify the token
+        jwt.verify(token, JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ error: 'Unauthorized: Invalid token' });
+            }
+
+            // Find the user by ID
+            const user = await User.findById(decoded.userId);
+
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+
+            const user_id = decoded.userId; // Extract user's ID from the decoded token
+
+            // Create a new image document with the user's ID
+            const newImage = new Image({
+                title,
+                image: req.file.path,
+                user_id: user_id, // Associate the user's ID with the image
+            });
+
+            const savedImage = await newImage.save();
+            res.json(savedImage);
+        });
+    } catch (error) {
+        console.error('Error in /api/gallery:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
     app.get('/api/gallery', async (req, res) => {
         try {
