@@ -189,6 +189,7 @@ app.get('/api/users', async (req, res) => {
                 is_admin: user.role,
                 disclosureScotland: user.disclosureScotland,
                 helperRegistered: user.helperRegistered,
+                helperTrained: user.helperTrained,
                 monday: user.monday,
                 tuesday: user.tuesday,
                 wednesday: user.wednesday,
@@ -258,10 +259,10 @@ app.put('/api/users/self', async (req, res) => {
             return res.status(401).json({ error: 'Unauthorized: Invalid token' });
         }
 
-        const { name, email, dob, address, disclosureScotland, helperRegistered, monday, tuesday, wednesday, thursday, friday, saturday, sunday } = req.body;
+        const { name, email, dob, address, disclosureScotland, helperRegistered, helperTrained, monday, tuesday, wednesday, thursday, friday, saturday, sunday } = req.body;
         const updatedUser = await User.findByIdAndUpdate(
             decoded.userId,
-            { name, email, dob, address, disclosureScotland, helperRegistered, monday, tuesday, wednesday, thursday, friday, saturday, sunday },
+            { name, email, dob, address, disclosureScotland, helperRegistered, helperTrained, monday, tuesday, wednesday, thursday, friday, saturday, sunday },
             { new: true }
         );
         res.json(updatedUser);
@@ -284,6 +285,7 @@ app.put('/api/users/:id',
         body('role').isIn(['admin', 'parent', 'child']).withMessage('Invalid role'),// Validate the role
         body('helperRegistered').isBoolean().withMessage('helperRegistered must be a boolean'), // New validation
         body('disclosureScotland').isBoolean().withMessage('disclosureScotland must be a boolean'), // New validation
+        body('helperTrained').isBoolean().withMessage('helperTrained must be a boolean'), // New validation
         body('monday').isBoolean().withMessage('monday must be a boolean'), // New validation
         body('tuesday').isBoolean().withMessage('tuesday must be a boolean'), // New validation
         body('wednesday').isBoolean().withMessage('wednesday must be a boolean'), // New validation

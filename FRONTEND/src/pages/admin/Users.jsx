@@ -27,7 +27,7 @@ const Users = () => {
         dob: formattedDob,
         isHelperRegistered: Boolean(isHelperRegistered) // Convert to boolean
     };
-    console.log(userToUpdate); // Log the userToUpdate object
+
 
   
     const response = await fetch(`http://localhost:5000/api/users/${user._id}`, {
@@ -110,6 +110,7 @@ const Users = () => {
                 <th className="text-left p-2 md:p-3 px2 md:px-5">Address</th>
                 <th className="text-left p-2 md:p-5 px2 md:px-5">Disclosure</th>
                 <th className="text-left p-2 md:p-5 px2 md:px-5">Helper</th>
+                <th className="text-left p-2 md:p-5 px2 md:px-5">Trained</th>
                 <th className="text-left p-2 md:p-5 px2 md:px-5">Role</th>
               </tr>
             </thead>
@@ -126,6 +127,10 @@ const Users = () => {
                   }
 
                   if (name === 'helperRegistered') {
+                    updatedUser[name] = value === 'true';
+                  }
+
+                  if (name === 'helperTrained') {
                     updatedUser[name] = value === 'true';
                   }
 
@@ -178,6 +183,19 @@ const Users = () => {
                           <option value="false">No</option>
                         </select>
                       </td>
+                      <td data-label="Trained" className="p-2 md:p-3 px-2 md:px-5">
+                        <select 
+                          name="helperTrained" 
+                          value={user.helperTrained ? 'true' : 'false'} 
+                          onChange={handleInputChange} 
+                          className="bg-transparent w-full"
+                          style={{ width: '80px', height: '30px', padding: '5px 10px', cursor: 'pointer' }}
+                        >
+                          <option value="true">Yes</option>
+                          <option value="false">No</option>
+                        </select>
+                      </td>
+
                       <td data-label="Role" className="p-2 md:p-3 px-2 md:px-5">
                         <select 
                           name="role" 

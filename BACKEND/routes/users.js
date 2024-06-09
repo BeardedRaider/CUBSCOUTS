@@ -31,6 +31,7 @@ app.get('/api/users', async (req, res) => {
     is_admin: user.role,
     disclosureScotland: user.disclosureScotland,
     helperRegistered: user.helperRegistered,
+    helperTrained: user.helperTrained,
     mondayAvailability: user.mondayAvailability,
     tuesdayAvailability: user.tuesdayAvailability,
     wednesdayAvailability: user.wednesdayAvailability,

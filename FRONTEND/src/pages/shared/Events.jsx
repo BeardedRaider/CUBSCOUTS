@@ -34,84 +34,86 @@ const Events = () => {
         </section>
 
         <section className='bg-gray-500 py-24 px-4 lg:px-16'>
-          <div className='container mx-auto'>
-            <h2 className='text-3xl mb-4'>Current Events</h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-              {events.map(event => (
-                <div
-                  key={event._id}
-                  className={`relative bg-white rounded-lg shadow-md p-6 ${flippedCard === event._id ? 'flipped' : ''}`}
-                  style={{ perspective: '1000px' }}
+  <div className='container mx-auto'>
+    <h2 className='text-3xl mb-4'>Current Events</h2>
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+      {events.map(event => (
+        <div
+          key={event._id}
+          className={`relative bg-white rounded-lg shadow-md p-6 ${flippedCard === event._id ? 'flipped' : ''}`}
+          style={{ perspective: '1000px' }}
+        >
+          <div
+            className="card-inner"
+            style={{
+              transformStyle: 'preserve-3d',
+              transition: 'transform 0.6s',
+              transform: flippedCard === event._id ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            }}
+          >
+            <div
+              className="card-front"
+              style={{
+                backfaceVisibility: 'hidden',
+                position: flippedCard === event._id ? 'absolute' : 'relative',
+                width: '100%',
+                height: '100%',
+              }}
+            >
+              <h3 className='text-xl font-bold mb-2'>{event.title}</h3>
+              <p className='text-gray-700 mb-2'>{event.description}</p>
+              <p className='text-gray-700 font-bold mb-2'>Date: {new Date(event.date).toLocaleDateString()}</p>
+              <p className='text-gray-700 font-bold mb-2'>Time: {event.time}</p>
+              <p className='text-gray-700 font-bold mb-2'>Location: {event.location}</p>
+              {event.image && (
+                <img
+                  src={`http://localhost:5000/${event.image.replace('\\', '/')}`}
+                  alt={event.title}
+                  className='w-full h-48 object-cover mb-2 rounded'
+                />
+              )}
+              {flippedCard !== event._id && (
+                <button
+                  onClick={() => setFlippedCard(flippedCard === event._id ? null : event._id)}
+                  className='bg-purple-600 hover:bg-purple-700 text-yellow-300 text-white font-bold py-2 px-4 rounded mt-2'
                 >
-                  <div
-                    className="card-inner"
-                    style={{
-                      transformStyle: 'preserve-3d',
-                      transition: 'transform 0.6s',
-                      transform: flippedCard === event._id ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                    }}
-                  >
-                    <div
-                      className="card-front"
-                      style={{
-                        backfaceVisibility: 'hidden',
-                        position: flippedCard === event._id ? 'absolute' : 'relative',
-                        width: '100%',
-                        height: '100%',
-                      }}
-                    >
-                      <h3 className='text-xl font-bold mb-2'>{event.title}</h3>
-                      <p className='text-gray-700 mb-2'>{event.description}</p>
-                      <p className='text-gray-700 font-bold mb-2'>Date: {new Date(event.date).toLocaleDateString()}</p>
-                      <p className='text-gray-700 font-bold mb-2'>Time: {event.time}</p>
-                      <p className='text-gray-700 font-bold mb-2'>Location: {event.location}</p>
-                      {event.image && (
-                        <img
-                          src={`http://localhost:5000/${event.image.replace('\\', '/')}`}
-                          alt={event.title}
-                          className='w-full h-48 object-cover mb-2 rounded'
-                        />
-                      )}
-                      <button
-                        onClick={() => setFlippedCard(flippedCard === event._id ? null : event._id)}
-                        className='bg-purple-600 hover:bg-purple-700 text-yellow-300 text-white font-bold py-2 px-4 rounded mt-2'
-                      >
-                        More Info
-                      </button>
-                    </div>
-                    <div
-                      className="card-back bg-white rounded-lg p-6"
-                      style={{
-                        backfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg)',
-                        position: flippedCard === event._id ? 'relative' : 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        top: '0',
-                        left: '0',
-                      }}
-                    >
-                      {event.image && (
-                        <img
-                          src={`http://localhost:5000/${event.image.replace('\\', '/')}`}
-                          alt={event.title}
-                          className='w-full h-48 object-cover mb-2 rounded'
-                        />
-                      )}
-                      <p className="text-gray-700">{event.moreInfo}</p>
-                      <button
-                        onClick={() => setFlippedCard(null)}
-                        className='bg-purple-600 hover:bg-purple-700 text-yellow-300 font-bold py-2 px-4 rounded mt-2'
-                      >
-                        Less Info
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  More Info
+                </button>
+              )}
+            </div>
+            <div
+              className="card-back bg-white rounded-lg p-6"
+              style={{
+                backfaceVisibility: 'hidden',
+                transform: 'rotateY(180deg)',
+                position: flippedCard === event._id ? 'relative' : 'absolute',
+                width: '100%',
+                height: '100%',
+                top: '0',
+                left: '0',
+              }}
+            >
+              {event.image && (
+                <img
+                  src={`http://localhost:5000/${event.image.replace('\\', '/')}`}
+                  alt={event.title}
+                  className='w-full h-48 object-cover mb-2 rounded'
+                />
+              )}
+              <p className="text-gray-700">{event.moreInfo}</p>
+              <button
+                onClick={() => setFlippedCard(null)}
+                className='bg-purple-600 hover:bg-purple-700 text-yellow-300 font-bold py-2 px-4 rounded mt-2'
+              >
+                Less Info
+              </button>
             </div>
           </div>
-        </section>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
 {/* COMING SOON HOLDER */}
         <section className='py-24 px-4 lg:px-16'>

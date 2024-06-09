@@ -15,6 +15,7 @@ const UserSchema = new Schema({
     role: { type: String, required: true },
     disclosureScotland: { type: Boolean, default: false },// Add disclosureScotland field
     helperRegistered: { type: Boolean, default: false },// Add helperRegistered field
+    helperTrained: { type: Boolean, default: false },// Add helperTrained field
     monday: { type: Boolean, default: false },// Add Monday field
     tuesday: { type: Boolean, default: false },// Add Tuesday field
     wednesday: { type: Boolean, default: false },// Add Wednesday field

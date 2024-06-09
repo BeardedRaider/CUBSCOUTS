@@ -34,13 +34,20 @@ const Account = () => {
     const { name, value } = event.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
-
+// ----------disclosureScotland----------
   const handleDisclosureClick = () => {
     setUser((prevUser) => ({ ...prevUser, disclosureScotland: !prevUser.disclosureScotland }));
   };
+  // ----------helperRegistered----------
   const handleHelperRegistration = () => {
     setUser((prevUser) => ({ ...prevUser, helperRegistered: !prevUser.helperRegistered }));
   };
+  // ----------helperTrained----------
+  const handleHelperTrained = () => {
+    setUser((prevUser) => ({ ...prevUser, helperTrained: !prevUser.helperTrained }));
+  };
+
+  // ----------------Day availability handlers
   const handleMondayAvailability = () => {
     console.trace("handleMondayAvailability called"); // Add this line
     setUser((prevUser) => {
@@ -207,118 +214,131 @@ const Account = () => {
                     {user.helperRegistered && <FaCheck className="ml-1" />}
                 </button>
               </label>
+              {/* ----------helperTrained---------- */}
+              <label htmlFor="helperTrained" className="block mb-2">
+                {user.helperTrained ? 'Trained Helper' : 'Train as Helper:'}
+                <br />
+                <button
+                    id="helperTrained"
+                    onClick={handleHelperTrained}
+                    name="helperTrained"
+                    className={`middle none center mr-4 rounded-lg ${user.helperTrained ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md ${user.helperTrained ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.helperTrained ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                >
+                    {user.helperTrained ? 'Trained Helper' : 'Train as Helper'}
+                    {user.helperTrained && <FaCheck className="ml-1" />}
+                </button>
+              </label>
+              {/* ----------------Day availability handlers */}
               <div>
-  <h3 className="mb-4 font-bold">Your Availability To Help:</h3>
-  <div className="flex flex-wrap justify-start">
-    {/* MONDAY */}
-    <div className="mb-4 mr-4">
-      <label htmlFor="monday" className="block text-center font-semibold">
-        Monday
-      </label>
-      <button
-        id="monday"
-        onClick={handleMondayAvailability}
-        name="monday"
-        className={`middle none center rounded-lg ${user.monday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.monday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.monday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
-      >
-        {user.monday ? 'Available' : 'Not Available'}
-        {user.monday && <FaCheck className="ml-1" />}
-      </button>
-    </div>
-    {/* TUESDAY */}
-    <div className="mb-4 mr-4">
-      <label htmlFor="tuesday" className="block text-center font-semibold">
-        Tuesday
-      </label>
-      <button
-        id="tuesday"
-        onClick={handleTuesdayAvailability}
-        name="tuesday"
-        className={`middle none center rounded-lg ${user.tuesday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.tuesday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.tuesday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
-      >
-        {user.tuesday ? 'Available' : 'Not Available'}
-        {user.tuesday && <FaCheck className="ml-1" />}
-      </button>
-    </div>
-    {/* WEDNESDAY */}
-    <div className="mb-4 mr-4">
-      <label htmlFor="wednesday" className="block text-center font-semibold">
-        Wednesday
-      </label>
-      <button
-        id="wednesday"
-        onClick={handleWednesdayAvailability}
-        name="wednesday"
-        className={`middle none center rounded-lg ${user.wednesday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.wednesday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.wednesday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
-      >
-        {user.wednesday ? 'Available' : 'Not Available'}
-        {user.wednesday && <FaCheck className="ml-1" />}
-      </button>
-    </div>
-    {/* THURSDAY */}
-    <div className="mb-4 mr-4">
-      <label htmlFor="thursday" className="block text-center font-semibold">
-        Thursday
-      </label>
-      <button
-        id="thursday"
-        onClick={handleThursdayAvailability}
-        name="thursday"
-        className={`middle none center rounded-lg ${user.thursday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.thursday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.thursday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
-      >
-        {user.thursday ? 'Available' : 'Not Available'}
-        {user.thursday && <FaCheck className="ml-1" />}
-      </button>
-    </div>
-    {/* FRIDAY */}
-    <div className="mb-4 mr-4">
-      <label htmlFor="friday" className="block text-center font-semibold">
-        Friday
-      </label>
-      <button
-        id="friday"
-        onClick={handleFridayAvailability}
-        name="friday"
-        className={`middle none center rounded-lg ${user.friday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.friday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.friday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
-      >
-        {user.friday ? 'Available' : 'Not Available'}
-        {user.friday && <FaCheck className="ml-1" />}
-      </button>
-    </div>
-    {/* SATURDAY */}
-    <div className="mb-4 mr-4">
-      <label htmlFor="saturday" className="block text-center font-semibold">
-        Saturday
-      </label>
-      <button
-        id="saturday"
-        onClick={handleSaturdayAvailability}
-        name="saturday"
-        className={`middle none center rounded-lg ${user.saturday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.saturday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.saturday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
-      >
-        {user.saturday ? 'Available' : 'Not Available'}
-        {user.saturday && <FaCheck className="ml-1" />}
-      </button>
-    </div>
-    {/* SUNDAY */}
-    <div className="mb-4 mr-4">
-      <label htmlFor="sunday" className="block text-center font-semibold">
-        Sunday
-      </label>
-      <button
-        id="sunday"
-        onClick={handleSundayAvailability}
-        name="sunday"
-        className={`middle none center rounded-lg ${user.sunday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.sunday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.sunday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
-      >
-        {user.sunday ? 'Available' : 'Not Available'}
-        {user.sunday && <FaCheck className="ml-1" />}
-      </button>
-    </div>
-  </div>
-</div>
-            
-
+                <h3 className="mb-4 font-bold">Your Availability To Help:</h3>
+                <div className="flex flex-wrap justify-start">
+                  {/* MONDAY */}
+                  <div className="mb-4 mr-4">
+                    <label htmlFor="monday" className="block text-center font-semibold">
+                      Monday
+                    </label>
+                    <button
+                      id="monday"
+                      onClick={handleMondayAvailability}
+                      name="monday"
+                      className={`middle none center rounded-lg ${user.monday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.monday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.monday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                    >
+                      {user.monday ? 'Available' : 'Not Available'}
+                      {user.monday && <FaCheck className="ml-1" />}
+                    </button>
+                  </div>
+                  {/* TUESDAY */}
+                  <div className="mb-4 mr-4">
+                    <label htmlFor="tuesday" className="block text-center font-semibold">
+                      Tuesday
+                    </label>
+                    <button
+                      id="tuesday"
+                      onClick={handleTuesdayAvailability}
+                      name="tuesday"
+                      className={`middle none center rounded-lg ${user.tuesday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.tuesday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.tuesday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                    >
+                      {user.tuesday ? 'Available' : 'Not Available'}
+                      {user.tuesday && <FaCheck className="ml-1" />}
+                    </button>
+                  </div>
+                  {/* WEDNESDAY */}
+                  <div className="mb-4 mr-4">
+                    <label htmlFor="wednesday" className="block text-center font-semibold">
+                      Wednesday
+                    </label>
+                    <button
+                      id="wednesday"
+                      onClick={handleWednesdayAvailability}
+                      name="wednesday"
+                      className={`middle none center rounded-lg ${user.wednesday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.wednesday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.wednesday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                    >
+                      {user.wednesday ? 'Available' : 'Not Available'}
+                      {user.wednesday && <FaCheck className="ml-1" />}
+                    </button>
+                  </div>
+                  {/* THURSDAY */}
+                  <div className="mb-4 mr-4">
+                    <label htmlFor="thursday" className="block text-center font-semibold">
+                      Thursday
+                    </label>
+                    <button
+                      id="thursday"
+                      onClick={handleThursdayAvailability}
+                      name="thursday"
+                      className={`middle none center rounded-lg ${user.thursday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.thursday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.thursday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                    >
+                      {user.thursday ? 'Available' : 'Not Available'}
+                      {user.thursday && <FaCheck className="ml-1" />}
+                    </button>
+                  </div>
+                  {/* FRIDAY */}
+                  <div className="mb-4 mr-4">
+                    <label htmlFor="friday" className="block text-center font-semibold">
+                      Friday
+                    </label>
+                    <button
+                      id="friday"
+                      onClick={handleFridayAvailability}
+                      name="friday"
+                      className={`middle none center rounded-lg ${user.friday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.friday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.friday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                    >
+                      {user.friday ? 'Available' : 'Not Available'}
+                      {user.friday && <FaCheck className="ml-1" />}
+                    </button>
+                  </div>
+                  {/* SATURDAY */}
+                  <div className="mb-4 mr-4">
+                    <label htmlFor="saturday" className="block text-center font-semibold">
+                      Saturday
+                    </label>
+                    <button
+                      id="saturday"
+                      onClick={handleSaturdayAvailability}
+                      name="saturday"
+                      className={`middle none center rounded-lg ${user.saturday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.saturday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.saturday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                    >
+                      {user.saturday ? 'Available' : 'Not Available'}
+                      {user.saturday && <FaCheck className="ml-1" />}
+                    </button>
+                  </div>
+                  {/* SUNDAY */}
+                  <div className="mb-4 mr-4">
+                    <label htmlFor="sunday" className="block text-center font-semibold">
+                      Sunday
+                    </label>
+                    <button
+                      id="sunday"
+                      onClick={handleSundayAvailability}
+                      name="sunday"
+                      className={`middle none center rounded-lg ${user.sunday ? 'bg-green-500 hover:bg-green-600' : 'bg-purple-500 hover:bg-purple-600'} py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md ${user.sunday ? 'shadow-green-500/50' : 'shadow-purple-500/50'} transition-all hover:shadow-lg ${user.sunday ? 'hover:shadow-green-500/40' : 'hover:shadow-purple-500/40'} focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+                    >
+                      {user.sunday ? 'Available' : 'Not Available'}
+                      {user.sunday && <FaCheck className="ml-1" />}
+                    </button>
+                  </div>
+                </div>
+              </div>
             <button onClick={handleSaveClick} 
             className="middle none center mr-4 rounded-lg bg-purple-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             >Save</button>
