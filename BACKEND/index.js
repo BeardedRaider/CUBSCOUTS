@@ -2,23 +2,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+
 const multer = require('multer');// Import the multer package
 const path = require('path');// Import the path package
 const fs = require('fs');
 const bcrypt = require('bcryptjs');// Import the bcryptjs package
 const jwt = require('jsonwebtoken');// Import the jsonwebtoken package
 require('dotenv').config();
-const bodyParser = require('body-parser');
-
-const app = express();// Create the express app
-const PORT = process.env.PORT || 5000;// Define the port to listen to
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const MONGO_URI = process.env.MONGO_URI;
 
 // Import the routes
 const badgeCountRouter = require('./routes/badgeCount');// Import the badgeCount route
-const galleryCountRoute = require('./routes/galleryCount'); // Import the galleryCount route
+const galleryCountRouter = require('./routes/galleryCount'); // Import the galleryCount route
+
 const badgesRouter = require('./routes/badges'); // Import the badges router
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
@@ -26,20 +25,23 @@ const Image = require('./models/image');// Import the Image model This model now
 
 const upload = multer({ dest: 'uploads/' }); // Configuring multer
 
+const app = express();// Create the express app
+const PORT = process.env.PORT || 5000;// Define the port to listen to
+
+// Middleware
 app.use(cors({
-    origin: 'http://localhost:3000', // Your frontend origin
-    methods: ['GET', 'POST', 'DELETE', 'PUT'], // Include DELETE method and PUT (save) method
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
-app.use(express.json());// Use the json parser
-app.use(express.urlencoded({ extended: true }));// Use the urlencoded parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// Use the badge count router
+
+// Routes
 app.use('/api', badgeCountRouter);
-// Use the badges router
 app.use('/api/badges', badgesRouter);
-app.use('/api/gallery', galleryCountRoute);
+app.use('/api/gallery', galleryCountRouter);
 
 // Connect to the mongodb server
 mongoose.connect(MONGO_URI, {
