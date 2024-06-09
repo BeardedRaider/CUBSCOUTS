@@ -67,6 +67,9 @@ const Header = ({ className }) => {
                 <li>
                   <Link to="/Aevents">Events</Link>
                 </li>
+                <li>
+                  <Link to="/Agallery">Gallery</Link>
+                </li>
 
                 <li>
                 {auth.token && (

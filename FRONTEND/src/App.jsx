@@ -15,6 +15,7 @@ import Badges from './pages/shared/Badges';
 import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/Users';
 import Events from './pages/admin/Aevents';
+import Agallery from './pages/admin/Agallery';
 // parent pages
 import Parent from './pages/parent/Parent';
 // child pages
@@ -51,6 +52,7 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/users" element={<Users />} />
             <Route path="/Aevents" element={<Events />} />
+            <Route path="/Agallery" element={<Agallery />} />
             <Route path="/events" element={<Uevents />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/account" element={<Account />} />

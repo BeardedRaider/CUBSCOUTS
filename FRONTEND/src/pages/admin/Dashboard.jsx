@@ -75,7 +75,7 @@ const Dashboard = () => {
             </Link>
 
             {/* Gallery count card */}
-            <Link to="/gallery" className='text-purple-600 hover:text-purple-800'>
+            <Link to="/Agallery" className='text-purple-600 hover:text-purple-800'>
               <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
                 <p className='text-xl text-gray-500'>Total Images In Gallery</p>
                 <h2 className="text-6xl font-bold">{galleryCount}</h2>
