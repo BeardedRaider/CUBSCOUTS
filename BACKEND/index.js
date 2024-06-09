@@ -10,7 +10,6 @@ const jwt = require('jsonwebtoken');// Import the jsonwebtoken package
 require('dotenv').config();
 const bodyParser = require('body-parser');
 
-
 const app = express();// Create the express app
 const PORT = process.env.PORT || 5000;// Define the port to listen to
 
@@ -19,6 +18,7 @@ const MONGO_URI = process.env.MONGO_URI;
 
 // Import the routes
 const badgeCountRouter = require('./routes/badgeCount');// Import the badgeCount route
+const galleryCountRoute = require('./routes/galleryCount'); // Import the galleryCount route
 const badgesRouter = require('./routes/badges'); // Import the badges router
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
@@ -39,6 +39,7 @@ app.use(bodyParser.json());
 app.use('/api', badgeCountRouter);
 // Use the badges router
 app.use('/api/badges', badgesRouter);
+app.use('/api/gallery', galleryCountRoute);
 
 // Connect to the mongodb server
 mongoose.connect(MONGO_URI, {
