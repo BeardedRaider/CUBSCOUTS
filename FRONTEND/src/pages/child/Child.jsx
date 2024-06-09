@@ -154,7 +154,7 @@ const ChildDash = () => {
           <source src={videoUrl} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2 relative z-10'>
+        <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] relative z-10'>
           <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose">Welcome</h1>
           <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white">
             {user ? user.name : 'Loading...'}!

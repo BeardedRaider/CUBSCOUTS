@@ -10,7 +10,7 @@ const ParentDash = () => {
     <div>
       {/* welcome section gets the users name and displays it back on screen so they know they are logged in correctly */}
       <section className='heroDash overlayDash bg-gray-300 py-24 px-4 lg:px-16'>
-        <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2'>
+        <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px]'>
           <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose">Welcome
           </h1>
           <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white"> 
@@ -26,7 +26,7 @@ const ParentDash = () => {
             <h2 class="text-[#480c88] font-bold text-2xl max-w-xs text-right mb-12 mt-10">What's On The <br/> Grounds?
             </h2>
             <div class="h-full mt-auto overflow-hidden relative">
-            <img src={img1} className="h-full w-full object-contain" alt="image here" />           
+            <img src={img1} className="h-full w-full object-contain" alt="" />           
             </div>
         </div>
           <div class="py-20 rightBox relative">
@@ -59,7 +59,7 @@ const ParentDash = () => {
           <div class="w-full flex flex-col pl-16">
             <h2 class="text-[#480c88] font-bold text-2xl max-w-xs text-left mb-12 mt-10">Getting Help where <br/> you need it.</h2>
             <div class="h-full mt-auto overflow-hidden relative">
-            <img src={img1} className="h-full w-full object-contain mb-10" alt="image here" />           
+            <img src={img1} className="h-full w-full object-contain mb-10" alt="" />           
             </div>
           </div>
 
@@ -73,7 +73,7 @@ const ParentDash = () => {
             <h2 class="text-[#480c88] font-bold text-2xl max-w-xs text-right mb-12 mt-10">What's On The <br/> Grounds?
             </h2>
             <div class="h-full mt-auto overflow-hidden relative">
-            <img src={img1} className="h-full w-full object-contain" alt="image here" />           
+            <img src={img1} className="h-full w-full object-contain" alt="" />           
             </div>
         </div>
           <div class="py-20 rightBox relative">
@@ -106,7 +106,7 @@ const ParentDash = () => {
           <div class="w-full flex flex-col pl-16">
             <h2 class="text-[#480c88] font-bold text-2xl max-w-xs text-left mb-12 mt-10">Getting Help where <br/> you need it.</h2>
             <div class="h-full mt-auto overflow-hidden relative">
-            <img src={img1} className="h-full w-full object-contain mb-10" alt="image here" />           
+            <img src={img1} className="h-full w-full object-contain mb-10" alt="" />           
             </div>
           </div>
 

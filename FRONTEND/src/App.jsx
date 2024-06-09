@@ -24,6 +24,7 @@ import Games from './pages/child/Games';
 import { Toaster } from 'react-hot-toast';
 // css
 import './App.css';
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => {
   const [auth, setAuth] = useState({
@@ -38,6 +39,7 @@ const App = () => {
       reverseOrder={false}/>
       <div className="App">       
         <Router>
+          <ScrollToTop /> {/* This component ensures that the page is scrolled to the top when the URL path changes*/}
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />

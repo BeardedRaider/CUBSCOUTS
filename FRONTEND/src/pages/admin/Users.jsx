@@ -4,7 +4,8 @@ import UserInformation from '../../UserInfo'// Import the 'UserInformation' func
 import getAllUsers from '../../components/GetAllUsers'; // Import the 'getAllUsers' function from the 'GetAllUsers' module.
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
-import "../../styles/users.css" 
+import "../../styles/users.css"
+import "../../styles/admin.css" 
 
 
 const Users = () => {
@@ -84,15 +85,15 @@ const Users = () => {
   return (
     <>
       <div className="text-gray-900 bg-gray-200">
-      <section className='bg-gray-300 py-24 px-4 lg:px-16'>
-        <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2'>
-          <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose">Welcome
-          </h1>
-          <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white"> 
-          {user ? user.name : 'Loading...'}!
-          </h2>
-        </div>
-      </section>
+        <section className=' heroAdd overlayAdd py-24 px-4 lg:px-16'>
+          <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px]'>
+            <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose" > Welcome
+            </h1>
+            <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white"> 
+              {user ? user.name : 'Loading...'}
+            </h2>
+          </div>
+        </section>
 
       <section>
         <div className="p-4 mt-10">
@@ -159,7 +160,7 @@ const Users = () => {
                           value={user.disclosureScotland} 
                           onChange={handleInputChange} 
                           className="bg-transparent w-full"
-                          style={{ width: '80px', height: '30px', padding: '5px 10px' }}
+                          style={{ width: '80px', height: '30px', padding: '5px 10px', cursor: 'pointer' }}
                         >
                           <option value="true">Yes</option>
                           <option value="false">No</option>
@@ -171,7 +172,7 @@ const Users = () => {
                           value={user.helperRegistered ? 'true' : 'false'} 
                           onChange={handleInputChange} 
                           className="bg-transparent w-full"
-                          style={{ width: '80px', height: '30px', padding: '5px 10px' }}
+                          style={{ width: '80px', height: '30px', padding: '5px 10px', cursor: 'pointer' }}
                         >
                           <option value="true">Yes</option>
                           <option value="false">No</option>
@@ -183,7 +184,7 @@ const Users = () => {
                           value={user.role} 
                           onChange={(event) => handleInputChange(event, user._id)} 
                           className="bg-transparent w-full"
-                          style={{ width: '85px', height: '30px', padding: '5px 10px' }}
+                          style={{ width: '85px', height: '30px', padding: '5px 10px', cursor: 'pointer' }}
                         >
                           <option value="admin">admin</option>
                           <option value="parent">parent</option>
@@ -204,7 +205,7 @@ const Users = () => {
                                   value={user[day] ? 'true' : 'false'} 
                                   onChange={handleInputChange} 
                                   className="bg-transparent w-full"
-                                  style={{ width: '80px', height: '30px', padding: '5px 10px' }}
+                                  style={{ width: '80px', height: '30px', padding: '5px 10px', cursor: 'pointer'}}
                                 >
                                   <option value="true">Yes</option>
                                   <option value="false">No</option>

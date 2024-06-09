@@ -49,7 +49,7 @@ const Games = () => {
   return (
     <>
     <section  class=" sectionWelcome py-24 px-4 lg:px-16"> 
-      <div class="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2">
+      <div class="container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px]">
         <h1 class=" text-white text-center text-5xl pb-12">
           Welcome
         </h1>

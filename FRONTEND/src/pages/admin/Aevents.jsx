@@ -167,23 +167,17 @@ const handleUpdate = async (eventId) => {
     }
   };
 
-  return (
-    <div>
-      <section className='bg-gray-300 py-24 px-4 lg:px-16'>
-        <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] nanum2'>
-          <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose">Welcome</h1>
-          <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white">
-            {user ? user.name : 'Loading...'} to the events page.
-          </h2>
-        </div>
-      </section>
-      <section>
-        <div className="flex items-center justify-center py-10">
-          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
-            <p className="text-xl text-gray-500">Events</p>
-            <h2 className="text-6xl font-bold">Coming Soon</h2>
-          </div>
-        </div>
+return (
+  <>
+    <div className="text-gray-900 bg-gray-200">
+      <section className=' heroAdd overlayAdd py-24 px-4 lg:px-16'>
+            <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px]'>
+              <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose" > Welcome
+              </h1>
+              <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white"> 
+                {user ? user.name : 'Loading...'}
+              </h2>
+            </div>
       </section>
 
       {/* Create Event Form */}
@@ -300,9 +294,9 @@ const handleUpdate = async (eventId) => {
       </section>
 
       {/* Display Events */}
-      <section className='bg-gray-300 py-24 px-4 lg:px-16'>
+      <section className='bg-gray-300 px-4 lg:px-16'>
         <div className='container mx-auto'>
-          <h2 className='text-3xl mb-4'>Current Events</h2>
+          <h2 className='text-3xl flex items-center justify-center px-3 mb-4'>Active Events</h2>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {events.map(event => (
               <div key={event._id} className='bg-white rounded-lg shadow-md p-6'>
@@ -399,7 +393,16 @@ const handleUpdate = async (eventId) => {
           </div>
         </div>
       </section>
+      <section>
+        <div className="flex items-center justify-center py-10">
+          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
+            <p className="text-xl text-gray-500">More Admin Tools</p>
+            <h2 className="text-6xl font-bold">Coming Soon</h2>
+          </div>
+        </div>
+      </section>
     </div>
+  </>
   );
 };
 
