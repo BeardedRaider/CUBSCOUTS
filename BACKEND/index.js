@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const galleryRoutes = require('./routes/galleryRoute');
 
 const multer = require('multer');// Import the multer package
 const path = require('path');// Import the path package
@@ -40,6 +41,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api', badgeCountRouter);
+app.use('/api', galleryRoutes);
 app.use('/api/badges', badgesRouter);
 app.use('/api/gallery', galleryCountRouter);
 

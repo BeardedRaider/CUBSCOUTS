@@ -130,6 +130,7 @@ const Gallery = () => {
             </h2>
           </div>
         </section>
+
         <section className='bg-gray-300 py-24 px-4 lg:px-16'>
           <div className="flex items-center justify-center px-3">
             <h1 className="text-3xl">Upload An Image</h1>
@@ -149,6 +150,7 @@ const Gallery = () => {
                   placeholder="Title"
                 />
               </div>
+
               <label htmlFor="image" className='block text-gray-700 ml-12 flex items-center justify-center w-1/2'>
                 Upload Image
               </label>
@@ -161,6 +163,7 @@ const Gallery = () => {
                   accept='image/*'
                 />
               </div>
+
               <div className='flex items-center justify-center'>
                 <button
                   className='bg-purple-600 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
@@ -173,6 +176,7 @@ const Gallery = () => {
             </form>
           </div>
         </section>
+        {/* // Gallery Section */}
         <section className='sectionBg3 pt-10'>
           <div className='container mx-auto p-4'>
             <div className='gallery'>
