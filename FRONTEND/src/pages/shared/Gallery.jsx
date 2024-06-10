@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import UserInformation from '../../UserInfo';
+
 import { toast } from 'react-hot-toast';
 import '../../styles/gallery.css';
 
@@ -10,10 +11,19 @@ const Gallery = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userUploaded, setUserUploaded] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [gallery, setGallery] = useState([]);
   const [imageMap, setImageMap] = useState({});
   const [selectedImage, setSelectedImage] = useState(null);
+
+  useEffect(() => {
+    // Set userName state with user name when user data is available
+    if (user) {
+      setUserName(user.name);
+    }
+  }, [user]);
 
   const openModal = (image) => {
     setSelectedImage(imageMap[image.title]);
@@ -41,36 +51,41 @@ const Gallery = () => {
       toast.error('Failed to fetch gallery');
     }
   };
+  
 
   useEffect(() => {
     fetchGallery();
   }, []);
 
+
+
   const handleUpload = async (e) => {
     e.preventDefault();
+    
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('image', image);
+    formData.append('title', title); // Append the title to the form data
+    formData.append('image', image); // Append the image to the form data
+    formData.append('userUploaded', userName);
 
     if (!title || !image) {
       toast.error('Please provide a title and image');
       return;
     }
-
+  
     const token = localStorage.getItem('token'); // Retrieve the authentication token from localStorage
-
+  
     if (!token) {
       toast.error('User not authenticated');
       return;
     }
-
+  
     const headers = {
       'Content-Type': 'multipart/form-data',
       'Authorization': `Bearer ${token}` // Include the token in the request headers
     };
-
+  
     setIsSubmitting(true);
-
+  
     try {
       const response = await axios.post('http://localhost:5000/api/gallery', formData, {
         headers: headers, // Pass the headers with the token
@@ -80,7 +95,7 @@ const Gallery = () => {
         ...prevImageMap,
         [response.data.title]: `http://localhost:5000/${response.data.image}`,
       }));
-
+  
       setTitle('');
       setImage(null);
       toast.success('Image uploaded successfully');
@@ -90,7 +105,7 @@ const Gallery = () => {
     } finally {
       setIsSubmitting(false);
     }
-};
+  };
 
   const handlePrint = () => {
     const printWindow = window.open('', '_blank');
@@ -151,6 +166,7 @@ const Gallery = () => {
                 />
               </div>
 
+              {/* Image Upload Input */}
               <label htmlFor="image" className='block text-gray-700 ml-12 flex items-center justify-center w-1/2'>
                 Upload Image
               </label>
@@ -176,7 +192,6 @@ const Gallery = () => {
             </form>
           </div>
         </section>
-        {/* // Gallery Section */}
         <section className='sectionBg3 pt-10'>
           <div className='container mx-auto p-4'>
             <div className='gallery'>

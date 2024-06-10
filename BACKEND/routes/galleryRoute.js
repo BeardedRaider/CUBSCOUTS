@@ -4,7 +4,7 @@ const Gallery = require('../models/gallery');
 const fs = require('fs');
 const path = require('path');
 
-// GET /api/gallery from FRONTEND/src/pages/admin/Agallery.jsx
+// PUT /api/gallery/:id for updating gallery
 router.put('/gallery/:id', async (req, res) => {
     try {
         const gallery = await Gallery.findById(req.params.id);
@@ -22,7 +22,7 @@ router.put('/gallery/:id', async (req, res) => {
     }
 });
 
-// DELETE /gallery/:id from FRONTEND/src/pages/admin/Agallery.jsx
+// DELETE /api/gallery/:id for deleting gallery
 router.delete('/gallery/:id', async (req, res) => {
     try {
         const gallery = await Gallery.findById(req.params.id);
@@ -43,6 +43,29 @@ router.delete('/gallery/:id', async (req, res) => {
     } catch (error) {
         console.error('Error deleting gallery image:', error);
         res.status(500).send({ message: 'Error deleting gallery image' });
+    }
+});
+
+// POST /api/upload for image upload
+router.post('/upload', async (req, res) => {
+    try {
+        const { title, image, userUploaded } = req.body; // Use userUploaded
+        
+        // Create a new image document
+        const newImage = new Gallery({
+            title,
+            image,
+            userUploaded, // Use userUploaded
+        });
+    
+        // Save the new image document to the database
+        await newImage.save();
+    
+        // Respond with the newly created image document
+        res.status(201).json(newImage);
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        res.status(500).json({ error: 'Failed to upload image' });
     }
 });
 

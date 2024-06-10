@@ -465,7 +465,7 @@ app.delete('/api/events/:id', async (req, res) => {
 // -----------------CREATRION OF GALLERY IMAGES ----------------
 app.post('/api/gallery', uploadGallery.single('image'), async (req, res) => {
     try {
-        const { title } = req.body;
+        const { title, userUploaded } = req.body;
         if (!title) {
             return res.status(400).json({ error: 'Title is required' });
         }
@@ -499,7 +499,7 @@ app.post('/api/gallery', uploadGallery.single('image'), async (req, res) => {
             const newImage = new Image({
                 title,
                 image: req.file.path,
-                user_id: user_id, // Associate the user's ID with the image
+                userUploaded, // Use the userUploaded value from the request body
             });
 
             const savedImage = await newImage.save();
