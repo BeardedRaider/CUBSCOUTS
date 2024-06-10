@@ -19,7 +19,7 @@ const ParentDash = () => {
         </div>
       </section>
       {/* this section is the main content of the page */}
-      <section>
+      <section className='bg-gray-400'>
       <div class="py-12 relative overflow-hidden ">
         <div class="grid grid-cols-2 max-w-screen-lg mx-auto">
           <div class="w-full flex flex-col items-end pr-16">
@@ -48,9 +48,9 @@ const ParentDash = () => {
 
           <div class="py-20 leftBox relative ">
             <div class="relative z-20 pl-12">
-              <h2 class="text-[#480c88] font-black text-4xl leading-snug mb-10">Your Childs Appointments</h2>
+              <h2 class="text-[#480c88] font-black text-4xl leading-snug mb-10">Your Childs Progress</h2>
               <p class=" text-gray-500 text-sm mr-10">
-                Here, you can find everthing you need to know about your child's upcoming appointments. You can also find out how to prepare for the appointments and what to expect.
+                Here, you can find everthing you need to know about your child's badge progress, and prind off badges.
               </p>
               <button class="mt-8 text-gray-500 uppercase py-3 text-sm px-10 border border-gray-500 ">Take A Look Around</button>
 
