@@ -53,6 +53,7 @@ npm i react-modal
 root install
 
 npm i vite
+npm i react-icons
 
 -----------------------------------
 App.jsx is where the routes are.
