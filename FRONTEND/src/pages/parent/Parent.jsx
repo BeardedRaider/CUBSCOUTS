@@ -45,21 +45,27 @@ const ParentDash = () => {
       <div class="py-4 relative overflow-hidden bg-gray-100">
         <div class="grid grid-cols-2 max-w-screen-lg mx-auto">
         
-
+        {/* ----------CHILDS BADGE PROGRESS---------- */}
           <div class="py-20 leftBox relative ">
             <div class="relative z-20 pl-12">
               <h2 class="text-[#480c88] font-black text-4xl leading-snug mb-10">Your Childs Progress</h2>
               <p class=" text-gray-500 text-sm mr-10">
                 Here, you can find everthing you need to know about your child's badge progress, and prind off badges.
               </p>
-              <button class="mt-8 text-gray-500 uppercase py-3 text-sm px-10 border border-gray-500 ">Take A Look Around</button>
-
             </div>
           </div>
           <div class="w-full flex flex-col pl-16">
-            <h2 class="text-[#480c88] font-bold text-2xl max-w-xs text-left mb-12 mt-10">Getting Help where <br/> you need it.</h2>
+            <h2 class="text-[#480c88] font-bold text-2xl max-w-xs text-left mb-12 mt-10">Lets See How<br/> Fantastic They Are!</h2>
             <div class="h-full mt-auto overflow-hidden relative">
-            <img src={img1} className="h-full w-full object-contain mb-10" alt="" />           
+            <section className='bg-gray-300 text-gray-500'>
+        <div className="flex items-center justify-center py-10">
+          {/* Badge count card AMOUNT WILL BE DISPLAYED HERE */}
+          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center cursor-pointer transition-all duration-300 ease-in-out hover:bg-purple-500 hover:text-yellow-400">
+            <p className="text-xl hover:text-yellow-400">Badges Completed</p>
+            <h2 className="text-6xl font-bold"></h2>
+          </div>
+        </div>
+      </section>         
             </div>
           </div>
 
