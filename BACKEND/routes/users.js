@@ -39,6 +39,8 @@ app.get('/api/users', async (req, res) => {
     fridayAvailability: user.fridayAvailability,
     saturdayAvailability: user.saturdayAvailability,
     sundayAvailability: user.sundayAvailability,
+    child_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Child' }, // Add child_id field
+    parent_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Add parent_id field
   };
   
   res.json(formattedUser);
