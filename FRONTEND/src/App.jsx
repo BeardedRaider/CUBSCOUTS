@@ -18,6 +18,7 @@ import Events from './pages/admin/Aevents';
 import Agallery from './pages/admin/Agallery';
 // parent pages
 import Parent from './pages/parent/Parent';
+import UserAv from './pages/parent/UserAv';
 // child pages
 import Child from './pages/child/Child';
 import Games from './pages/child/Games';
@@ -47,6 +48,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/parent" element={<Parent />} />
+            <Route path="/userav" element={<UserAv />} />
             <Route path="/child" element={<Child />} />
             <Route path="/games" element={<Games />} />
             <Route path="/dashboard" element={<Dashboard />} />

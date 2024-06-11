@@ -11,7 +11,7 @@ const Register = () => {
     const [name, setName] = useState('');
     const [dob, setDob] = useState('');
     const [address, setAddress] = useState('');
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState('parent');
 
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const Register = () => {
             setName('');
             setDob('');
             setAddress('');
-            setRole('child');//default role
+            setRole('parent');//default role
 
             toast.success('Registration successful');
 

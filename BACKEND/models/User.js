@@ -23,8 +23,6 @@ const UserSchema = new Schema({
     friday: { type: Boolean, default: false },// Add Friday field
     saturday: { type: Boolean, default: false },// Add Saturday field
     sunday: { type: Boolean, default: false },// Add Sunday field
-    child_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Child' }, // Add child_id field
-    parent_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Add parent_id field
     badges: [BadgeSchema] // Add badges as an array
 });
 

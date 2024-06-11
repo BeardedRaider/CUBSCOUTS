@@ -94,6 +94,9 @@ const Header = ({ className }) => {
                   <Link to="/events">Events</Link>
                 </li>
                 <li>
+                  <Link to="/userav">User Availability</Link>
+                </li>
+                <li>
                   <Link to="/gallery">Gallery</Link>
                 </li>
                 

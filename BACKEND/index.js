@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const galleryRoutes = require('./routes/galleryRoute');
+const helperRouter = require('./routes/helper');
 
 const multer = require('multer');// Import the multer package
 const path = require('path');// Import the path package
@@ -18,11 +19,12 @@ const MONGO_URI = process.env.MONGO_URI;
 // Import the routes
 const badgeCountRouter = require('./routes/badgeCount');// Import the badgeCount route
 const galleryCountRouter = require('./routes/galleryCount'); // Import the galleryCount route
+const helpersRouter = require('./routes/helper');
 
 const badgesRouter = require('./routes/badges'); // Import the badges router
 const Event = require('./models/Events');// Import the Event model
 const User = require('./models/User');// Import the User model
-const Image = require('./models/image');// Import the Image model This model now uses the 'gallery' collection
+const Image = require('./models/Image');// Import the Image model This model now uses the 'gallery' collection
 
 const upload = multer({ dest: 'uploads/' }); // Configuring multer
 
@@ -44,6 +46,7 @@ app.use('/api', badgeCountRouter);
 app.use('/api', galleryRoutes);
 app.use('/api/badges', badgesRouter);
 app.use('/api/gallery', galleryCountRouter);
+app.use(helpersRouter);
 
 // Connect to the mongodb server
 mongoose.connect(MONGO_URI, {
