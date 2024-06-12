@@ -1,10 +1,10 @@
 // routes/galleryCount.js
 const express = require('express');
 const router = express.Router();
-const Gallery = require('../models/gallery'); // Import the Gallery model
+const Gallery = require('../models/Gallery'); // Import the Gallery model
 
 // Route to get the gallery image count
-router.get('/count', async (req, res) => {
+router.get('/count', async (req, res) => {// Route to get the count of gallery images
   try {
     const count = await Gallery.countDocuments();
     res.json({ count });

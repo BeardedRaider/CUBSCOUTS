@@ -1,52 +1,52 @@
 const mongoose = require('mongoose');
 
-const userSchema  = new mongoose.Schema({
-    name: {
+const userSchema  = new mongoose.Schema({// Creating user schema
+    name: {// Name of the user
         type: String,
         required: true
     },
-    email: {
+    email: {// Email of the user
         type: String,
         required: true
     },
-    disclosureScotland: {
+    disclosureScotland: {// Disclosure Scotland status of the user
         type: Boolean,
         default: false
     },
-    helperRegistered: {
+    helperRegistered: {// Helper registration status of the user
+        type: Boolean,// Data type of helper registration status
+        default: false// Default value of helper registration status
+    },
+    helperTrained: {// Helper training status of the user
         type: Boolean,
         default: false
     },
-    helperTrained: {
-        type: Boolean,
-        default: false
-    },
-    availability: {
+    availability: {// Availability of the user
         monday: {
             type: Boolean,
             default: false
         },
-        tuesday: {
+        tuesday: {// Availability of the user
             type: Boolean,
             default: false
         },
-        wednesday: {
+        wednesday: {// Availability of the user
             type: Boolean,
             default: false
         },
-        thursday: {
+        thursday: {// Availability of the user
             type: Boolean,
             default: false
         },
-        friday: {
+        friday: {// Availability of the user
             type: Boolean,
             default: false
         },
-        saturday: {
+        saturday: {// Availability of the user
             type: Boolean,
             default: false
         },
-        sunday: {
+        sunday: {// Availability of the user
             type: Boolean,
             default: false
         }

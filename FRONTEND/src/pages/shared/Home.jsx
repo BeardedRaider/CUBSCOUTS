@@ -4,6 +4,7 @@ import "../../styles/home.css"
 const Home = () => {
   return (
     <div>
+      {/* ------WELCOME MESSAGE------ */}
       <section className='sectionBg 100vh'>
         <div className='text-white  py-4'>
           <div className='container mx-auto flex flex-col md:flex-row items-center my-12 md:my-20'>
@@ -208,7 +209,7 @@ const Home = () => {
                 </p>
               </div>
             </div>
-
+            
             <div>
               <div class="inline-block rounded-lg bg-yellow-400 p-3 text-black">
                 <svg

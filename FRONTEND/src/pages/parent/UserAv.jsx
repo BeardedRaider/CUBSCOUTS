@@ -51,7 +51,7 @@ const UsersAv = () => {
                 <div className="p-4 mt-10">
                     <h1 className="text-3xl">Existing Users</h1>
                 </div>
-
+{/* // The following code snippet is responsible for rendering the table that displays the user information. It maps over the users array and displays the user's name, email, Disclosure Scotland status, helper registration status, helper training status, and availability status for each day of the week. The availability status is displayed as "Available" or "Not Available" based on the boolean value in the user's availability object. */}
                 <div className="px-3 py-4 overflow-x-auto">
                     <table className="w-full text-sm md:text-md bg-white shadow-md rounded mb-4 responsive-table">
                         <thead>

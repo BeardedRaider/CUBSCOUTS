@@ -10,15 +10,15 @@ router.get('/api/helpers', async (req, res) => {
 
         // Map the users data to include only the necessary fields for display
         const usersData = helperUsers.map(user => ({
-            _id: user._id,
+            _id: user._id,// Add the user ID
             name: user.name,
             email: user.email,
-            disclosureScotland: user.disclosureScotland,
+            disclosureScotland: user.disclosureScotland,//  Add the Disclosure Scotland status
             helperRegistered: user.helperRegistered,
-            helperTrained: user.helperTrained,
+            helperTrained: user.helperTrained,// Add the helper training status
             availability: {
                 monday: user.monday,
-                tuesday: user.tuesday,
+                tuesday: user.tuesday,// Add the availability status for each day
                 wednesday: user.wednesday,
                 thursday: user.thursday,
                 friday: user.friday,

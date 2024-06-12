@@ -18,7 +18,7 @@ const Login = () => {
           email,
           password,
       });
-
+      // console.log(response.data);
       console.log("Login successful");
       console.log('Token:', response.data.token);
       console.log('Email:', response.data.email);
@@ -32,7 +32,7 @@ const Login = () => {
           token: response.data.token,
           role: response.data.role,
       });
-
+        // Redirect user based on their role
       if (response.data.role === 'admin') {
           navigate("/dashboard");
       } else if (response.data.role === 'parent') {
@@ -45,7 +45,7 @@ const Login = () => {
       alert("Login failed", error.response.data.error);
   }
 };
-
+    // Check if the user is an admin and set the role in the AuthContext
     useEffect(() => {
         const storedRole = localStorage.getItem("role");
         if (storedRole === 'admin') {
@@ -55,7 +55,7 @@ const Login = () => {
           }));
         }
     }, [setAuth]);
-
+      // Check if the user is a parent and set the role in the AuthContext
 return (
     <div >
       <div class="bg-gray-100 flex justify-center items-center h-screen">

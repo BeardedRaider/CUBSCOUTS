@@ -79,8 +79,9 @@ const ChildDash = () => {
     document.body.style.overflow = 'auto'; // Enable scrolling
   };
 
-  const handlePrint = (badge) => {
-    const printWindow = window.open('', '_blank');
+  const handlePrint = (badge) => {// Print the badge certificate
+    const printWindow = window.open('', '_blank');// Open a new window
+    // Write the content to the new window
     printWindow.document.write(`
       <html>
       <head>
@@ -217,6 +218,7 @@ const ChildDash = () => {
 
   return (
     <div>
+      
       <section className='bg-gray-300 py-24 px-4 lg:px-16 relative'>
         <video autoPlay loop muted className="absolute inset-0 w-full h-full object-cover z-0">
           <source src={videoUrl} type="video/mp4" />
@@ -225,6 +227,7 @@ const ChildDash = () => {
         <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px] relative z-10'>
           <h1 className="text-3xl md:text-5xl p-1 text-yellow-300 tracking-loose">Welcome</h1>
           <h2 className="text-3xl md:text-4xl leading-relaxed md:leading-snug mb-2 text-white">
+            {/* // Display the user's name */}
             {user ? user.name : 'Loading...'}!
           </h2>
         </div>
@@ -270,6 +273,7 @@ const ChildDash = () => {
       </section>
 
       <section>
+        {/* // Display the child's badge count */}
       <div className="bg-gray-300 py-12 relative overflow-hidden ">
         <div className="grid grid-cols-2 max-w-screen-lg mx-auto">
           <div className="w-full flex flex-col items-end pr-16">
@@ -300,6 +304,7 @@ const ChildDash = () => {
           </div>
         </div>
       </section>
+      {/* // Display the completed badges modal */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -312,6 +317,7 @@ const ChildDash = () => {
           <div className='gallery'>
             {badges.map((badge, index) => (
               <div key={index} className='gallery-item'>
+                {/* // Display the badge image and title */}
                 <img
                   className='h-auto max-w-full rounded-lg cursor-pointer'
                   src={badge.image}
@@ -323,6 +329,7 @@ const ChildDash = () => {
               </div>
             ))}
           </div>
+          {/* // Close the modal */}
           <button onClick={closeModal} className='closeBtn text-yellow-400'>Close</button>
         </div>
       </Modal>

@@ -6,17 +6,17 @@ import UserInformation from '../../UserInfo';
 import { toast } from 'react-hot-toast';
 import '../../styles/gallery.css';
 
-const Gallery = () => {
-  const user = UserInformation();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [title, setTitle] = useState('');
-  const [image, setImage] = useState('');
-  const [userName, setUserName] = useState('');
-  const [userUploaded, setUserUploaded] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [gallery, setGallery] = useState([]);
-  const [imageMap, setImageMap] = useState({});
-  const [selectedImage, setSelectedImage] = useState(null);
+const Gallery = () => {// Gallery component
+  const user = UserInformation();// Get user information
+  const [modalIsOpen, setModalIsOpen] = useState(false);// State to manage modal open state
+  const [title, setTitle] = useState('');// State to store image title
+  const [image, setImage] = useState('');// State to store image file
+  const [userName, setUserName] = useState('');// State to store user name
+  const [userUploaded, setUserUploaded] = useState('');// State to store user who uploaded the image
+  const [isSubmitting, setIsSubmitting] = useState(false);// State to manage form submission state
+  const [gallery, setGallery] = useState([]);// State to store gallery images
+  const [imageMap, setImageMap] = useState({});// State to store image map
+  const [selectedImage, setSelectedImage] = useState(null);// State to store selected image
 
   useEffect(() => {
     // Set userName state with user name when user data is available
@@ -107,7 +107,7 @@ const Gallery = () => {
     }
   };
 
-  const handlePrint = () => {
+  const handlePrint = () => {// Function to print the selected image
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
@@ -136,6 +136,7 @@ const Gallery = () => {
 
   return (
     <>
+    {/* // The following code snippet is responsible for rendering the gallery section of the page. It displays a welcome message to the user and a form to upload an image. The form contains input fields for the image title and file upload. When the form is submitted, the handleUpload function is called to upload the image to the server. The gallery section also displays the uploaded images in a grid layout. Each image is displayed as a gallery item with a rounded border. When an image is clicked, a modal opens displaying the full-size image. The modal contains buttons to close the modal and print the image. */}
       <div className="text-gray-900 bg-gray-200">
         <section className='heroGallery overlayGallery py-24 px-4 lg:px-16'>
           <div className='container mx-auto px-[12px] md:px-24 xl:px-12 max-w-[1300px]'>

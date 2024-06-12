@@ -4,26 +4,26 @@ const Badge = require('../models/Badge'); // Adjust the path as necessary
 
 // Add or update badges
 
-router.post('/', async (req, res) => {
-    try {
-        const { userId, title, completed } = req.body;
+router.post('/', async (req, res) => {// Route to add or update badges
+    try {// Try to add or update badges
+        const { userId, title, completed } = req.body;// Extract user ID, badge title, and completion status from request body
 
-        if (!userId || !title) {
+        if (!userId || !title) {//  If user ID or badge title is not provided
             return res.status(400).json({ message: 'User ID and Badge Title are required.' });
         }
 
-        let badge = await Badge.findOne({ userId, title });
-        if (badge) {
-            badge.completed = completed;
-        } else {
+        let badge = await Badge.findOne({ userId, title });//   Find badge by user ID and title
+        if (badge) {// If badge exists
+            badge.completed = completed;// Update completion status
+        } else {// If badge does not exist
             badge = new Badge({ userId, title, completed });
-        }
+        }// Create a new badge
 
-        await badge.save();
-        res.status(200).json(badge);
-    } catch (error) {
-        console.error('Error in /api/badges:', error.message);
-        res.status(500).json({ message: 'Internal server error.', error });
+        await badge.save();// Save the badge
+        res.status(200).json(badge);// Return the badge
+    } catch (error) {// If there is an error
+        console.error('Error in /api/badges:', error.message);// Log the error message
+        res.status(500).json({ message: 'Internal server error.', error });// Return an error message
     }
 });
 

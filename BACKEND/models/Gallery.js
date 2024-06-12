@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const gallerySchema = new mongoose.Schema({
+const gallerySchema = new mongoose.Schema({// Creating gallery schema
     title: { 
         type: String, 
         required: true, 
@@ -13,6 +13,6 @@ const gallerySchema = new mongoose.Schema({
         type: String,
         required: true,
     }
-}, { collection: 'gallery' });
+}, { collection: 'gallery' });// Defining collection name if no collection name is defined, mongoose will create a collection with the plural of the model name
 
 module.exports = mongoose.model('Gallery', gallerySchema);

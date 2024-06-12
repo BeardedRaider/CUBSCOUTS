@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+// Desc: Main App component that contains the routing for the entire application.
+// imports the necessary components and pages to be rendered.
+import React, {useState} from 'react';// Import the useState hook
 import {Route, Routes, BrowserRouter as Router} from 'react-router-dom';
 import {AuthProvider} from './components/AuthContext';
 import Header from './components/Header';
@@ -28,22 +30,24 @@ import { Toaster } from 'react-hot-toast';
 import './App.css';
 import ScrollToTop from './components/ScrollToTop';
 
-const App = () => {
-  const [auth, setAuth] = useState({
-    token: localStorage.getItem('token'),
-    role: localStorage.getItem('role'),
+// Main App component
+const App = () => {// Main App component
+  const [auth, setAuth] = useState({// State to store authentication details
+    token: localStorage.getItem('token'),// Retrieve token from localStorage
+    role: localStorage.getItem('role'),// Retrieve role from localStorage
   });
 
-  return (
+  return (// Return the JSX for the App component
     <AuthProvider value={{auth, setAuth}}>
-      <Toaster 
-      position="bottom-right"
+      <Toaster // Notification component
+      position="bottom-right"// Position of the notification
       reverseOrder={false}/>
       <div className="App">       
         <Router>
           <ScrollToTop /> {/* This component ensures that the page is scrolled to the top when the URL path changes*/}
           <Header />
           <Routes>
+            {/* // Routes for the  pages */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

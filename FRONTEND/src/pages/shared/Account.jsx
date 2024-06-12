@@ -11,39 +11,39 @@ const Account = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/users', {
-          headers: { Authorization: `Bearer ${token}` }
+  useEffect(() => {// Fetch user data on component mount
+    const fetchUserData = async () => {// Function to fetch user data
+      try {// Try to fetch user data
+        const token = localStorage.getItem('token');// Retrieve the token from localStorage
+        const response = await axios.get('http://localhost:5000/api/users', {// Send a GET request to the server
+          headers: { Authorization: `Bearer ${token}` }// Include the token in the request headers
         });
-        setUser(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching user data:', error.response ? error.response.data : error.message);
+        setUser(response.data);// Set the user data in state
+        setLoading(false);// Set loading state to false
+      } catch (error) {// If there is an error
+        console.error('Error fetching user data:', error.response ? error.response.data : error.message);// Log the error message
         setError('Error fetching user data');
-        setLoading(false);
+        setLoading(false);// Set loading state to false
       }
     };
 
     fetchUserData();
   }, []);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event) => {// Function to handle input change
     const { name, value } = event.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 // ----------disclosureScotland----------
-  const handleDisclosureClick = () => {
+  const handleDisclosureClick = () => {// Function to handle Disclosure Scotland registration
     setUser((prevUser) => ({ ...prevUser, disclosureScotland: !prevUser.disclosureScotland }));
   };
   // ----------helperRegistered----------
-  const handleHelperRegistration = () => {
+  const handleHelperRegistration = () => {// Function to handle helper registration
     setUser((prevUser) => ({ ...prevUser, helperRegistered: !prevUser.helperRegistered }));
   };
   // ----------helperTrained----------
-  const handleHelperTrained = () => {
+  const handleHelperTrained = () => {// Function to handle helper training
     setUser((prevUser) => ({ ...prevUser, helperTrained: !prevUser.helperTrained }));
   };
 
@@ -165,7 +165,7 @@ const Account = () => {
         </section>
 
         <section className="px-3 py-4 overflow-x-auto">
-        
+        {/* // The following code snippet is responsible for rendering the form that allows the user to update their profile settings. It includes input fields for the user's name, email, date of birth, address, and availability for each day of the week. The user can also register for Disclosure Scotland, register as a helper, and indicate whether they have completed helper training. The form includes buttons to save the changes made by the user. */}
         <div className="account-container p-4 mt-10">
           <h1 className="account-title">Profile Settings</h1>
         

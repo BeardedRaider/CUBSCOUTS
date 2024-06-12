@@ -5,13 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import regImg from "../../images/fire.jpg";
 import "../../styles/register.css";
 
+// Register component
 const Register = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [dob, setDob] = useState('');
-    const [address, setAddress] = useState('');
-    const [role, setRole] = useState('parent');
+    const [email, setEmail] = useState('');// State to store email
+    const [password, setPassword] = useState('');// State to store password
+    const [name, setName] = useState('');// State to store name
+    const [dob, setDob] = useState('');// State to store date of birth
+    const [address, setAddress] = useState('');// State to store address
+    const [role, setRole] = useState('parent');// State to store role
 
     const navigate = useNavigate();
 
@@ -25,20 +26,20 @@ const Register = () => {
         }
 
         try {
-            await axios.post('http://localhost:5000/api/register', {
-                email,
-                password,
-                name,
-                dob,
-                address,
-                role,
+            await axios.post('http://localhost:5000/api/register', {// Make a POST request to the register endpoint
+                email,// Pass email in the request body
+                password,// Pass password in the request body
+                name,// Pass name in the request body
+                dob,// Pass date of birth in the request body
+                address,// Pass address in the request body
+                role,// Pass role in the request body
             });
 
-            setEmail('');
-            setPassword('');
-            setName('');
-            setDob('');
-            setAddress('');
+            setEmail('');// Reset email state
+            setPassword('');// Reset password state
+            setName('');// Reset name state
+            setDob('');// Reset date of birth state
+            setAddress('');// Reset address state
             setRole('parent');//default role
 
             toast.success('Registration successful');

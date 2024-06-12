@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');// Import the mongoose library
 const Schema = mongoose.Schema;// Create a schema object
 
-const BadgeSchema = new Schema({
-    title: { type: String, required: true },
-    completed: { type: Boolean, default: false }
+const BadgeSchema = new Schema({// Create a badge schema
+    title: { type: String, required: true },// Title of the badge
+    completed: { type: Boolean, default: false }// Completion status of the badge
 });
 
 const UserSchema = new Schema({

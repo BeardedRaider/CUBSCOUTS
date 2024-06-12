@@ -4,15 +4,15 @@ import UserInformation from '../../UserInfo';
 import { toast } from 'react-hot-toast';
 import "../../styles/parent.css";
 
-const Badges = () => {
-    const user = UserInformation();
-    const [badges, setBadges] = useState([]);
-    const [completedBadges, setCompletedBadges] = useState({});
-    const [setError] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [filteredBadges, setFilteredBadges] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const badgesPerPage = 6;
+const Badges = () => {// This component is responsible for rendering the badge collection page. It displays a list of badges that users can earn by completing certain tasks. The badges are fetched from the server and displayed in a grid layout. Each badge has a title, an image, a link to more information, and a button to mark the badge as completed. The user's completed badges are stored in the database and updated when the user marks a badge as completed. The badges are paginated to improve performance and user experience. The user can search for badges by title using a search input field. The search results are displayed in real-time as the user types in the search input field. The user can clear the search input field to view all badges. The user can navigate between pages of badges using pagination buttons at the bottom of the page.
+    const user = UserInformation();// The 'UserInformation' component is used to get the user's information from the context. It returns an object containing the user's information, such as their name, email, and ID.
+    const [badges, setBadges] = useState([]);// State to store all badges
+    const [completedBadges, setCompletedBadges] = useState({});// State to store completed badges
+    const [setError] = useState(null);// State to store error messages
+    const [searchTerm, setSearchTerm] = useState('');// State to store search term
+    const [filteredBadges, setFilteredBadges] = useState([]);// State to store filtered badges
+    const [currentPage, setCurrentPage] = useState(1);// State to store current page number
+    const badgesPerPage = 6;// Number of badges to display per page
 
     useEffect(() => {
         // Fetch all badges
