@@ -1,7 +1,7 @@
 .navbar {
     width: 100%;/* set the width of the navbar */
     height: 7rem;/* set the height of the navbar */
-    background-color: rgba(83, 81, 81, 0.973);
+    background-color: rgb(72, 12, 136);
     color: white;/*set the background color of the navbar*/
     display: flex;/* display the items in a row */
     align-items: center;/* align the items in the center */
@@ -24,7 +24,7 @@
     margin-right: 1rem;/* set the margin right of the icon */
     height: 3rem;/* set the height of the icon */
     width: 3rem;/* set the width of the icon */
-    border: 3px solid rgb(72, 12, 136); /* add a ring around the icon */
+    border: 3px solid rgb(255, 233, 39); /* add a ring around the icon */
 
 
 }
@@ -79,7 +79,7 @@
 }
 
 .logoutBtn:hover {
-    background-color: rgba(57, 19, 100, 0.9);/* set the background color of the logout button when hovered */
+    background-color: rgba(123, 77, 175, 0.9);/* set the background color of the logout button when hovered */
     transition: 1.5s;
 }
 

@@ -45,7 +45,7 @@ const Header = ({ className }) => {
   }, [auth]);
 
   return (
-    <div className={`navbar ${className}`}>
+    <div className={`navbar ${className}`} >
       <div>
         <img
           className="logo"

@@ -3,6 +3,7 @@ import axios from 'axios';
 import UserInformation from '../../UserInfo';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
+import img1 from '../../images/legoMe.jpg';
 
 
 
@@ -60,19 +61,19 @@ const ChildDash = () => {
           ...badgeDetail
         };
       });
-
+// Set the badges in the state
       setBadges(completedBadges);
     } catch (error) {
       console.error('Error fetching completed badges:', error);
     }
   };
-
+// Open the modal
   const openModal = () => {
     fetchCompletedBadges();
     setModalIsOpen(true);
     document.body.style.overflow = 'hidden'; // Prevent scrolling
   };
-
+// Close the modal
   const closeModal = () => {
     setModalIsOpen(false);
     document.body.style.overflow = 'auto'; // Enable scrolling
@@ -85,46 +86,51 @@ const ChildDash = () => {
       <head>
         <title>Print Badge Certificate</title>
         <style>
-        @media print {
-          @page {
-            size: A4;
+          @media print {
+            @page {
+              size: A4;
+              margin: 0;
+            }
+          }
+          body, html {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
           }
           .certificate {
             border: 10px solid #ccc;
             padding: 40px;
             text-align: center;
-            width: 90%; /* Adjusted to fill more of the A4 width */
+            width: 80%;
             box-sizing: border-box;
           }
           .certificate h1 {
-            font-size: 3em; /* Increased font size */
+            font-size: 3em;
           }
           .certificate p {
-            font-size: 1.5em; /* Increased font size */
-            margin: 20px 20px; /* Increased margin */
+            font-size: 1.5em;
+            margin: 20px 0;
           }
           .certificate h2 {
-            font-size: 2.5em; /* Increased font size */
+            font-size: 2.5em;
           }
           .certificate h3 {
-            font-size: 2em; /* Increased font size */
+            font-size: 2em;
           }
           .certificate img {
-            max-width: 300px; /* Increased max width for image */
-            margin-top: 30px; /* Increased margin-top */
-            margin-bottom: 30px; /* Increased margin-bottom */
+            max-width: 300px;
+            margin-top: 30px;
+            margin-bottom: 30px;
           }
-        }
-          body, html { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif; }
-          .certificate { border: 10px solid #ccc; padding: 20px; text-align: center; width: 80%; }
-          .certificate h1 { font-size: 2.5em; }
-          .certificate p { font-size: 1.2em; margin: 10px 0; }
-          .certificate img { max-width: 200px; margin-top: 20px; }
         </style>
       </head>
       <body>
-        <div className="certificate">
+        <div class="certificate">
           <h1>Certificate of Achievement</h1>
           <p>This is to certify that</p>
           <h2>${user.name}</h2>
@@ -133,6 +139,68 @@ const ChildDash = () => {
           <img src="${badge.image}" alt="${badge.title} Badge" />
           <p>Date: ${new Date().toLocaleDateString()}</p>
         </div>
+        <script>
+          window.onload = function() {
+            window.print();
+            window.onafterprint = function() {
+              window.close();
+            };
+          };
+        </script>
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
+  };
+
+
+  // Print the Lego image
+  const handlePrintImage = () => {
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+      <head>
+        <title>Print Image</title>
+        <style>
+          @media print {
+            @page {
+              size: A4;
+              margin: 0;
+            }
+            body, html {
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin: 0;
+              padding: 0;
+            }
+            img {
+              max-width: 100%;
+              height: auto;
+              display: block;
+              margin: 0;
+              padding: 0;
+            }
+          }
+          body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+        </style>
+      </head>
+      <body>
+        <img src="${img1}" alt="Lego Man" />
         <script>
           window.onload = function() {
             window.print();
@@ -172,7 +240,7 @@ const ChildDash = () => {
         </div>
       </section>
 
-      <section className='bg-purple-800 '>
+      <section className='bg-purple-900 '>
           {/*-------- Entertainment -------- */}
       <div className="marginLeft: '-100px' py-12 relative overflow-hidden " style={{ boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
         <div className="grid grid-cols-2 max-w-screen-lg mx-auto">
@@ -201,7 +269,30 @@ const ChildDash = () => {
       </div>
       </section>
 
-      <section className='bg-gray-300'>
+      <section>
+      <div className="bg-gray-300 py-12 relative overflow-hidden ">
+        <div className="grid grid-cols-2 max-w-screen-lg mx-auto">
+          <div className="w-full flex flex-col items-end pr-16">
+            <h2 className="text-[#480c88] font-bold text-2xl max-w-xs text-right mb-12 mt-10">Do you want to build a  <br/> Lego Man??
+            </h2>
+            <div className="h-full mt-auto overflow-hidden relative">
+            <img src={img1} className="h-full w-full object-contain" alt="" />           
+            </div>
+        </div>
+          <div className="py-20 rightBox relative">
+            <div className="relative z-20 pl-12">
+              <h2 className="text-[#480c88] font-black text-4xl leading-snug mb-10">Lets find out about you!</h2>
+              <p className="text-gray-900 text-sm mr-10">
+                  Purus in massa tempor nec. Magna etiam tempor orci eu lobortis elementum nibh tellus molestie. Faucibus ornare suspendisse sed nisi lacus sed viverra. Diam in arcu cursus euismod quis viverra nibh cras pulvinar.
+              </p>
+              <button className="mt-8 text-gray-900 uppercase py-3 text-sm px-10 border border-white" onClick={handlePrintImage}>PRINT ME</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </section>
+
+      <section className='bg-purple-900'>
         <div className="flex items-center justify-center py-10">
           <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
             <p className="text-2xl text-gray-500">More</p>

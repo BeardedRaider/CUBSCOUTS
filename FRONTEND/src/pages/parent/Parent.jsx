@@ -142,9 +142,9 @@ const ParentDash = () => {
 
           <div className="py-20 leftBox relative ">
             <div className="relative z-20 pl-12">
-              <h2 className="text-[#480c88] font-black text-4xl leading-snug mb-10">Your Childs Appointments</h2>
+              <h2 className="text-[#480c88] font-black text-4xl leading-snug mb-10">Your Childs Future</h2>
               <p className=" text-gray-500 text-sm mr-10">
-                Here, you can find everthing you need to know about your child's upcoming appointments. You can also find out how to prepare for the appointments and what to expect.
+                Here, you can find everthing you need to know about your child's upcoming awards. You can also find out how to prepare for the overnight events and what to expect.
               </p>
               <button className="mt-8 text-gray-500 uppercase py-3 text-sm px-10 border border-gray-500 ">Take A Look Around</button>
 
